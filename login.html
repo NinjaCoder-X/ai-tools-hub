@@ -171,6 +171,11 @@
             border-color: var(--accent-primary);
             background: var(--interactive-hover);
         }
+
+        .google-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
         
         .google-icon {
             width: 20px;
@@ -269,12 +274,12 @@
             <div class="auth-card">
                 <div class="auth-header">
                     <a href="/" class="auth-logo">AI Tools Hub</a>
-                    <h1 class="auth-title">Welcome</h1>
+                    <h1 class="auth-title">Welcome Back</h1>
                     <p class="auth-subtitle">Sign in to save favorites and create collections</p>
                 </div>
                 
                 <div class="success-message" id="successMessage">
-                    Account created successfully! You can now sign in.
+                    ✅ Account created successfully! You can now sign in.
                 </div>
                 
                 <!-- Tabs -->
@@ -405,23 +410,37 @@
             });
         });
         
-        // Wait for Firebase to load
+        // Don't auto-redirect if user is intentionally on login page
+        let hasRedirected = false;
+        
+        // Wait longer for Firebase to fully initialize
         setTimeout(() => {
-            // Check if already logged in
             if (window.FirebaseService?.isReady) {
-                window.FirebaseService.onAuthChange((user) => {
-                    if (user) {
-                        window.location.href = '/';
+                const user = window.FirebaseService.getCurrentUser();
+                
+                // Only redirect if user is logged in and hasn't manually visited login page
+                if (user && !hasRedirected && !sessionStorage.getItem('allowLoginPage')) {
+                    hasRedirected = true;
+                    
+                    if (user.isAdmin) {
+                        window.location.href = '/admin.html';
+                    } else {
+                        window.location.href = '/tools.html';
                     }
-                });
+                }
             }
-        }, 1000);
+        }, 2000);
+        
+        // Clear session flag when leaving page
+        window.addEventListener('beforeunload', () => {
+            sessionStorage.removeItem('allowLoginPage');
+        });
         
         // Sign In Form
         document.getElementById('signinForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             
-            const email = document.getElementById('signinEmail').value;
+            const email = document.getElementById('signinEmail').value.trim();
             const password = document.getElementById('signinPassword').value;
             const btn = document.getElementById('signinBtn');
             const errorEl = document.getElementById('signinError');
@@ -429,38 +448,56 @@
             btn.disabled = true;
             btn.textContent = 'Signing in...';
             errorEl.classList.remove('show');
+            errorEl.textContent = '';
             
             try {
-                if (window.FirebaseService) {
+                if (window.FirebaseService?.isReady) {
                     const result = await window.FirebaseService.signIn(email, password);
                     
                     if (result.success) {
-                        window.location.href = '/';
+                        // Show success message
+                        btn.textContent = '✅ Success! Redirecting...';
+                        
+                        // Wait for auth state to fully update
+                        await new Promise(resolve => setTimeout(resolve, 1500));
+                        
+                        // Get fresh user data
+                        const user = window.FirebaseService.getCurrentUser();
+                        
+                        // Redirect based on role
+                        if (user && user.isAdmin) {
+                            window.location.href = '/admin.html';
+                        } else {
+                            window.location.href = '/tools.html';
+                        }
                     } else {
-                        errorEl.textContent = result.error;
+                        errorEl.textContent = result.error || 'Invalid email or password';
                         errorEl.classList.add('show');
+                        btn.disabled = false;
+                        btn.textContent = 'Sign In';
                     }
                 } else {
-                    // Demo mode
+                    // Demo mode fallback
+                    console.log('Firebase not ready, using demo mode');
                     alert('Firebase not configured. Demo mode active.');
                     localStorage.setItem('demoUser', JSON.stringify({ email }));
-                    window.location.href = '/';
+                    window.location.href = '/tools.html';
                 }
             } catch (error) {
-                errorEl.textContent = error.message;
+                console.error('Sign in error:', error);
+                errorEl.textContent = error.message || 'An error occurred. Please try again.';
                 errorEl.classList.add('show');
+                btn.disabled = false;
+                btn.textContent = 'Sign In';
             }
-            
-            btn.disabled = false;
-            btn.textContent = 'Sign In';
         });
         
         // Sign Up Form
         document.getElementById('signupForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             
-            const name = document.getElementById('signupName').value;
-            const email = document.getElementById('signupEmail').value;
+            const name = document.getElementById('signupName').value.trim();
+            const email = document.getElementById('signupEmail').value.trim();
             const password = document.getElementById('signupPassword').value;
             const btn = document.getElementById('signupBtn');
             const errorEl = document.getElementById('signupError');
@@ -468,47 +505,89 @@
             btn.disabled = true;
             btn.textContent = 'Creating account...';
             errorEl.classList.remove('show');
+            errorEl.textContent = '';
             
             try {
-                if (window.FirebaseService) {
+                if (window.FirebaseService?.isReady) {
                     const result = await window.FirebaseService.signUp(email, password, name);
                     
                     if (result.success) {
+                        // Show success message
                         document.getElementById('successMessage').classList.add('show');
-                        tabs[0].click(); // Switch to sign in tab
+                        
+                        // Switch to sign in tab
+                        tabs[0].click();
+                        
+                        // Pre-fill email
                         document.getElementById('signinEmail').value = email;
+                        
+                        // Reset form
+                        e.target.reset();
+                        
+                        // Hide success message after 5 seconds
+                        setTimeout(() => {
+                            document.getElementById('successMessage').classList.remove('show');
+                        }, 5000);
                     } else {
-                        errorEl.textContent = result.error;
+                        errorEl.textContent = result.error || 'Account creation failed';
                         errorEl.classList.add('show');
                     }
                 } else {
                     alert('Firebase not configured. Demo mode active.');
                 }
+                
+                btn.disabled = false;
+                btn.textContent = 'Create Account';
+                
             } catch (error) {
-                errorEl.textContent = error.message;
+                console.error('Sign up error:', error);
+                errorEl.textContent = error.message || 'An error occurred. Please try again.';
                 errorEl.classList.add('show');
+                btn.disabled = false;
+                btn.textContent = 'Create Account';
             }
-            
-            btn.disabled = false;
-            btn.textContent = 'Create Account';
         });
         
         // Google Sign In
         document.getElementById('googleBtn').addEventListener('click', async () => {
+            const btn = document.getElementById('googleBtn');
+            const originalText = btn.textContent;
+            
             try {
-                if (window.FirebaseService) {
+                btn.disabled = true;
+                btn.textContent = 'Signing in with Google...';
+                
+                if (window.FirebaseService?.isReady) {
                     const result = await window.FirebaseService.signInWithGoogle();
                     
                     if (result.success) {
-                        window.location.href = '/';
+                        btn.textContent = '✅ Success! Redirecting...';
+                        
+                        // Wait for auth state to update
+                        await new Promise(resolve => setTimeout(resolve, 1500));
+                        
+                        const user = window.FirebaseService.getCurrentUser();
+                        
+                        if (user && user.isAdmin) {
+                            window.location.href = '/admin.html';
+                        } else {
+                            window.location.href = '/tools.html';
+                        }
                     } else {
-                        alert(result.error);
+                        alert(result.error || 'Google sign in failed');
+                        btn.disabled = false;
+                        btn.textContent = originalText;
                     }
                 } else {
                     alert('Firebase not configured. Demo mode active.');
+                    btn.disabled = false;
+                    btn.textContent = originalText;
                 }
             } catch (error) {
-                alert(error.message);
+                console.error('Google sign in error:', error);
+                alert(error.message || 'Google sign in failed');
+                btn.disabled = false;
+                btn.textContent = originalText;
             }
         });
     </script>
