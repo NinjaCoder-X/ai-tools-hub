@@ -189,7 +189,24 @@
                 <li><a href="tools.html" class="nav-link">Tools</a></li>
                 <li><a href="about.html" class="nav-link active">About</a></li>
                 <li><a href="contact.html" class="nav-link">Contact</a></li>
-                <li><a href="login.html" class="btn btn-primary">Get Started</a></li>
+                
+                <li id="guestNav">
+                    <a href="login.html" class="btn btn-primary">Get Started</a>
+                </li>
+                
+                <li id="userNav" style="display: none;">
+                    <div style="display: flex; align-items: center; gap: 0.75rem;">
+                        <a href="profile.html" style="display: flex; align-items: center; gap: 0.5rem; text-decoration: none; color: var(--text-primary); font-weight: 600; padding: 0.5rem 0.75rem; border-radius: var(--radius-lg); background: var(--bg-tertiary); transition: all 0.2s;">
+                            <span id="userAvatar" style="width: 32px; height: 32px; background: var(--bg-gradient-1); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.875rem; font-weight: 700;">U</span>
+                            <span id="userName" style="max-width: 100px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">User</span>
+                        </a>
+                        <button onclick="handleLogout()" class="btn btn-ghost" style="padding: 0.5rem 1rem; font-size: 0.875rem;">Logout</button>
+                    </div>
+                </li>
+                
+                <li id="adminNav" style="display: none;">
+                    <a href="admin.html" class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.875rem;">👑 Admin</a>
+                </li>
             </ul>
         </nav>
     </header>
@@ -214,8 +231,7 @@
                     We believe that <strong>everyone deserves access to powerful tools</strong> 
                     that can help them work smarter, create better, and achieve more. 
                     AI Tools Hub exists to bridge the gap between incredible technology 
-                    and the people who need it most. We curate, organize, and present 
-                    the best tools in one beautiful, easy-to-navigate platform.
+                    and the people who need it most.
                 </p>
             </div>
         </div>
@@ -225,15 +241,14 @@
     <section class="about-section">
         <div class="container">
             <h2 class="section-title reveal">By The Numbers</h2>
-            <p class="section-subtitle reveal">Growing every day to serve you better</p>
             
             <div class="stats-grid">
                 <div class="stat-card reveal stagger-1">
-                    <div class="stat-number counter" data-target="150">0</div>
+                    <div class="stat-number">150+</div>
                     <div class="stat-label">Curated Tools</div>
                 </div>
                 <div class="stat-card reveal stagger-2">
-                    <div class="stat-number counter" data-target="15">0</div>
+                    <div class="stat-number">15+</div>
                     <div class="stat-label">Categories</div>
                 </div>
                 <div class="stat-card reveal stagger-3">
@@ -252,61 +267,42 @@
     <section class="about-section">
         <div class="container">
             <h2 class="section-title reveal">What Makes Us Different</h2>
-            <p class="section-subtitle reveal">Built with care, designed for you</p>
             
             <div class="features-grid">
                 <div class="feature-card reveal stagger-1">
                     <div class="feature-icon animate-float">🎯</div>
                     <h3 class="feature-title">Curated Quality</h3>
-                    <p class="feature-description">
-                        Every tool is hand-picked and verified. No spam, no duplicates, 
-                        just the best tools that actually work.
-                    </p>
+                    <p class="feature-description">Every tool is hand-picked and verified. No spam, just the best tools.</p>
                 </div>
                 
                 <div class="feature-card reveal stagger-2">
                     <div class="feature-icon animate-float">⚡</div>
                     <h3 class="feature-title">Lightning Fast</h3>
-                    <p class="feature-description">
-                        Built for speed. Search 150+ tools instantly with our 
-                        optimized search engine and smart filters.
-                    </p>
+                    <p class="feature-description">Search 150+ tools instantly with our optimized search engine.</p>
                 </div>
                 
                 <div class="feature-card reveal stagger-3">
                     <div class="feature-icon animate-float">🤖</div>
                     <h3 class="feature-title">AI-Powered</h3>
-                    <p class="feature-description">
-                        Intelligent search, auto-categorization, and smart 
-                        recommendations powered by Google Gemini.
-                    </p>
+                    <p class="feature-description">Intelligent search and smart recommendations powered by Google Gemini.</p>
                 </div>
                 
                 <div class="feature-card reveal stagger-4">
                     <div class="feature-icon animate-float">🎨</div>
                     <h3 class="feature-title">Beautiful Design</h3>
-                    <p class="feature-description">
-                        Modern, clean, and obsessively crafted. A design so good 
-                        you won't want to leave.
-                    </p>
+                    <p class="feature-description">Modern, clean, and obsessively crafted for the best experience.</p>
                 </div>
                 
                 <div class="feature-card reveal stagger-5">
                     <div class="feature-icon animate-float">🔒</div>
                     <h3 class="feature-title">Privacy First</h3>
-                    <p class="feature-description">
-                        Your data is yours. We don't track, sell, or misuse 
-                        your information. Ever.
-                    </p>
+                    <p class="feature-description">Your data is yours. We don't track or sell your information.</p>
                 </div>
                 
                 <div class="feature-card reveal stagger-6">
                     <div class="feature-icon animate-float">💚</div>
                     <h3 class="feature-title">100% Free</h3>
-                    <p class="feature-description">
-                        No paywalls, no premium tiers. Every feature is free 
-                        and always will be.
-                    </p>
+                    <p class="feature-description">No paywalls. Every feature is free and always will be.</p>
                 </div>
             </div>
         </div>
@@ -319,21 +315,16 @@
                 <div class="creator-avatar animate-pulse-glow">👨‍💻</div>
                 <h2 class="creator-name">NinjaCoder-X</h2>
                 <p class="creator-bio">
-                    Hi! I'm a passionate developer and tool enthusiast who believes in 
-                    making technology accessible to everyone. I built AI Tools Hub to 
-                    solve a problem I faced daily: finding the right tool for the job. 
-                    Now, I'm sharing this solution with the world. Every line of code, 
-                    every design decision, and every tool listing is crafted with care.
+                    Hi! I'm a passionate developer who believes in making technology accessible to everyone. 
+                    I built AI Tools Hub to solve a problem I faced daily: finding the right tool for the job.
                 </p>
                 
                 <div class="social-links">
                     <a href="https://www.facebook.com/heyitsvihanga/" target="_blank" class="social-link hover-lift">
-                        <span>📘</span>
-                        Facebook
+                        <span>📘</span> Facebook
                     </a>
                     <a href="https://www.instagram.com/heyitsvihanga/" target="_blank" class="social-link hover-lift">
-                        <span>📸</span>
-                        Instagram
+                        <span>📸</span> Instagram
                     </a>
                 </div>
             </div>
@@ -344,7 +335,6 @@
     <section class="about-section">
         <div class="container" style="text-align: center;">
             <h2 class="section-title reveal">Start Exploring Today</h2>
-            <p class="section-subtitle reveal">Join thousands discovering amazing tools</p>
             <div class="reveal" style="display: flex; gap: 1rem; justify-content: center; margin-top: 2rem;">
                 <a href="tools.html" class="btn btn-primary btn-animated">Browse All Tools</a>
                 <a href="contact.html" class="btn btn-secondary">Get in Touch</a>
@@ -353,50 +343,18 @@
     </section>
 
     <!-- Footer -->
-    <footer style="background: var(--bg-tertiary); padding: 60px 20px 30px; margin-top: 80px;">
-        <div class="container">
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; margin-bottom: 3rem;">
-                <div>
-                    <h3 style="font-weight: 700; margin-bottom: 1rem;">AI Tools Hub</h3>
-                    <p style="color: var(--text-secondary); font-size: 0.9rem;">Your ultimate directory for discovering the best AI tools and digital resources.</p>
-                </div>
-                <div>
-                    <h4 style="font-weight: 600; margin-bottom: 1rem;">Quick Links</h4>
-                    <ul style="list-style: none;">
-                        <li style="margin-bottom: 0.5rem;"><a href="/" style="color: var(--text-secondary); text-decoration: none;">Home</a></li>
-                        <li style="margin-bottom: 0.5rem;"><a href="tools.html" style="color: var(--text-secondary); text-decoration: none;">Browse Tools</a></li>
-                        <li style="margin-bottom: 0.5rem;"><a href="about.html" style="color: var(--text-secondary); text-decoration: none;">About Us</a></li>
-                        <li style="margin-bottom: 0.5rem;"><a href="contact.html" style="color: var(--text-secondary); text-decoration: none;">Contact</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 style="font-weight: 600; margin-bottom: 1rem;">Legal</h4>
-                    <ul style="list-style: none;">
-                        <li style="margin-bottom: 0.5rem;"><a href="privacy.html" style="color: var(--text-secondary); text-decoration: none;">Privacy Policy</a></li>
-                        <li style="margin-bottom: 0.5rem;"><a href="terms.html" style="color: var(--text-secondary); text-decoration: none;">Terms of Service</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 style="font-weight: 600; margin-bottom: 1rem;">Connect</h4>
-                    <div style="display: flex; gap: 1rem;">
-                        <a href="https://www.facebook.com/heyitsvihanga/" target="_blank" style="color: var(--accent-primary); font-size: 1.5rem;">📘</a>
-                        <a href="https://www.instagram.com/heyitsvihanga/" target="_blank" style="color: var(--accent-secondary); font-size: 1.5rem;">📸</a>
-                    </div>
-                </div>
-            </div>
-            <div style="text-align: center; padding-top: 2rem; border-top: 1px solid var(--border-light);">
-                <p style="color: var(--text-tertiary); font-size: 0.9rem;">
-                    © 2024 AI Tools Hub. Created by <strong style="color: var(--accent-primary);">NinjaCoder-X</strong>
-                </p>
-            </div>
-        </div>
+    <footer style="background: var(--bg-tertiary); padding: 40px 20px; text-align: center;">
+        <p style="color: var(--text-tertiary); font-size: 0.9rem;">
+            © 2024 AI Tools Hub. Created by <strong style="color: var(--accent-primary);">NinjaCoder-X</strong>
+        </p>
     </footer>
 
     <!-- Scripts -->
     <script src="assets/js/config.js"></script>
+    <script type="module" src="assets/js/firebase.js"></script>
     
     <script>
-        // Header scroll effect
+        // Header scroll
         window.addEventListener('scroll', () => {
             const header = document.getElementById('header');
             if (window.scrollY > 50) {
@@ -408,48 +366,77 @@
         
         // Scroll reveal
         const revealElements = document.querySelectorAll('.reveal');
-        
         const revealObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('active');
                 }
             });
-        }, {
-            threshold: 0.1
-        });
+        }, { threshold: 0.1 });
         
         revealElements.forEach(el => revealObserver.observe(el));
-        
-        // Counter animation
-        const counters = document.querySelectorAll('.counter');
-        
-        counters.forEach(counter => {
-            const target = parseInt(counter.dataset.target);
-            let current = 0;
-            const increment = target / 50;
+    </script>
+    
+    <!-- Header Auth Script -->
+    <script type="module">
+        function updateHeader(user) {
+            const guestNav = document.getElementById('guestNav');
+            const userNav = document.getElementById('userNav');
+            const adminNav = document.getElementById('adminNav');
+            const userName = document.getElementById('userName');
+            const userAvatar = document.getElementById('userAvatar');
             
-            const updateCounter = () => {
-                if (current < target) {
-                    current += increment;
-                    counter.textContent = Math.ceil(current);
-                    requestAnimationFrame(updateCounter);
-                } else {
-                    counter.textContent = target + '+';
-                }
-            };
+            if (!guestNav || !userNav) return;
             
-            const counterObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        updateCounter();
-                        counterObserver.unobserve(entry.target);
+            if (user) {
+                guestNav.style.display = 'none';
+                userNav.style.display = 'block';
+                
+                if (userName) userName.textContent = user.displayName || user.email?.split('@')[0] || 'User';
+                
+                if (userAvatar) {
+                    if (user.photoURL) {
+                        userAvatar.innerHTML = `<img src="${user.photoURL}" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;" alt="Avatar">`;
+                    } else {
+                        userAvatar.textContent = (user.displayName || user.email || 'U')[0].toUpperCase();
                     }
-                });
-            });
-            
-            counterObserver.observe(counter);
-        });
+                }
+                
+                if (adminNav) adminNav.style.display = user.isAdmin ? 'block' : 'none';
+            } else {
+                guestNav.style.display = 'block';
+                userNav.style.display = 'none';
+                if (adminNav) adminNav.style.display = 'none';
+            }
+        }
+        
+        function initHeaderAuth() {
+            let attempts = 0;
+            const checkAuth = setInterval(() => {
+                attempts++;
+                if (window.FirebaseService?.isReady) {
+                    clearInterval(checkAuth);
+                    updateHeader(window.FirebaseService.getCurrentUser());
+                    window.FirebaseService.onAuthChange(updateHeader);
+                } else if (attempts >= 20) {
+                    clearInterval(checkAuth);
+                }
+            }, 200);
+        }
+        
+        window.handleLogout = async () => {
+            if (confirm('Are you sure you want to logout?')) {
+                if (window.FirebaseService?.isReady) await window.FirebaseService.logOut();
+                localStorage.removeItem('demoUser');
+                window.location.href = '/';
+            }
+        };
+        
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initHeaderAuth);
+        } else {
+            initHeaderAuth();
+        }
     </script>
 
 </body>

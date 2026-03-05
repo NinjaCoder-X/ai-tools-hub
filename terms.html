@@ -11,68 +11,18 @@
     <link rel="stylesheet" href="assets/css/main.css">
     
     <style>
-        .legal-page {
-            padding: 140px 0 80px;
-        }
-        
-        .legal-container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        .legal-title {
-            font-size: var(--text-5xl);
-            font-weight: 900;
-            margin-bottom: var(--space-4);
-            background: var(--bg-gradient-1);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        
-        .legal-updated {
-            color: var(--text-tertiary);
-            margin-bottom: var(--space-12);
-        }
-        
-        .legal-section {
-            margin-bottom: var(--space-10);
-        }
-        
-        .legal-section h2 {
-            font-size: var(--text-2xl);
-            font-weight: 700;
-            margin-bottom: var(--space-4);
-            color: var(--text-primary);
-        }
-        
-        .legal-section h3 {
-            font-size: var(--text-xl);
-            font-weight: 600;
-            margin: var(--space-6) 0 var(--space-3);
-            color: var(--text-primary);
-        }
-        
-        .legal-section p {
-            color: var(--text-secondary);
-            line-height: 1.8;
-            margin-bottom: var(--space-4);
-        }
-        
-        .legal-section ul {
-            color: var(--text-secondary);
-            line-height: 1.8;
-            margin-left: var(--space-6);
-            margin-bottom: var(--space-4);
-        }
-        
-        .legal-section li {
-            margin-bottom: var(--space-2);
-        }
+        .legal-page { padding: 140px 0 80px; }
+        .legal-container { max-width: 800px; margin: 0 auto; }
+        .legal-title { font-size: var(--text-5xl); font-weight: 900; margin-bottom: var(--space-4); background: var(--bg-gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .legal-updated { color: var(--text-tertiary); margin-bottom: var(--space-12); }
+        .legal-section { margin-bottom: var(--space-10); }
+        .legal-section h2 { font-size: var(--text-2xl); font-weight: 700; margin-bottom: var(--space-4); }
+        .legal-section p { color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-4); }
+        .legal-section ul { color: var(--text-secondary); line-height: 1.8; margin-left: var(--space-6); margin-bottom: var(--space-4); }
     </style>
 </head>
 <body>
     
-    <!-- HEADER -->
     <header class="header theme-transition" id="header">
         <nav class="nav container">
             <a href="/" class="logo">AI Tools Hub</a>
@@ -81,6 +31,17 @@
                 <li><a href="tools.html" class="nav-link">Tools</a></li>
                 <li><a href="about.html" class="nav-link">About</a></li>
                 <li><a href="contact.html" class="nav-link">Contact</a></li>
+                <li id="guestNav"><a href="login.html" class="btn btn-primary">Get Started</a></li>
+                <li id="userNav" style="display: none;">
+                    <div style="display: flex; align-items: center; gap: 0.75rem;">
+                        <a href="profile.html" style="display: flex; align-items: center; gap: 0.5rem; text-decoration: none; color: var(--text-primary); font-weight: 600; padding: 0.5rem 0.75rem; border-radius: var(--radius-lg); background: var(--bg-tertiary);">
+                            <span id="userAvatar" style="width: 32px; height: 32px; background: var(--bg-gradient-1); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.875rem; font-weight: 700;">U</span>
+                            <span id="userName">User</span>
+                        </a>
+                        <button onclick="handleLogout()" class="btn btn-ghost" style="padding: 0.5rem 1rem;">Logout</button>
+                    </div>
+                </li>
+                <li id="adminNav" style="display: none;"><a href="admin.html" class="btn btn-secondary" style="padding: 0.5rem 1rem;">👑 Admin</a></li>
             </ul>
         </nav>
     </header>
@@ -92,146 +53,31 @@
             
             <div class="legal-section">
                 <h2>1. Acceptance of Terms</h2>
-                <p>
-                    By accessing and using AI Tools Hub, you accept and agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use our service.
-                </p>
+                <p>By accessing AI Tools Hub, you agree to these Terms of Service.</p>
             </div>
             
             <div class="legal-section">
                 <h2>2. Description of Service</h2>
-                <p>
-                    AI Tools Hub is a free directory and discovery platform for AI tools, OSINT resources, development tools, and digital resources. We provide:
-                </p>
+                <p>AI Tools Hub is a free directory for AI tools, OSINT resources, and digital platforms.</p>
+            </div>
+            
+            <div class="legal-section">
+                <h2>3. User Conduct</h2>
                 <ul>
-                    <li>Curated tool listings and descriptions</li>
-                    <li>Search and filtering capabilities</li>
-                    <li>User accounts for saving favorites</li>
-                    <li>Ratings and reviews system</li>
-                    <li>AI-powered features (search, categorization)</li>
+                    <li>No spam or misleading content</li>
+                    <li>No hacking or compromising the website</li>
+                    <li>No impersonation or fake accounts</li>
                 </ul>
             </div>
             
             <div class="legal-section">
-                <h2>3. User Accounts</h2>
-                <h3>3.1 Account Creation</h3>
-                <p>
-                    You may create an account to access additional features. You are responsible for:
-                </p>
-                <ul>
-                    <li>Providing accurate information</li>
-                    <li>Maintaining the security of your account</li>
-                    <li>All activities under your account</li>
-                </ul>
-                
-                <h3>3.2 Account Termination</h3>
-                <p>
-                    We reserve the right to terminate accounts that violate these terms or engage in abusive behavior.
-                </p>
+                <h2>4. Disclaimer</h2>
+                <p>AI Tools Hub is provided "AS IS" without warranties. We are not responsible for third-party tools listed.</p>
             </div>
             
             <div class="legal-section">
-                <h2>4. User Conduct</h2>
-                <p>You agree NOT to:</p>
-                <ul>
-                    <li>Post false, misleading, or spam content</li>
-                    <li>Attempt to hack or compromise the website</li>
-                    <li>Use automated tools to scrape content</li>
-                    <li>Impersonate others or create fake accounts</li>
-                    <li>Upload malicious code or viruses</li>
-                    <li>Violate any applicable laws or regulations</li>
-                </ul>
-            </div>
-            
-            <div class="legal-section">
-                <h2>5. Content and Intellectual Property</h2>
-                
-                <h3>5.1 Our Content</h3>
-                <p>
-                    All content on AI Tools Hub (design, code, text, graphics) is owned by us and protected by copyright laws. You may not copy, reproduce, or distribute our content without permission.
-                </p>
-                
-                <h3>5.2 User-Generated Content</h3>
-                <p>
-                    By submitting reviews, ratings, or other content, you grant us a non-exclusive, worldwide license to use, display, and distribute your content.
-                </p>
-                
-                <h3>5.3 Third-Party Tools</h3>
-                <p>
-                    Tool listings are for informational purposes. We are not affiliated with or responsible for third-party tools. Always review each tool's own terms and privacy policy.
-                </p>
-            </div>
-            
-            <div class="legal-section">
-                <h2>6. Disclaimer of Warranties</h2>
-                <p>
-                    AI Tools Hub is provided "AS IS" without warranties of any kind. We do not guarantee:
-                </p>
-                <ul>
-                    <li>Accuracy of tool information</li>
-                    <li>Availability of listed tools</li>
-                    <li>Uninterrupted service</li>
-                    <li>Error-free operation</li>
-                </ul>
-            </div>
-            
-            <div class="legal-section">
-                <h2>7. Limitation of Liability</h2>
-                <p>
-                    We are not liable for any damages arising from:
-                </p>
-                <ul>
-                    <li>Use of AI Tools Hub</li>
-                    <li>Use of third-party tools listed on our site</li>
-                    <li>Loss of data or profits</li>
-                    <li>Service interruptions</li>
-                </ul>
-            </div>
-            
-            <div class="legal-section">
-                <h2>8. External Links</h2>
-                <p>
-                    Our website contains links to external sites. We are not responsible for the content, privacy practices, or terms of service of these external sites. Use them at your own risk.
-                </p>
-            </div>
-            
-            <div class="legal-section">
-                <h2>9. Modifications to Service</h2>
-                <p>
-                    We reserve the right to:
-                </p>
-                <ul>
-                    <li>Modify or discontinue the service at any time</li>
-                    <li>Change these Terms of Service</li>
-                    <li>Update features and functionality</li>
-                </ul>
-                <p>
-                    Continued use after changes constitutes acceptance of new terms.
-                </p>
-            </div>
-            
-            <div class="legal-section">
-                <h2>10. Privacy</h2>
-                <p>
-                    Your use of AI Tools Hub is also governed by our <a href="privacy.html" style="color: var(--accent-primary);">Privacy Policy</a>. Please review it to understand how we collect and use your information.
-                </p>
-            </div>
-            
-            <div class="legal-section">
-                <h2>11. Governing Law</h2>
-                <p>
-                    These terms are governed by applicable laws. Any disputes will be resolved in accordance with these laws.
-                </p>
-            </div>
-            
-            <div class="legal-section">
-                <h2>12. Contact</h2>
-                <p>
-                    For questions about these Terms of Service:
-                </p>
-                <ul>
-                    <li>Email: <a href="mailto:vvsithum241@gmail.com" style="color: var(--accent-primary);">vvsithum241@gmail.com</a></li>
-                    <li>Website: <a href="https://vihanga.dpdns.org" style="color: var(--accent-primary);">vihanga.dpdns.org</a></li>
-                </ul>
+                <h2>5. Contact</h2>
+                <p>Email: <a href="mailto:vvsithum241@gmail.com" style="color: var(--accent-primary);">vvsithum241@gmail.com</a></p>
             </div>
             
             <div style="text-align: center; margin-top: var(--space-12);">
@@ -241,20 +87,53 @@
     </main>
 
     <footer style="background: var(--bg-tertiary); padding: 40px 20px; text-align: center; margin-top: 80px;">
-        <p style="color: var(--text-tertiary); font-size: 0.9rem;">
-            © 2024 AI Tools Hub. Created by <strong style="color: var(--accent-primary);">NinjaCoder-X</strong>
-        </p>
+        <p style="color: var(--text-tertiary); font-size: 0.9rem;">© 2024 AI Tools Hub. Created by <strong style="color: var(--accent-primary);">NinjaCoder-X</strong></p>
     </footer>
 
+    <script src="assets/js/config.js"></script>
+    <script type="module" src="assets/js/firebase.js"></script>
+    
     <script>
         window.addEventListener('scroll', () => {
-            const header = document.getElementById('header');
-            if (window.scrollY > 50) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
+            document.getElementById('header').classList.toggle('scrolled', window.scrollY > 50);
         });
+    </script>
+    
+    <script type="module">
+        function updateHeader(user) {
+            const guestNav = document.getElementById('guestNav');
+            const userNav = document.getElementById('userNav');
+            const adminNav = document.getElementById('adminNav');
+            const userName = document.getElementById('userName');
+            const userAvatar = document.getElementById('userAvatar');
+            if (!guestNav || !userNav) return;
+            if (user) {
+                guestNav.style.display = 'none';
+                userNav.style.display = 'block';
+                if (userName) userName.textContent = user.displayName || user.email?.split('@')[0] || 'User';
+                if (userAvatar) userAvatar.textContent = (user.displayName || user.email || 'U')[0].toUpperCase();
+                if (adminNav) adminNav.style.display = user.isAdmin ? 'block' : 'none';
+            } else {
+                guestNav.style.display = 'block';
+                userNav.style.display = 'none';
+                if (adminNav) adminNav.style.display = 'none';
+            }
+        }
+        let attempts = 0;
+        const checkAuth = setInterval(() => {
+            attempts++;
+            if (window.FirebaseService?.isReady) {
+                clearInterval(checkAuth);
+                updateHeader(window.FirebaseService.getCurrentUser());
+                window.FirebaseService.onAuthChange(updateHeader);
+            } else if (attempts >= 20) clearInterval(checkAuth);
+        }, 200);
+        window.handleLogout = async () => {
+            if (confirm('Logout?')) {
+                if (window.FirebaseService?.isReady) await window.FirebaseService.logOut();
+                window.location.href = '/';
+            }
+        };
     </script>
 
 </body>
