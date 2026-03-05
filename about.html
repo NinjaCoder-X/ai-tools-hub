@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Learn about AI Tools Hub - Your ultimate directory for discovering the best AI tools and digital resources.">
+    
+    <title>About - AI Tools Hub</title>
+    
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
+    
+    <link rel="stylesheet" href="assets/css/themes.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/animations.css">
+    
+    <style>
+        .about-hero {
+            padding: 140px 0 80px;
+            background: var(--bg-gradient-hero);
+            text-align: center;
+        }
+        
+        .about-section {
+            padding: 80px 0;
+        }
+        
+        .about-section:nth-child(even) {
+            background: var(--bg-secondary);
+        }
+        
+        .section-title {
+            font-size: var(--text-4xl);
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: var(--space-4);
+            background: var(--bg-gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: var(--text-lg);
+            max-width: 600px;
+            margin: 0 auto var(--space-12);
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--space-8);
+            margin-top: var(--space-12);
+        }
+        
+        .feature-card {
+            text-align: center;
+            padding: var(--space-8);
+        }
+        
+        .feature-icon {
+            font-size: 4rem;
+            margin-bottom: var(--space-4);
+            display: inline-block;
+        }
+        
+        .feature-title {
+            font-size: var(--text-xl);
+            font-weight: 700;
+            margin-bottom: var(--space-3);
+        }
+        
+        .feature-description {
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-8);
+            margin-top: var(--space-12);
+        }
+        
+        .stat-card {
+            text-align: center;
+            padding: var(--space-6);
+        }
+        
+        .stat-number {
+            font-size: 4rem;
+            font-weight: 900;
+            background: var(--bg-gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1;
+            margin-bottom: var(--space-2);
+        }
+        
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: var(--text-base);
+        }
+        
+        .creator-section {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .creator-avatar {
+            width: 120px;
+            height: 120px;
+            background: var(--bg-gradient-1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            margin: 0 auto var(--space-6);
+            box-shadow: var(--shadow-xl);
+        }
+        
+        .creator-name {
+            font-size: var(--text-3xl);
+            font-weight: 800;
+            margin-bottom: var(--space-3);
+        }
+        
+        .creator-bio {
+            color: var(--text-secondary);
+            font-size: var(--text-lg);
+            line-height: 1.8;
+            margin-bottom: var(--space-6);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: var(--space-4);
+            justify-content: center;
+        }
+        
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-2);
+            padding: var(--space-3) var(--space-6);
+            background: var(--bg-card);
+            border: 2px solid var(--border-light);
+            border-radius: var(--radius-lg);
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 500;
+            transition: all var(--duration-fast) var(--ease-smooth);
+        }
+        
+        .social-link:hover {
+            border-color: var(--accent-primary);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .mission-box {
+            background: var(--bg-card);
+            border-radius: var(--radius-2xl);
+            padding: var(--space-10);
+            border: 1px solid var(--border-light);
+            box-shadow: var(--shadow-lg);
+            max-width: 900px;
+            margin: var(--space-12) auto 0;
+        }
+        
+        .mission-text {
+            font-size: var(--text-xl);
+            line-height: 1.8;
+            color: var(--text-secondary);
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    
+    <!-- HEADER -->
+    <header class="header theme-transition" id="header">
+        <nav class="nav container">
+            <a href="/" class="logo">AI Tools Hub</a>
+            <ul class="nav-links">
+                <li><a href="/" class="nav-link">Home</a></li>
+                <li><a href="tools.html" class="nav-link">Tools</a></li>
+                <li><a href="about.html" class="nav-link active">About</a></li>
+                <li><a href="contact.html" class="nav-link">Contact</a></li>
+                <li><a href="login.html" class="btn btn-primary">Get Started</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- HERO -->
+    <section class="about-hero">
+        <div class="container">
+            <h1 class="hero-title animate-fade-in-up">About AI Tools Hub</h1>
+            <p class="hero-subtitle animate-fade-in-up stagger-1" style="max-width: 700px; margin: 0 auto;">
+                Your trusted directory for discovering the best AI-powered tools, 
+                OSINT resources, and digital platforms to supercharge your workflow.
+            </p>
+        </div>
+    </section>
+
+    <!-- MISSION -->
+    <section class="about-section">
+        <div class="container">
+            <h2 class="section-title reveal">Our Mission</h2>
+            <div class="mission-box reveal">
+                <p class="mission-text">
+                    We believe that <strong>everyone deserves access to powerful tools</strong> 
+                    that can help them work smarter, create better, and achieve more. 
+                    AI Tools Hub exists to bridge the gap between incredible technology 
+                    and the people who need it most. We curate, organize, and present 
+                    the best tools in one beautiful, easy-to-navigate platform.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- STATS -->
+    <section class="about-section">
+        <div class="container">
+            <h2 class="section-title reveal">By The Numbers</h2>
+            <p class="section-subtitle reveal">Growing every day to serve you better</p>
+            
+            <div class="stats-grid">
+                <div class="stat-card reveal stagger-1">
+                    <div class="stat-number counter" data-target="150">0</div>
+                    <div class="stat-label">Curated Tools</div>
+                </div>
+                <div class="stat-card reveal stagger-2">
+                    <div class="stat-number counter" data-target="15">0</div>
+                    <div class="stat-label">Categories</div>
+                </div>
+                <div class="stat-card reveal stagger-3">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">Free Access</div>
+                </div>
+                <div class="stat-card reveal stagger-4">
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">Available</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section class="about-section">
+        <div class="container">
+            <h2 class="section-title reveal">What Makes Us Different</h2>
+            <p class="section-subtitle reveal">Built with care, designed for you</p>
+            
+            <div class="features-grid">
+                <div class="feature-card reveal stagger-1">
+                    <div class="feature-icon animate-float">🎯</div>
+                    <h3 class="feature-title">Curated Quality</h3>
+                    <p class="feature-description">
+                        Every tool is hand-picked and verified. No spam, no duplicates, 
+                        just the best tools that actually work.
+                    </p>
+                </div>
+                
+                <div class="feature-card reveal stagger-2">
+                    <div class="feature-icon animate-float">⚡</div>
+                    <h3 class="feature-title">Lightning Fast</h3>
+                    <p class="feature-description">
+                        Built for speed. Search 150+ tools instantly with our 
+                        optimized search engine and smart filters.
+                    </p>
+                </div>
+                
+                <div class="feature-card reveal stagger-3">
+                    <div class="feature-icon animate-float">🤖</div>
+                    <h3 class="feature-title">AI-Powered</h3>
+                    <p class="feature-description">
+                        Intelligent search, auto-categorization, and smart 
+                        recommendations powered by Google Gemini.
+                    </p>
+                </div>
+                
+                <div class="feature-card reveal stagger-4">
+                    <div class="feature-icon animate-float">🎨</div>
+                    <h3 class="feature-title">Beautiful Design</h3>
+                    <p class="feature-description">
+                        Modern, clean, and obsessively crafted. A design so good 
+                        you won't want to leave.
+                    </p>
+                </div>
+                
+                <div class="feature-card reveal stagger-5">
+                    <div class="feature-icon animate-float">🔒</div>
+                    <h3 class="feature-title">Privacy First</h3>
+                    <p class="feature-description">
+                        Your data is yours. We don't track, sell, or misuse 
+                        your information. Ever.
+                    </p>
+                </div>
+                
+                <div class="feature-card reveal stagger-6">
+                    <div class="feature-icon animate-float">💚</div>
+                    <h3 class="feature-title">100% Free</h3>
+                    <p class="feature-description">
+                        No paywalls, no premium tiers. Every feature is free 
+                        and always will be.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CREATOR -->
+    <section class="about-section">
+        <div class="container">
+            <div class="creator-section reveal">
+                <div class="creator-avatar animate-pulse-glow">👨‍💻</div>
+                <h2 class="creator-name">NinjaCoder-X</h2>
+                <p class="creator-bio">
+                    Hi! I'm a passionate developer and tool enthusiast who believes in 
+                    making technology accessible to everyone. I built AI Tools Hub to 
+                    solve a problem I faced daily: finding the right tool for the job. 
+                    Now, I'm sharing this solution with the world. Every line of code, 
+                    every design decision, and every tool listing is crafted with care.
+                </p>
+                
+                <div class="social-links">
+                    <a href="https://www.facebook.com/heyitsvihanga/" target="_blank" class="social-link hover-lift">
+                        <span>📘</span>
+                        Facebook
+                    </a>
+                    <a href="https://www.instagram.com/heyitsvihanga/" target="_blank" class="social-link hover-lift">
+                        <span>📸</span>
+                        Instagram
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="about-section">
+        <div class="container" style="text-align: center;">
+            <h2 class="section-title reveal">Start Exploring Today</h2>
+            <p class="section-subtitle reveal">Join thousands discovering amazing tools</p>
+            <div class="reveal" style="display: flex; gap: 1rem; justify-content: center; margin-top: 2rem;">
+                <a href="tools.html" class="btn btn-primary btn-animated">Browse All Tools</a>
+                <a href="contact.html" class="btn btn-secondary">Get in Touch</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer style="background: var(--bg-tertiary); padding: 60px 20px 30px; margin-top: 80px;">
+        <div class="container">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; margin-bottom: 3rem;">
+                <div>
+                    <h3 style="font-weight: 700; margin-bottom: 1rem;">AI Tools Hub</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem;">Your ultimate directory for discovering the best AI tools and digital resources.</p>
+                </div>
+                <div>
+                    <h4 style="font-weight: 600; margin-bottom: 1rem;">Quick Links</h4>
+                    <ul style="list-style: none;">
+                        <li style="margin-bottom: 0.5rem;"><a href="/" style="color: var(--text-secondary); text-decoration: none;">Home</a></li>
+                        <li style="margin-bottom: 0.5rem;"><a href="tools.html" style="color: var(--text-secondary); text-decoration: none;">Browse Tools</a></li>
+                        <li style="margin-bottom: 0.5rem;"><a href="about.html" style="color: var(--text-secondary); text-decoration: none;">About Us</a></li>
+                        <li style="margin-bottom: 0.5rem;"><a href="contact.html" style="color: var(--text-secondary); text-decoration: none;">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="font-weight: 600; margin-bottom: 1rem;">Legal</h4>
+                    <ul style="list-style: none;">
+                        <li style="margin-bottom: 0.5rem;"><a href="privacy.html" style="color: var(--text-secondary); text-decoration: none;">Privacy Policy</a></li>
+                        <li style="margin-bottom: 0.5rem;"><a href="terms.html" style="color: var(--text-secondary); text-decoration: none;">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="font-weight: 600; margin-bottom: 1rem;">Connect</h4>
+                    <div style="display: flex; gap: 1rem;">
+                        <a href="https://www.facebook.com/heyitsvihanga/" target="_blank" style="color: var(--accent-primary); font-size: 1.5rem;">📘</a>
+                        <a href="https://www.instagram.com/heyitsvihanga/" target="_blank" style="color: var(--accent-secondary); font-size: 1.5rem;">📸</a>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align: center; padding-top: 2rem; border-top: 1px solid var(--border-light);">
+                <p style="color: var(--text-tertiary); font-size: 0.9rem;">
+                    © 2024 AI Tools Hub. Created by <strong style="color: var(--accent-primary);">NinjaCoder-X</strong>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="assets/js/config.js"></script>
+    
+    <script>
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+        
+        // Scroll reveal
+        const revealElements = document.querySelectorAll('.reveal');
+        
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+        
+        revealElements.forEach(el => revealObserver.observe(el));
+        
+        // Counter animation
+        const counters = document.querySelectorAll('.counter');
+        
+        counters.forEach(counter => {
+            const target = parseInt(counter.dataset.target);
+            let current = 0;
+            const increment = target / 50;
+            
+            const updateCounter = () => {
+                if (current < target) {
+                    current += increment;
+                    counter.textContent = Math.ceil(current);
+                    requestAnimationFrame(updateCounter);
+                } else {
+                    counter.textContent = target + '+';
+                }
+            };
+            
+            const counterObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        updateCounter();
+                        counterObserver.unobserve(entry.target);
+                    }
+                });
+            });
+            
+            counterObserver.observe(counter);
+        });
+    </script>
+
+</body>
+</html>

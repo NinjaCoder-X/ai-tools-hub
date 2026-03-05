@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Get in touch with AI Tools Hub. Submit a tool, report an issue, or just say hello!">
+    
+    <title>Contact - AI Tools Hub</title>
+    
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
+    
+    <link rel="stylesheet" href="assets/css/themes.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/animations.css">
+    
+    <style>
+        .contact-hero {
+            padding: 140px 0 80px;
+            background: var(--bg-gradient-hero);
+            text-align: center;
+        }
+        
+        .contact-content {
+            padding: 80px 0;
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: var(--space-12);
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-8);
+        }
+        
+        .info-card {
+            background: var(--bg-card);
+            padding: var(--space-6);
+            border-radius: var(--radius-xl);
+            border: 1px solid var(--border-light);
+            transition: all var(--duration-base) var(--ease-smooth);
+        }
+        
+        .info-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .info-icon {
+            font-size: 2.5rem;
+            margin-bottom: var(--space-3);
+        }
+        
+        .info-title {
+            font-size: var(--text-xl);
+            font-weight: 700;
+            margin-bottom: var(--space-2);
+        }
+        
+        .info-text {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+        
+        .info-link {
+            color: var(--accent-primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .info-link:hover {
+            text-decoration: underline;
+        }
+        
+        .contact-form {
+            background: var(--bg-card);
+            padding: var(--space-10);
+            border-radius: var(--radius-2xl);
+            border: 1px solid var(--border-light);
+            box-shadow: var(--shadow-xl);
+        }
+        
+        .form-title {
+            font-size: var(--text-2xl);
+            font-weight: 700;
+            margin-bottom: var(--space-6);
+        }
+        
+        .form-group {
+            margin-bottom: var(--space-6);
+        }
+        
+        .form-label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: var(--space-2);
+            color: var(--text-primary);
+        }
+        
+        .form-input,
+        .form-textarea,
+        .form-select {
+            width: 100%;
+            padding: var(--space-4);
+            border: 2px solid var(--border-light);
+            border-radius: var(--radius-lg);
+            font-family: var(--font-primary);
+            font-size: var(--text-base);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            transition: all var(--duration-fast) var(--ease-smooth);
+        }
+        
+        .form-input:focus,
+        .form-textarea:focus,
+        .form-select:focus {
+            outline: none;
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+        }
+        
+        .form-textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .form-submit {
+            width: 100%;
+            padding: var(--space-4);
+            background: var(--bg-gradient-1);
+            color: white;
+            border: none;
+            border-radius: var(--radius-lg);
+            font-family: var(--font-primary);
+            font-size: var(--text-lg);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--duration-fast) var(--ease-smooth);
+        }
+        
+        .form-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-primary);
+        }
+        
+        .form-submit:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .success-message,
+        .error-message {
+            padding: var(--space-4);
+            border-radius: var(--radius-lg);
+            margin-bottom: var(--space-4);
+            text-align: center;
+            display: none;
+        }
+        
+        .success-message {
+            background: var(--success-bg);
+            color: var(--accent-success);
+        }
+        
+        .error-message {
+            background: var(--error-bg);
+            color: var(--accent-error);
+        }
+        
+        .success-message.show,
+        .error-message.show {
+            display: block;
+            animation: fadeInDown var(--duration-base) var(--ease-smooth);
+        }
+        
+        @media (max-width: 968px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-info {
+                order: 2;
+            }
+            
+            .contact-form {
+                order: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    
+    <!-- HEADER -->
+    <header class="header theme-transition" id="header">
+        <nav class="nav container">
+            <a href="/" class="logo">AI Tools Hub</a>
+            <ul class="nav-links">
+                <li><a href="/" class="nav-link">Home</a></li>
+                <li><a href="tools.html" class="nav-link">Tools</a></li>
+                <li><a href="about.html" class="nav-link">About</a></li>
+                <li><a href="contact.html" class="nav-link active">Contact</a></li>
+                <li><a href="login.html" class="btn btn-primary">Get Started</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- HERO -->
+    <section class="contact-hero">
+        <div class="container">
+            <h1 class="hero-title animate-fade-in-up">Get In Touch</h1>
+            <p class="hero-subtitle animate-fade-in-up stagger-1">
+                Have a question, suggestion, or tool to submit? We'd love to hear from you!
+            </p>
+        </div>
+    </section>
+
+    <!-- CONTACT CONTENT -->
+    <section class="contact-content">
+        <div class="container">
+            <div class="contact-grid">
+                
+                <!-- Contact Info -->
+                <div class="contact-info">
+                    <div class="info-card reveal">
+                        <div class="info-icon">✉️</div>
+                        <h3 class="info-title">Email</h3>
+                        <p class="info-text">
+                            For general inquiries and support:<br>
+                            <a href="mailto:vvsithum241@gmail.com" class="info-link">vvsithum241@gmail.com</a>
+                        </p>
+                    </div>
+                    
+                    <div class="info-card reveal stagger-1">
+                        <div class="info-icon">📱</div>
+                        <h3 class="info-title">Social Media</h3>
+                        <p class="info-text">
+                            Follow us for updates:<br>
+                            <a href="https://www.facebook.com/heyitsvihanga/" target="_blank" class="info-link">Facebook</a> • 
+                            <a href="https://www.instagram.com/heyitsvihanga/" target="_blank" class="info-link">Instagram</a>
+                        </p>
+                    </div>
+                    
+                    <div class="info-card reveal stagger-2">
+                        <div class="info-icon">🚀</div>
+                        <h3 class="info-title">Submit a Tool</h3>
+                        <p class="info-text">
+                            Know an amazing tool we should feature? Use the form to submit it for review.
+                        </p>
+                    </div>
+                    
+                    <div class="info-card reveal stagger-3">
+                        <div class="info-icon">⚡</div>
+                        <h3 class="info-title">Quick Response</h3>
+                        <p class="info-text">
+                            We typically respond within 24-48 hours. We read every message!
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Contact Form -->
+                <div class="contact-form reveal">
+                    <h2 class="form-title">Send Us a Message</h2>
+                    
+                    <div class="success-message" id="successMessage">
+                        ✅ Message sent successfully! We'll get back to you soon.
+                    </div>
+                    
+                    <div class="error-message" id="errorMessage">
+                        ❌ Oops! Something went wrong. Please try again.
+                    </div>
+                    
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label class="form-label" for="name">Your Name *</label>
+                            <input 
+                                type="text" 
+                                id="name" 
+                                class="form-input"
+                                placeholder="John Doe"
+                                required
+                            >
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label" for="email">Email Address *</label>
+                            <input 
+                                type="email" 
+                                id="email" 
+                                class="form-input"
+                                placeholder="you@example.com"
+                                required
+                            >
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label" for="subject">Subject *</label>
+                            <select id="subject" class="form-select" required>
+                                <option value="">Select a subject</option>
+                                <option value="general">General Inquiry</option>
+                                <option value="submit-tool">Submit a Tool</option>
+                                <option value="bug-report">Report a Bug</option>
+                                <option value="feature-request">Feature Request</option>
+                                <option value="partnership">Partnership Opportunity</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group" id="toolUrlGroup" style="display: none;">
+                            <label class="form-label" for="toolUrl">Tool URL</label>
+                            <input 
+                                type="url" 
+                                id="toolUrl" 
+                                class="form-input"
+                                placeholder="https://example.com"
+                            >
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label" for="message">Message *</label>
+                            <textarea 
+                                id="message" 
+                                class="form-textarea"
+                                placeholder="Tell us more..."
+                                required
+                            ></textarea>
+                        </div>
+                        
+                        <button type="submit" class="form-submit" id="submitBtn">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer style="background: var(--bg-tertiary); padding: 40px 20px; text-align: center;">
+        <p style="color: var(--text-tertiary); font-size: 0.9rem;">
+            © 2024 AI Tools Hub. Created by <strong style="color: var(--accent-primary);">NinjaCoder-X</strong>
+        </p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="assets/js/config.js"></script>
+    <script type="module" src="assets/js/firebase.js"></script>
+    
+    <script>
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+        
+        // Scroll reveal
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        revealElements.forEach(el => revealObserver.observe(el));
+        
+        // Show/hide tool URL field based on subject
+        const subjectSelect = document.getElementById('subject');
+        const toolUrlGroup = document.getElementById('toolUrlGroup');
+        
+        subjectSelect.addEventListener('change', () => {
+            if (subjectSelect.value === 'submit-tool') {
+                toolUrlGroup.style.display = 'block';
+                document.getElementById('toolUrl').required = true;
+            } else {
+                toolUrlGroup.style.display = 'none';
+                document.getElementById('toolUrl').required = false;
+            }
+        });
+        
+        // Form submission
+        const contactForm = document.getElementById('contactForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const successMessage = document.getElementById('successMessage');
+        const errorMessage = document.getElementById('errorMessage');
+        
+        contactForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                subject: document.getElementById('subject').value,
+                toolUrl: document.getElementById('toolUrl').value,
+                message: document.getElementById('message').value,
+                timestamp: new Date().toISOString()
+            };
+            
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sending...';
+            successMessage.classList.remove('show');
+            errorMessage.classList.remove('show');
+            
+            try {
+                // Store in Firestore if Firebase is available
+                if (window.FirebaseService?.isReady) {
+                    // Import Firebase functions
+                    const { getFirestore, collection, addDoc } = await import('https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js');
+                    const db = getFirestore();
+                    
+                    await addDoc(collection(db, 'contact_messages'), formData);
+                    
+                    successMessage.classList.add('show');
+                    contactForm.reset();
+                } else {
+                    // Fallback: Log to console or send to external service
+                    console.log('Contact form submission:', formData);
+                    
+                    // You can integrate with services like Formspree, EmailJS, etc.
+                    successMessage.classList.add('show');
+                    contactForm.reset();
+                }
+                
+                // Scroll to success message
+                successMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                
+            } catch (error) {
+                console.error('Form submission error:', error);
+                errorMessage.classList.add('show');
+            }
+            
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Send Message';
+        });
+    </script>
+
+</body>
+</html>
