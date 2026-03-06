@@ -9,6 +9,12 @@ const headerHTML = `
                 <li><a href="/about.html" class="nav-link" id="nav-about">About</a></li>
                 <li><a href="/contact.html" class="nav-link" id="nav-contact">Contact</a></li>
                 
+                <li>
+                    <a href="https://buymeacoffee.com/heyitsvihanga" target="_blank" class="btn hover-scale" style="background: #FFDD00; color: #000000; border: none; font-weight: 700; padding: 0.5rem 1rem; border-radius: var(--radius-lg);">
+                        ☕ Support Us
+                    </a>
+                </li>
+                
                 <li style="cursor:pointer; font-size:1.2rem; padding:0 0.5rem; user-select:none;" onclick="window.toggleGlobalTheme()" title="Toggle Dark/Light Mode">🌓</li>
                 
                 <li class="show-logged-out"><a href="/login.html" class="btn btn-primary">Get Started</a></li>
@@ -29,16 +35,19 @@ const headerHTML = `
     </header>
 `;
 
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2545479545289526"
+    crossorigin="anonymous"></script>
+
 // Inject Header
 document.getElementById('site-header').outerHTML = headerHTML;
 
 // Highlight Active Link
 const path = window.location.pathname;
-if(path.includes('tools')) document.getElementById('nav-tools').classList.add('active');
-else if(path.includes('categories')) document.getElementById('nav-categories').classList.add('active');
-else if(path.includes('about')) document.getElementById('nav-about').classList.add('active');
-else if(path.includes('contact')) document.getElementById('nav-contact').classList.add('active');
-else if(path === '/' || path.includes('index')) document.getElementById('nav-home').classList.add('active');
+if (path.includes('tools')) document.getElementById('nav-tools').classList.add('active');
+else if (path.includes('categories')) document.getElementById('nav-categories').classList.add('active');
+else if (path.includes('about')) document.getElementById('nav-about').classList.add('active');
+else if (path.includes('contact')) document.getElementById('nav-contact').classList.add('active');
+else if (path === '/' || path.includes('index')) document.getElementById('nav-home').classList.add('active');
 
 // Theme Toggle Logic
 window.toggleGlobalTheme = () => {
@@ -60,22 +69,22 @@ function populateUserData() {
             const u = JSON.parse(c);
             const userName = document.getElementById('userName');
             const userAvatar = document.getElementById('userAvatar');
-            
+
             if (userName) userName.textContent = u.displayName || u.email?.split('@')[0] || 'User';
             if (userAvatar) {
-                if(u.photoURL) userAvatar.innerHTML = `<img src="${u.photoURL}" style="width:100%;height:100%;border-radius:50%;object-fit:cover">`;
+                if (u.photoURL) userAvatar.innerHTML = `<img src="${u.photoURL}" style="width:100%;height:100%;border-radius:50%;object-fit:cover">`;
                 else userAvatar.textContent = (u.displayName || u.email || 'U')[0].toUpperCase();
             }
         }
-    } catch(e) {}
+    } catch (e) { }
 }
 populateUserData();
 
 // Global Logout
 window.handleLogout = async () => {
-    if(confirm('Logout?')) {
+    if (confirm('Logout?')) {
         localStorage.removeItem('cachedUser');
-        if(window.FirebaseService?.isReady) await window.FirebaseService.logOut();
+        if (window.FirebaseService?.isReady) await window.FirebaseService.logOut();
         window.location.href = '/';
     }
 };
@@ -84,7 +93,7 @@ window.handleLogout = async () => {
 document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('scroll', () => {
         const header = document.getElementById('header');
-        if(header) header.classList.toggle('scrolled', window.scrollY > 50);
+        if (header) header.classList.toggle('scrolled', window.scrollY > 50);
     });
 
     let attempts = 0;
