@@ -35,9 +35,6 @@ const headerHTML = `
     </header>
 `;
 
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2545479545289526"
-    crossorigin="anonymous"></script>
-
 // Inject Header
 document.getElementById('site-header').outerHTML = headerHTML;
 
