@@ -57,7 +57,7 @@ html:not(.is-admin) .show-admin {
     font-size: var(--text-2xl);
     font-weight: 800;
     background: var(--bg-gradient-1);
-    -webkit-background-clip: text;
+    -webkit-background-clip: text; background-clip: text;
     -webkit-text-fill-color: transparent;
     text-decoration: none;
     letter-spacing: -0.02em;
@@ -264,7 +264,7 @@ html:not(.is-admin) .show-admin {
     line-height: 1.1;
     margin-bottom: var(--space-6);
     background: var(--bg-gradient-1);
-    -webkit-background-clip: text;
+    -webkit-background-clip: text; background-clip: text;
     -webkit-text-fill-color: transparent;
     letter-spacing: -0.02em;
 }
