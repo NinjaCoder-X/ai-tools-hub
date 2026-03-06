@@ -175,10 +175,37 @@
                                 class="info-link">Facebook</a> • <a href="https://www.instagram.com/heyitsvihanga/"
                                 target="_blank" class="info-link">Instagram</a></p>
                     </div>
-                    <div class="info-card reveal stagger-2">
-                        <div class="info-icon">🚀</div>
-                        <h3 class="info-title">Submit a Tool</h3>
-                        <p class="info-text">Know an amazing tool? Use the form!</p>
+                    <div class="modal" id="submitToolModal">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h3 class="modal-title">🚀 Submit a Tool</h3>
+                                <button class="modal-close" onclick="hideSubmitModal()">×</button>
+                            </div>
+                            <form id="submitToolForm">
+                                <p style="color:var(--text-secondary); margin-bottom:var(--space-4);">
+                                    Our AI will verify the tool before sending it to the admins for approval.
+                                </p>
+                                <div class="form-group">
+                                    <label class="form-label">Tool Name *</label>
+                                    <input type="text" id="subName" class="form-input" placeholder="e.g., ChatGPT"
+                                        required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Tool URL *</label>
+                                    <input type="url" id="subUrl" class="form-input" placeholder="https://..." required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Short Description *</label>
+                                    <textarea id="subDesc" class="form-input" style="min-height:80px"
+                                        placeholder="What does this tool do?" required></textarea>
+                                </div>
+                                <div id="subStatus" class="alert" style="display:none; margin-bottom:var(--space-4);">
+                                </div>
+                                <button type="submit" class="btn btn-primary" id="subBtn" style="width:100%">
+                                    Submit for AI Review
+                                </button>
+                            </form>
+                        </div>
                     </div>
                     <div class="info-card reveal stagger-3">
                         <div class="info-icon">⚡</div>
@@ -245,6 +272,64 @@
                 e.target.reset();
                 btn.disabled = false; btn.textContent = 'Send Message';
             }, 1000);
+        });
+    </script>
+    <script src="assets/js/gemini.js"></script>
+    <script>
+        window.showSubmitModal = () => document.getElementById('submitToolModal').classList.add('show');
+        window.hideSubmitModal = () => document.getElementById('submitToolModal').classList.remove('show');
+
+        document.getElementById('submitToolForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('subBtn');
+            const status = document.getElementById('subStatus');
+            const name = document.getElementById('subName').value;
+            const url = document.getElementById('subUrl').value;
+            const desc = document.getElementById('subDesc').value;
+
+            btn.disabled = true;
+            btn.textContent = '🤖 AI is reviewing...';
+            status.style.display = 'none';
+            status.className = 'alert';
+
+            try {
+                // 1. AI Verification
+                let aiResult = { valid: true, confidence: 100, reason: "Auto-passed" };
+                if (window.geminiAPI) {
+                    aiResult = await window.geminiAPI.verifyTool(name, url, desc);
+                }
+
+                // 2. Send to Firebase (even if flagged, so admin can review)
+                const toolData = {
+                    name, url, description: desc,
+                    aiVerified: aiResult.valid,
+                    aiConfidence: aiResult.confidence,
+                    aiReason: aiResult.reason || "Looks good"
+                };
+
+                const res = await window.FirebaseService.submitPendingTool(toolData);
+
+                if (res.success) {
+                    if (aiResult.valid) {
+                        status.textContent = '✅ AI verified! Sent to admins for final approval.';
+                        status.classList.add('alert-success');
+                    } else {
+                        status.textContent = '⚠️ AI flagged some details, but we sent it to admins for manual review.';
+                        status.classList.add('alert-warning');
+                    }
+                    status.style.display = 'block';
+                    e.target.reset();
+                    btn.textContent = 'Submit Another Tool';
+                } else {
+                    throw new Error(res.error);
+                }
+            } catch (err) {
+                status.textContent = '❌ Error: ' + err.message;
+                status.classList.add('alert-error');
+                status.style.display = 'block';
+                btn.textContent = 'Try Again';
+            }
+            btn.disabled = false;
         });
     </script>
 

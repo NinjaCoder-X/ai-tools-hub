@@ -1145,8 +1145,84 @@ Canva | https://canva.com | Graphic design platform`;
             a.download = `database-export-${Date.now()}.json`;
             a.click();
         };
+        // Fetch pending tools for Admin
+        async function loadPendingTools() {
+            if (!window.FirebaseService?.isReady) return;
+
+            const pending = await window.FirebaseService.getPendingTools();
+            document.getElementById('pendingTools').textContent = pending.length;
+
+            const container = document.getElementById('recentActivity');
+
+            if (pending.length === 0) {
+                container.innerHTML = '<p style="color:var(--text-tertiary);text-align:center;padding:var(--space-8);">No pending submissions</p>';
+                return;
+            }
+
+            container.innerHTML = pending.map(t => `
+        <div class="tool-preview-item" style="border-left: 4px solid ${t.aiVerified ? 'var(--accent-success)' : 'var(--accent-warning)'}; margin-bottom: var(--space-4);">
+            <div class="tool-preview-header">
+                <span class="tool-preview-name">${t.name}</span>
+                <span class="tool-preview-status ${t.aiVerified ? 'status-verified' : 'status-pending'}">
+                    AI: ${t.aiConfidence}% (${t.aiVerified ? 'Pass' : 'Flagged'})
+                </span>
+            </div>
+            <p style="font-size:var(--text-sm);color:var(--text-secondary);margin-bottom:var(--space-2)">
+                🔗 <a href="${t.url}" target="_blank" style="color:var(--accent-primary)">${t.url}</a><br>
+                📝 ${t.description}
+            </p>
+            <p style="font-size:var(--text-xs);color:var(--text-tertiary);margin-bottom:var(--space-3)">
+                <strong>AI Note:</strong> ${t.aiReason} <br>
+                <strong>From:</strong> ${t.submittedBy}
+            </p>
+            <div style="display:flex;gap:var(--space-2)">
+                <button class="btn btn-primary" style="padding:var(--space-2) var(--space-4);font-size:var(--text-sm)" onclick="reviewTool('${t.id}', '${btoa(encodeURIComponent(JSON.stringify(t)))}')">
+                    Review & Add
+                </button>
+                <button class="btn btn-secondary" style="padding:var(--space-2) var(--space-4);font-size:var(--text-sm);color:var(--accent-error);border-color:var(--error-bg)" onclick="rejectTool('${t.id}')">
+                    Reject
+                </button>
+            </div>
+        </div>
+    `).join('');
+        }
+
+        // Send tool to the "Add Tool" form
+        window.reviewTool = (id, b64Data) => {
+            const data = JSON.parse(decodeURIComponent(atob(b64Data)));
+
+            // Switch to Add Tool tab
+            window.switchTab('add-tool');
+
+            // Pre-fill the form
+            document.getElementById('toolName').value = data.name;
+            document.getElementById('toolLink').value = data.url;
+            document.getElementById('toolDescription').value = data.description;
+
+            // Mark as approved in Firebase to remove from queue
+            window.FirebaseService.updatePendingToolStatus(id, 'approved');
+            loadPendingTools();
+
+            alert('Tool loaded into the form! Click "✨ Generate with AI" to fill the remaining fields, then save it to your database.');
+        };
+
+        // Reject a tool
+        window.rejectTool = async (id) => {
+            if (confirm('Are you sure you want to reject and delete this submission?')) {
+                await window.FirebaseService.updatePendingToolStatus(id, 'rejected');
+                loadPendingTools();
+            }
+        };
+
+        // Hook it into the auth check so it loads automatically when admin logs in
+        window.FirebaseService.onAuthChange((u) => {
+            if (u && u.isAdmin) {
+                loadPendingTools();
+            }
+        });
 
     </script>
+
 
 </body>
 
