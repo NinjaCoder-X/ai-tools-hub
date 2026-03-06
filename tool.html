@@ -1,23 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title id="pageTitle">Tool Details - AI Tools Hub</title>
+    
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
     <link rel="stylesheet" href="assets/css/themes.css">
     <link rel="stylesheet" href="assets/css/main.css">
     <link rel="stylesheet" href="assets/css/animations.css">
+    
     <script>
         /* Instant Anti-Flicker & Theme Check */
         (function () {
-            // 1. Theme Check (Remembers user preference or system default)
             var theme = localStorage.getItem('theme');
             if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
                 document.documentElement.setAttribute('data-theme', 'dark');
             }
-
-            // 2. Auth Check
             var c = localStorage.getItem('cachedUser');
             if (c) {
                 document.documentElement.classList.add('is-logged-in');
@@ -27,24 +26,71 @@
             }
         })();
     </script>
+    
+    <style>
+        .tool-hero { padding: 120px 0 60px; background: var(--bg-gradient-hero); text-align: center; border-bottom: 1px solid var(--border-light); }
+        .tool-category-badge { display: inline-block; padding: 6px 16px; background: var(--interactive-hover); color: var(--accent-primary); border-radius: var(--radius-full); font-weight: 700; font-size: var(--text-sm); margin-bottom: var(--space-4); letter-spacing: 1px; text-transform: uppercase; }
+        .tool-title { font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 900; color: var(--text-primary); margin-bottom: var(--space-4); }
+        .tool-tags { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-2); margin-bottom: var(--space-8); }
+        .tag { background: var(--bg-card); border: 1px solid var(--border-light); padding: 4px 12px; border-radius: var(--radius-md); font-size: var(--text-sm); color: var(--text-secondary); }
+        .action-buttons { display: flex; justify-content: center; gap: var(--space-4); flex-wrap: wrap; }
+        .details-card { max-width: 800px; margin: -40px auto 80px; background: var(--bg-card); border-radius: var(--radius-2xl); padding: var(--space-8); box-shadow: var(--shadow-2xl); border: 1px solid var(--border-light); position: relative; z-index: 10; text-align: left; }
+    </style>
 </head>
-
 <body>
 
     <div id="site-header"></div>
     <script src="assets/js/header.js"></script>
 
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2545479545289526" crossorigin="anonymous"></script>
+
+    <main id="mainContent" style="display: none; min-height: 60vh;">
+        
+        <section class="tool-hero">
+            <div class="container">
+                <div class="animate-fade-in-up">
+                    <span class="tool-category-badge" id="tCategory">Category</span>
+                    <h1 class="tool-title" id="tName">Tool Name</h1>
+                    <div class="tool-tags" id="tTags"></div>
+                    
+                    <div class="action-buttons">
+                        <a href="#" id="tLink" target="_blank" class="btn btn-primary hover-scale" style="font-size: 1.1rem; padding: var(--space-3) var(--space-8);">
+                            🚀 Visit Website
+                        </a>
+                        <button onclick="window.toggleFavorite()" id="favBtn" class="btn btn-secondary">🤍 Save to Favorites</button>
+                        <button onclick="window.showAddToCollection()" class="btn btn-secondary">📁 Add to Collection</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="container">
+            <div class="details-card animate-fade-in-up stagger-2">
+                <h2 style="font-size: 1.5rem; font-weight: 800; margin-bottom: var(--space-4); border-bottom: 2px solid var(--border-light); padding-bottom: var(--space-2);">About this Tool</h2>
+                <p id="tDesc" style="font-size: 1.1rem; color: var(--text-secondary); line-height: 1.8;"></p>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="loadingState" style="text-align: center; padding: 150px 0; min-height: 60vh;">
+        <h2 style="color: var(--text-secondary);">Loading Tool Details...</h2>
+    </div>
+
     <div class="modal" id="collectionModal">
         <div class="modal-content">
             <div class="modal-header">
                 <h3 class="modal-title">Add to Collection</h3>
-                <button class="modal-close" onclick="closeCollectionModal()">×</button>
+                <button class="modal-close" onclick="window.closeCollectionModal()">×</button>
             </div>
-            <div id="collectionList"
-                style="display:flex; flex-direction:column; gap:var(--space-3); max-height: 300px; overflow-y: auto;">
+            <div id="collectionList" style="display:flex; flex-direction:column; gap:var(--space-3); max-height: 300px; overflow-y: auto;">
             </div>
         </div>
     </div>
+
+    <footer style="background:var(--bg-tertiary);padding:40px 20px; text-align:center">
+        <p style="color:var(--text-tertiary);font-size:0.9rem">© 2026 AI Tools Hub. Created by <strong style="color:var(--accent-primary)">NinjaCoder-X</strong></p>
+    </footer>
 
     <script src="assets/js/config.js"></script>
     <script src="assets/js/database.js"></script>
@@ -52,6 +98,8 @@
 
     <script type="module">
         let currentTool = null;
+        let isFavorite = false;
+
         const urlParams = new URLSearchParams(window.location.search);
         const toolName = urlParams.get('name');
 
@@ -59,10 +107,81 @@
 
         document.addEventListener('DOMContentLoaded', () => {
             currentTool = window.DB_HELPERS.getToolByName(toolName);
-            // ... (keep the rest of your loadToolData logic here) ...
+            
+            if (!currentTool) {
+                alert('Tool not found!');
+                window.location.href = '/tools.html';
+                return;
+            }
+
+            // Populate the HTML
+            document.getElementById('pageTitle').textContent = `${currentTool.name} - AI Tools Hub`;
+            document.getElementById('tName').textContent = currentTool.name;
+            document.getElementById('tCategory').textContent = currentTool.category || 'Uncategorized';
+            document.getElementById('tDesc').textContent = currentTool.description;
+            document.getElementById('tLink').href = currentTool.link;
+
+            // Generate Tags
+            if (currentTool.tags && currentTool.tags.length > 0) {
+                document.getElementById('tTags').innerHTML = currentTool.tags.map(tag => `<span class="tag">#${tag}</span>`).join('');
+            }
+
+            // Show Content, Hide Loader
+            document.getElementById('loadingState').style.display = 'none';
+            document.getElementById('mainContent').style.display = 'block';
+
+            // Check if favorited once Firebase loads
+            const checkAuth = setInterval(async () => {
+                if (window.FirebaseService && window.FirebaseService.isReady) {
+                    clearInterval(checkAuth);
+                    if (window.FirebaseService.getCurrentUser()) {
+                        isFavorite = await window.FirebaseService.isFavorite(currentTool.name);
+                        updateFavoriteBtn();
+                    }
+                }
+            }, 100);
         });
 
-        // The Fixed Collection Logic
+        // Favorites Logic
+        window.toggleFavorite = async () => {
+            if (!window.FirebaseService?.isReady || !window.FirebaseService.getCurrentUser()) {
+                alert('Please sign in to save favorites!');
+                window.location.href = '/login.html';
+                return;
+            }
+
+            const btn = document.getElementById('favBtn');
+            btn.disabled = true;
+
+            try {
+                if (isFavorite) {
+                    await window.FirebaseService.removeFavorite(currentTool.name);
+                    isFavorite = false;
+                } else {
+                    await window.FirebaseService.addFavorite(currentTool);
+                    isFavorite = true;
+                }
+                updateFavoriteBtn();
+            } catch (e) {
+                alert('Error updating favorites');
+            }
+            btn.disabled = false;
+        };
+
+        function updateFavoriteBtn() {
+            const btn = document.getElementById('favBtn');
+            if (isFavorite) {
+                btn.innerHTML = '❤️ Saved to Favorites';
+                btn.classList.add('btn-primary');
+                btn.classList.remove('btn-secondary');
+            } else {
+                btn.innerHTML = '🤍 Save to Favorites';
+                btn.classList.add('btn-secondary');
+                btn.classList.remove('btn-primary');
+            }
+        }
+
+        // Collection Logic
         window.showAddToCollection = async () => {
             if (!window.FirebaseService?.isReady || !window.FirebaseService.getCurrentUser()) {
                 alert('Please sign in to add tools to collections');
@@ -82,7 +201,7 @@
                     return;
                 }
                 list.innerHTML = collections.map(col => `
-                    <button class="btn btn-secondary" style="justify-content:flex-start; text-align:left; width:100%;" onclick="addToolToCol(event, '${col.id}')">
+                    <button class="btn btn-secondary" style="justify-content:flex-start; text-align:left; width:100%;" onclick="window.addToolToCol(event, '${col.id}')">
                         <span style="font-size:1.5rem; margin-right:var(--space-3);">${col.icon || '📁'}</span>
                         <div><div style="font-weight:600;">${col.name}</div><div style="font-size:var(--text-xs); color:var(--text-tertiary);">${col.tools?.length || 0} tools</div></div>
                     </button>
@@ -100,11 +219,10 @@
             btn.innerHTML = 'Adding...'; btn.disabled = true;
             try {
                 const res = await window.FirebaseService.addToolToCollection(colId, currentTool);
-                if (res.success) { btn.innerHTML = '✅ Added!'; setTimeout(closeCollectionModal, 1000); }
+                if (res.success) { btn.innerHTML = '✅ Added!'; setTimeout(window.closeCollectionModal, 1000); }
                 else { alert('Error: ' + res.error); btn.innerHTML = originalText; btn.disabled = false; }
             } catch (e) { alert('Error adding tool'); btn.innerHTML = originalText; btn.disabled = false; }
         };
     </script>
 </body>
-
 </html>
