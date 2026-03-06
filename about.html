@@ -3,185 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Learn about AI Tools Hub - Your ultimate directory for discovering the best AI tools and digital resources.">
-    
+    <meta name="description" content="Learn about AI Tools Hub - Your ultimate directory for AI tools.">
     <title>About - AI Tools Hub</title>
-    
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
-    
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
     <link rel="stylesheet" href="assets/css/themes.css">
     <link rel="stylesheet" href="assets/css/main.css">
     <link rel="stylesheet" href="assets/css/animations.css">
-    
     <style>
-        .about-hero {
-            padding: 140px 0 80px;
-            background: var(--bg-gradient-hero);
-            text-align: center;
-        }
-        
-        .about-section {
-            padding: 80px 0;
-        }
-        
-        .about-section:nth-child(even) {
-            background: var(--bg-secondary);
-        }
-        
-        .section-title {
-            font-size: var(--text-4xl);
-            font-weight: 800;
-            text-align: center;
-            margin-bottom: var(--space-4);
-            background: var(--bg-gradient-1);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        
-        .section-subtitle {
-            text-align: center;
-            color: var(--text-secondary);
-            font-size: var(--text-lg);
-            max-width: 600px;
-            margin: 0 auto var(--space-12);
-        }
-        
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: var(--space-8);
-            margin-top: var(--space-12);
-        }
-        
-        .feature-card {
-            text-align: center;
-            padding: var(--space-8);
-        }
-        
-        .feature-icon {
-            font-size: 4rem;
-            margin-bottom: var(--space-4);
-            display: inline-block;
-        }
-        
-        .feature-title {
-            font-size: var(--text-xl);
-            font-weight: 700;
-            margin-bottom: var(--space-3);
-        }
-        
-        .feature-description {
-            color: var(--text-secondary);
-            line-height: 1.7;
-        }
-        
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: var(--space-8);
-            margin-top: var(--space-12);
-        }
-        
-        .stat-card {
-            text-align: center;
-            padding: var(--space-6);
-        }
-        
-        .stat-number {
-            font-size: 4rem;
-            font-weight: 900;
-            background: var(--bg-gradient-1);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            line-height: 1;
-            margin-bottom: var(--space-2);
-        }
-        
-        .stat-label {
-            color: var(--text-secondary);
-            font-size: var(--text-base);
-        }
-        
-        .creator-section {
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
-        }
-        
-        .creator-avatar {
-            width: 120px;
-            height: 120px;
-            background: var(--bg-gradient-1);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3rem;
-            margin: 0 auto var(--space-6);
-            box-shadow: var(--shadow-xl);
-        }
-        
-        .creator-name {
-            font-size: var(--text-3xl);
-            font-weight: 800;
-            margin-bottom: var(--space-3);
-        }
-        
-        .creator-bio {
-            color: var(--text-secondary);
-            font-size: var(--text-lg);
-            line-height: 1.8;
-            margin-bottom: var(--space-6);
-        }
-        
-        .social-links {
-            display: flex;
-            gap: var(--space-4);
-            justify-content: center;
-        }
-        
-        .social-link {
-            display: inline-flex;
-            align-items: center;
-            gap: var(--space-2);
-            padding: var(--space-3) var(--space-6);
-            background: var(--bg-card);
-            border: 2px solid var(--border-light);
-            border-radius: var(--radius-lg);
-            text-decoration: none;
-            color: var(--text-primary);
-            font-weight: 500;
-            transition: all var(--duration-fast) var(--ease-smooth);
-        }
-        
-        .social-link:hover {
-            border-color: var(--accent-primary);
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-md);
-        }
-        
-        .mission-box {
-            background: var(--bg-card);
-            border-radius: var(--radius-2xl);
-            padding: var(--space-10);
-            border: 1px solid var(--border-light);
-            box-shadow: var(--shadow-lg);
-            max-width: 900px;
-            margin: var(--space-12) auto 0;
-        }
-        
-        .mission-text {
-            font-size: var(--text-xl);
-            line-height: 1.8;
-            color: var(--text-secondary);
-            text-align: center;
-        }
+        .about-hero{padding:140px 0 80px;background:var(--bg-gradient-hero);text-align:center}
+        .about-section{padding:80px 0}
+        .about-section:nth-child(even){background:var(--bg-secondary)}
+        .section-title{font-size:var(--text-4xl);font-weight:800;text-align:center;margin-bottom:var(--space-4);background:var(--bg-gradient-1);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+        .features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:var(--space-8);margin-top:var(--space-12)}
+        .feature-card{text-align:center;padding:var(--space-8)}
+        .feature-icon{font-size:4rem;margin-bottom:var(--space-4)}
+        .feature-title{font-size:var(--text-xl);font-weight:700;margin-bottom:var(--space-3)}
+        .feature-desc{color:var(--text-secondary);line-height:1.7}
+        .stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:var(--space-8);margin-top:var(--space-12)}
+        .stat-card{text-align:center;padding:var(--space-6)}
+        .stat-number{font-size:4rem;font-weight:900;background:var(--bg-gradient-1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1;margin-bottom:var(--space-2)}
+        .stat-label{color:var(--text-secondary)}
+        .creator-section{max-width:800px;margin:0 auto;text-align:center}
+        .creator-avatar{width:120px;height:120px;background:var(--bg-gradient-1);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:3rem;margin:0 auto var(--space-6);box-shadow:var(--shadow-xl)}
+        .creator-name{font-size:var(--text-3xl);font-weight:800;margin-bottom:var(--space-3)}
+        .creator-bio{color:var(--text-secondary);font-size:var(--text-lg);line-height:1.8;margin-bottom:var(--space-6)}
+        .social-links{display:flex;gap:var(--space-4);justify-content:center}
+        .social-link{display:inline-flex;align-items:center;gap:var(--space-2);padding:var(--space-3) var(--space-6);background:var(--bg-card);border:2px solid var(--border-light);border-radius:var(--radius-lg);text-decoration:none;color:var(--text-primary);font-weight:500;transition:all var(--duration-fast)}
+        .social-link:hover{border-color:var(--accent-primary);transform:translateY(-2px)}
     </style>
 </head>
 <body>
-    
+
     <!-- HEADER -->
-    <header class="header theme-transition" id="header">
+    <header class="header" id="header">
         <nav class="nav container">
             <a href="/" class="logo">AI Tools Hub</a>
             <ul class="nav-links">
@@ -189,24 +43,18 @@
                 <li><a href="tools.html" class="nav-link">Tools</a></li>
                 <li><a href="about.html" class="nav-link active">About</a></li>
                 <li><a href="contact.html" class="nav-link">Contact</a></li>
-                
-                <li id="guestNav">
-                    <a href="login.html" class="btn btn-primary">Get Started</a>
-                </li>
-                
-                <li id="userNav" style="display: none;">
-                    <div style="display: flex; align-items: center; gap: 0.75rem;">
-                        <a href="profile.html" style="display: flex; align-items: center; gap: 0.5rem; text-decoration: none; color: var(--text-primary); font-weight: 600; padding: 0.5rem 0.75rem; border-radius: var(--radius-lg); background: var(--bg-tertiary); transition: all 0.2s;">
-                            <span id="userAvatar" style="width: 32px; height: 32px; background: var(--bg-gradient-1); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.875rem; font-weight: 700;">U</span>
-                            <span id="userName" style="max-width: 100px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">User</span>
+                <li id="authLoading"><div style="width:100px;height:38px;background:var(--bg-tertiary);border-radius:var(--radius-lg);animation:pulse 1.5s infinite"></div></li>
+                <li id="guestNav" style="display:none"><a href="login.html" class="btn btn-primary">Get Started</a></li>
+                <li id="userNav" style="display:none">
+                    <div style="display:flex;align-items:center;gap:0.75rem">
+                        <a href="profile.html" style="display:flex;align-items:center;gap:0.5rem;text-decoration:none;color:var(--text-primary);font-weight:600;padding:0.5rem 0.75rem;border-radius:var(--radius-lg);background:var(--bg-tertiary)">
+                            <span id="userAvatar" style="width:32px;height:32px;background:var(--bg-gradient-1);border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-size:0.875rem;font-weight:700">U</span>
+                            <span id="userName">User</span>
                         </a>
-                        <button onclick="handleLogout()" class="btn btn-ghost" style="padding: 0.5rem 1rem; font-size: 0.875rem;">Logout</button>
+                        <button onclick="handleLogout()" class="btn btn-ghost">Logout</button>
                     </div>
                 </li>
-                
-                <li id="adminNav" style="display: none;">
-                    <a href="admin.html" class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.875rem;">👑 Admin</a>
-                </li>
+                <li id="adminNav" style="display:none"><a href="admin.html" class="btn btn-secondary">👑 Admin</a></li>
             </ul>
         </nav>
     </header>
@@ -215,25 +63,7 @@
     <section class="about-hero">
         <div class="container">
             <h1 class="hero-title animate-fade-in-up">About AI Tools Hub</h1>
-            <p class="hero-subtitle animate-fade-in-up stagger-1" style="max-width: 700px; margin: 0 auto;">
-                Your trusted directory for discovering the best AI-powered tools, 
-                OSINT resources, and digital platforms to supercharge your workflow.
-            </p>
-        </div>
-    </section>
-
-    <!-- MISSION -->
-    <section class="about-section">
-        <div class="container">
-            <h2 class="section-title reveal">Our Mission</h2>
-            <div class="mission-box reveal">
-                <p class="mission-text">
-                    We believe that <strong>everyone deserves access to powerful tools</strong> 
-                    that can help them work smarter, create better, and achieve more. 
-                    AI Tools Hub exists to bridge the gap between incredible technology 
-                    and the people who need it most.
-                </p>
-            </div>
+            <p class="hero-subtitle animate-fade-in-up stagger-1" style="max-width:700px;margin:0 auto">Your trusted directory for discovering the best AI-powered tools and digital resources.</p>
         </div>
     </section>
 
@@ -241,24 +71,11 @@
     <section class="about-section">
         <div class="container">
             <h2 class="section-title reveal">By The Numbers</h2>
-            
             <div class="stats-grid">
-                <div class="stat-card reveal stagger-1">
-                    <div class="stat-number">150+</div>
-                    <div class="stat-label">Curated Tools</div>
-                </div>
-                <div class="stat-card reveal stagger-2">
-                    <div class="stat-number">15+</div>
-                    <div class="stat-label">Categories</div>
-                </div>
-                <div class="stat-card reveal stagger-3">
-                    <div class="stat-number">100%</div>
-                    <div class="stat-label">Free Access</div>
-                </div>
-                <div class="stat-card reveal stagger-4">
-                    <div class="stat-number">24/7</div>
-                    <div class="stat-label">Available</div>
-                </div>
+                <div class="stat-card reveal stagger-1"><div class="stat-number">150+</div><div class="stat-label">Curated Tools</div></div>
+                <div class="stat-card reveal stagger-2"><div class="stat-number">15+</div><div class="stat-label">Categories</div></div>
+                <div class="stat-card reveal stagger-3"><div class="stat-number">100%</div><div class="stat-label">Free Access</div></div>
+                <div class="stat-card reveal stagger-4"><div class="stat-number">24/7</div><div class="stat-label">Available</div></div>
             </div>
         </div>
     </section>
@@ -267,43 +84,13 @@
     <section class="about-section">
         <div class="container">
             <h2 class="section-title reveal">What Makes Us Different</h2>
-            
             <div class="features-grid">
-                <div class="feature-card reveal stagger-1">
-                    <div class="feature-icon animate-float">🎯</div>
-                    <h3 class="feature-title">Curated Quality</h3>
-                    <p class="feature-description">Every tool is hand-picked and verified. No spam, just the best tools.</p>
-                </div>
-                
-                <div class="feature-card reveal stagger-2">
-                    <div class="feature-icon animate-float">⚡</div>
-                    <h3 class="feature-title">Lightning Fast</h3>
-                    <p class="feature-description">Search 150+ tools instantly with our optimized search engine.</p>
-                </div>
-                
-                <div class="feature-card reveal stagger-3">
-                    <div class="feature-icon animate-float">🤖</div>
-                    <h3 class="feature-title">AI-Powered</h3>
-                    <p class="feature-description">Intelligent search and smart recommendations powered by Google Gemini.</p>
-                </div>
-                
-                <div class="feature-card reveal stagger-4">
-                    <div class="feature-icon animate-float">🎨</div>
-                    <h3 class="feature-title">Beautiful Design</h3>
-                    <p class="feature-description">Modern, clean, and obsessively crafted for the best experience.</p>
-                </div>
-                
-                <div class="feature-card reveal stagger-5">
-                    <div class="feature-icon animate-float">🔒</div>
-                    <h3 class="feature-title">Privacy First</h3>
-                    <p class="feature-description">Your data is yours. We don't track or sell your information.</p>
-                </div>
-                
-                <div class="feature-card reveal stagger-6">
-                    <div class="feature-icon animate-float">💚</div>
-                    <h3 class="feature-title">100% Free</h3>
-                    <p class="feature-description">No paywalls. Every feature is free and always will be.</p>
-                </div>
+                <div class="feature-card reveal stagger-1"><div class="feature-icon animate-float">🎯</div><h3 class="feature-title">Curated Quality</h3><p class="feature-desc">Every tool is hand-picked and verified.</p></div>
+                <div class="feature-card reveal stagger-2"><div class="feature-icon animate-float">⚡</div><h3 class="feature-title">Lightning Fast</h3><p class="feature-desc">Search 150+ tools instantly.</p></div>
+                <div class="feature-card reveal stagger-3"><div class="feature-icon animate-float">🤖</div><h3 class="feature-title">AI-Powered</h3><p class="feature-desc">Smart search powered by Google Gemini.</p></div>
+                <div class="feature-card reveal stagger-4"><div class="feature-icon animate-float">🎨</div><h3 class="feature-title">Beautiful Design</h3><p class="feature-desc">Modern, clean, and obsessively crafted.</p></div>
+                <div class="feature-card reveal stagger-5"><div class="feature-icon animate-float">🔒</div><h3 class="feature-title">Privacy First</h3><p class="feature-desc">Your data is yours. Always.</p></div>
+                <div class="feature-card reveal stagger-6"><div class="feature-icon animate-float">💚</div><h3 class="feature-title">100% Free</h3><p class="feature-desc">No paywalls, ever.</p></div>
             </div>
         </div>
     </section>
@@ -312,20 +99,12 @@
     <section class="about-section">
         <div class="container">
             <div class="creator-section reveal">
-                <div class="creator-avatar animate-pulse-glow">👨‍💻</div>
+                <div class="creator-avatar animate-glow">👨‍💻</div>
                 <h2 class="creator-name">NinjaCoder-X</h2>
-                <p class="creator-bio">
-                    Hi! I'm a passionate developer who believes in making technology accessible to everyone. 
-                    I built AI Tools Hub to solve a problem I faced daily: finding the right tool for the job.
-                </p>
-                
+                <p class="creator-bio">Hi! I'm a passionate developer who believes in making technology accessible to everyone.</p>
                 <div class="social-links">
-                    <a href="https://www.facebook.com/heyitsvihanga/" target="_blank" class="social-link hover-lift">
-                        <span>📘</span> Facebook
-                    </a>
-                    <a href="https://www.instagram.com/heyitsvihanga/" target="_blank" class="social-link hover-lift">
-                        <span>📸</span> Instagram
-                    </a>
+                    <a href="https://www.facebook.com/heyitsvihanga/" target="_blank" class="social-link"><span>📘</span> Facebook</a>
+                    <a href="https://www.instagram.com/heyitsvihanga/" target="_blank" class="social-link"><span>📸</span> Instagram</a>
                 </div>
             </div>
         </div>
@@ -333,111 +112,36 @@
 
     <!-- CTA -->
     <section class="about-section">
-        <div class="container" style="text-align: center;">
+        <div class="container" style="text-align:center">
             <h2 class="section-title reveal">Start Exploring Today</h2>
-            <div class="reveal" style="display: flex; gap: 1rem; justify-content: center; margin-top: 2rem;">
-                <a href="tools.html" class="btn btn-primary btn-animated">Browse All Tools</a>
+            <div class="reveal" style="display:flex;gap:1rem;justify-content:center;margin-top:2rem">
+                <a href="tools.html" class="btn btn-primary">Browse All Tools</a>
                 <a href="contact.html" class="btn btn-secondary">Get in Touch</a>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer style="background: var(--bg-tertiary); padding: 40px 20px; text-align: center;">
-        <p style="color: var(--text-tertiary); font-size: 0.9rem;">
-            © 2024 AI Tools Hub. Created by <strong style="color: var(--accent-primary);">NinjaCoder-X</strong>
-        </p>
+    <!-- FOOTER -->
+    <footer style="background:var(--bg-tertiary);padding:40px 20px;text-align:center">
+        <p style="color:var(--text-tertiary);font-size:0.9rem">© 2024 AI Tools Hub. Created by <strong style="color:var(--accent-primary)">NinjaCoder-X</strong></p>
     </footer>
 
-    <!-- Scripts -->
     <script src="assets/js/config.js"></script>
     <script type="module" src="assets/js/firebase.js"></script>
-    
+
     <script>
-        // Header scroll
-        window.addEventListener('scroll', () => {
-            const header = document.getElementById('header');
-            if (window.scrollY > 50) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-        });
-        
-        // Scroll reveal
-        const revealElements = document.querySelectorAll('.reveal');
-        const revealObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                }
-            });
-        }, { threshold: 0.1 });
-        
-        revealElements.forEach(el => revealObserver.observe(el));
-    </script>
-    
-    <!-- Header Auth Script -->
-    <script type="module">
-        function updateHeader(user) {
-            const guestNav = document.getElementById('guestNav');
-            const userNav = document.getElementById('userNav');
-            const adminNav = document.getElementById('adminNav');
-            const userName = document.getElementById('userName');
-            const userAvatar = document.getElementById('userAvatar');
-            
-            if (!guestNav || !userNav) return;
-            
-            if (user) {
-                guestNav.style.display = 'none';
-                userNav.style.display = 'block';
-                
-                if (userName) userName.textContent = user.displayName || user.email?.split('@')[0] || 'User';
-                
-                if (userAvatar) {
-                    if (user.photoURL) {
-                        userAvatar.innerHTML = `<img src="${user.photoURL}" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;" alt="Avatar">`;
-                    } else {
-                        userAvatar.textContent = (user.displayName || user.email || 'U')[0].toUpperCase();
-                    }
-                }
-                
-                if (adminNav) adminNav.style.display = user.isAdmin ? 'block' : 'none';
-            } else {
-                guestNav.style.display = 'block';
-                userNav.style.display = 'none';
-                if (adminNav) adminNav.style.display = 'none';
-            }
-        }
-        
-        function initHeaderAuth() {
-            let attempts = 0;
-            const checkAuth = setInterval(() => {
-                attempts++;
-                if (window.FirebaseService?.isReady) {
-                    clearInterval(checkAuth);
-                    updateHeader(window.FirebaseService.getCurrentUser());
-                    window.FirebaseService.onAuthChange(updateHeader);
-                } else if (attempts >= 20) {
-                    clearInterval(checkAuth);
-                }
-            }, 200);
-        }
-        
-        window.handleLogout = async () => {
-            if (confirm('Are you sure you want to logout?')) {
-                if (window.FirebaseService?.isReady) await window.FirebaseService.logOut();
-                localStorage.removeItem('demoUser');
-                window.location.href = '/';
-            }
-        };
-        
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', initHeaderAuth);
-        } else {
-            initHeaderAuth();
-        }
+        (function(){var c=localStorage.getItem('cachedUser');if(c){try{var u=JSON.parse(c);document.getElementById('authLoading').style.display='none';document.getElementById('guestNav').style.display='none';document.getElementById('userNav').style.display='block';document.getElementById('userName').textContent=u.displayName||u.email?.split('@')[0]||'User';document.getElementById('userAvatar').textContent=(u.displayName||u.email||'U')[0].toUpperCase();if(u.isAdmin)document.getElementById('adminNav').style.display='block';}catch(e){}}})();
+        window.addEventListener('scroll',()=>{document.getElementById('header').classList.toggle('scrolled',window.scrollY>50)});
+
+        // Reveal animation
+        const obs=new IntersectionObserver(e=>e.forEach(el=>{if(el.isIntersecting)el.target.classList.add('active')}),{threshold:0.1});
+        document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
     </script>
 
+    <script type="module">
+        function updateHeader(u){document.getElementById('authLoading').style.display='none';if(u){localStorage.setItem('cachedUser',JSON.stringify({email:u.email,displayName:u.displayName,photoURL:u.photoURL,isAdmin:u.isAdmin}));document.getElementById('guestNav').style.display='none';document.getElementById('userNav').style.display='block';document.getElementById('userName').textContent=u.displayName||u.email?.split('@')[0]||'User';document.getElementById('userAvatar').textContent=(u.displayName||u.email||'U')[0].toUpperCase();document.getElementById('adminNav').style.display=u.isAdmin?'block':'none'}else{localStorage.removeItem('cachedUser');document.getElementById('guestNav').style.display='block';document.getElementById('userNav').style.display='none';document.getElementById('adminNav').style.display='none'}}
+        var attempts=0;var check=setInterval(()=>{attempts++;if(window.FirebaseService?.isReady){clearInterval(check);updateHeader(window.FirebaseService.getCurrentUser());window.FirebaseService.onAuthChange(updateHeader)}else if(attempts>=30){clearInterval(check);if(!localStorage.getItem('cachedUser')){document.getElementById('authLoading').style.display='none';document.getElementById('guestNav').style.display='block'}}},100);
+        window.handleLogout=async()=>{if(confirm('Logout?')){localStorage.removeItem('cachedUser');document.getElementById('guestNav').style.display='block';document.getElementById('userNav').style.display='none';document.getElementById('adminNav').style.display='none';if(window.FirebaseService?.isReady)await window.FirebaseService.logOut();location.href='/'}}
+    </script>
 </body>
 </html>

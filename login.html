@@ -4,593 +4,219 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign In - AI Tools Hub</title>
-    
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
-    
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
     <link rel="stylesheet" href="assets/css/themes.css">
     <link rel="stylesheet" href="assets/css/main.css">
     <link rel="stylesheet" href="assets/css/animations.css">
-    
     <style>
-        .auth-page {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: var(--space-6);
-            background: var(--bg-gradient-hero);
-        }
-        
-        .auth-container {
-            width: 100%;
-            max-width: 440px;
-        }
-        
-        .auth-card {
-            background: var(--bg-card);
-            border-radius: var(--radius-2xl);
-            padding: var(--space-10);
-            box-shadow: var(--shadow-2xl);
-            border: 1px solid var(--border-light);
-        }
-        
-        .auth-header {
-            text-align: center;
-            margin-bottom: var(--space-8);
-        }
-        
-        .auth-logo {
-            font-family: var(--font-display);
-            font-size: var(--text-3xl);
-            font-weight: 800;
-            background: var(--bg-gradient-1);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: var(--space-2);
-            display: block;
-            text-decoration: none;
-        }
-        
-        .auth-title {
-            font-size: var(--text-2xl);
-            font-weight: 700;
-            margin-bottom: var(--space-2);
-        }
-        
-        .auth-subtitle {
-            color: var(--text-secondary);
-            font-size: var(--text-sm);
-        }
-        
-        .form-group {
-            margin-bottom: var(--space-5);
-        }
-        
-        .form-label {
-            display: block;
-            font-weight: 500;
-            margin-bottom: var(--space-2);
-            font-size: var(--text-sm);
-        }
-        
-        .form-input {
-            width: 100%;
-            padding: var(--space-4);
-            border: 2px solid var(--border-light);
-            border-radius: var(--radius-lg);
-            font-family: var(--font-primary);
-            font-size: var(--text-base);
-            background: var(--bg-primary);
-            color: var(--text-primary);
-            transition: all var(--duration-fast) var(--ease-smooth);
-        }
-        
-        .form-input:focus {
-            outline: none;
-            border-color: var(--accent-primary);
-            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
-        }
-        
-        .form-input::placeholder {
-            color: var(--text-muted);
-        }
-        
-        .form-error {
-            color: var(--accent-error);
-            font-size: var(--text-sm);
-            margin-top: var(--space-2);
-            display: none;
-        }
-        
-        .form-error.show {
-            display: block;
-        }
-        
-        .auth-btn {
-            width: 100%;
-            padding: var(--space-4);
-            background: var(--bg-gradient-1);
-            color: white;
-            border: none;
-            border-radius: var(--radius-lg);
-            font-family: var(--font-primary);
-            font-size: var(--text-base);
-            font-weight: 600;
-            cursor: pointer;
-            transition: all var(--duration-fast) var(--ease-smooth);
-        }
-        
-        .auth-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-primary);
-        }
-        
-        .auth-btn:disabled {
-            opacity: 0.7;
-            cursor: not-allowed;
-            transform: none;
-        }
-        
-        .divider {
-            display: flex;
-            align-items: center;
-            gap: var(--space-4);
-            margin: var(--space-6) 0;
-        }
-        
-        .divider-line {
-            flex: 1;
-            height: 1px;
-            background: var(--border-light);
-        }
-        
-        .divider-text {
-            color: var(--text-muted);
-            font-size: var(--text-sm);
-        }
-        
-        .google-btn {
-            width: 100%;
-            padding: var(--space-4);
-            background: var(--bg-primary);
-            border: 2px solid var(--border-light);
-            border-radius: var(--radius-lg);
-            font-family: var(--font-primary);
-            font-size: var(--text-base);
-            font-weight: 500;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: var(--space-3);
-            transition: all var(--duration-fast) var(--ease-smooth);
-            color: var(--text-primary);
-        }
-        
-        .google-btn:hover {
-            border-color: var(--accent-primary);
-            background: var(--interactive-hover);
-        }
-
-        .google-btn:disabled {
-            opacity: 0.7;
-            cursor: not-allowed;
-        }
-        
-        .google-icon {
-            width: 20px;
-            height: 20px;
-        }
-        
-        .auth-footer {
-            text-align: center;
-            margin-top: var(--space-6);
-            font-size: var(--text-sm);
-            color: var(--text-secondary);
-        }
-        
-        .auth-link {
-            color: var(--accent-primary);
-            text-decoration: none;
-            font-weight: 500;
-        }
-        
-        .auth-link:hover {
-            text-decoration: underline;
-        }
-        
-        .tabs {
-            display: flex;
-            background: var(--bg-tertiary);
-            border-radius: var(--radius-lg);
-            padding: var(--space-1);
-            margin-bottom: var(--space-6);
-        }
-        
-        .tab {
-            flex: 1;
-            padding: var(--space-3);
-            text-align: center;
-            border-radius: var(--radius-md);
-            font-weight: 500;
-            cursor: pointer;
-            transition: all var(--duration-fast) var(--ease-smooth);
-            color: var(--text-secondary);
-        }
-        
-        .tab.active {
-            background: var(--bg-card);
-            color: var(--text-primary);
-            box-shadow: var(--shadow-sm);
-        }
-        
-        .tab-content {
-            display: none;
-        }
-        
-        .tab-content.active {
-            display: block;
-            animation: fadeIn var(--duration-base) var(--ease-smooth);
-        }
-        
-        .success-message {
-            background: var(--success-bg);
-            color: var(--accent-success);
-            padding: var(--space-4);
-            border-radius: var(--radius-lg);
-            margin-bottom: var(--space-4);
-            text-align: center;
-            display: none;
-        }
-        
-        .success-message.show {
-            display: block;
-        }
-        
-        .back-link {
-            position: absolute;
-            top: var(--space-6);
-            left: var(--space-6);
-            color: var(--text-secondary);
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: var(--space-2);
-            font-weight: 500;
-            transition: color var(--duration-fast) var(--ease-smooth);
-        }
-        
-        .back-link:hover {
-            color: var(--text-primary);
-        }
+        .auth-page{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:var(--space-6);background:var(--bg-gradient-hero)}
+        .auth-card{background:var(--bg-card);border-radius:var(--radius-2xl);padding:var(--space-10);box-shadow:var(--shadow-2xl);border:1px solid var(--border-light);width:100%;max-width:440px}
+        .auth-header{text-align:center;margin-bottom:var(--space-8)}
+        .auth-logo{font-size:var(--text-3xl);font-weight:800;background:var(--bg-gradient-1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;display:block;text-decoration:none;margin-bottom:var(--space-2)}
+        .auth-title{font-size:var(--text-2xl);font-weight:700;margin-bottom:var(--space-2)}
+        .auth-subtitle{color:var(--text-secondary);font-size:var(--text-sm)}
+        .tabs{display:flex;background:var(--bg-tertiary);border-radius:var(--radius-lg);padding:var(--space-1);margin-bottom:var(--space-6)}
+        .tab{flex:1;padding:var(--space-3);text-align:center;border-radius:var(--radius-md);font-weight:500;cursor:pointer;transition:all var(--duration-fast);color:var(--text-secondary)}
+        .tab.active{background:var(--bg-card);color:var(--text-primary);box-shadow:var(--shadow-sm)}
+        .tab-content{display:none}
+        .tab-content.active{display:block;animation:fadeIn var(--duration-base)}
+        .form-error{color:var(--accent-error);font-size:var(--text-sm);margin-top:var(--space-2);display:none}
+        .form-error.show{display:block}
+        .auth-btn{width:100%;padding:var(--space-4);background:var(--bg-gradient-1);color:white;border:none;border-radius:var(--radius-lg);font-family:var(--font-primary);font-size:var(--text-base);font-weight:600;cursor:pointer;transition:all var(--duration-fast)}
+        .auth-btn:hover{transform:translateY(-2px);box-shadow:var(--shadow-primary)}
+        .auth-btn:disabled{opacity:0.7;cursor:not-allowed;transform:none}
+        .divider{display:flex;align-items:center;gap:var(--space-4);margin:var(--space-6) 0}
+        .divider-line{flex:1;height:1px;background:var(--border-light)}
+        .divider-text{color:var(--text-muted);font-size:var(--text-sm)}
+        .google-btn{width:100%;padding:var(--space-4);background:var(--bg-primary);border:2px solid var(--border-light);border-radius:var(--radius-lg);font-family:var(--font-primary);font-size:var(--text-base);font-weight:500;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:var(--space-3);transition:all var(--duration-fast);color:var(--text-primary)}
+        .google-btn:hover{border-color:var(--accent-primary);background:var(--interactive-hover)}
+        .google-btn:disabled{opacity:0.7;cursor:not-allowed}
+        .auth-footer{text-align:center;margin-top:var(--space-6);font-size:var(--text-sm);color:var(--text-secondary)}
+        .auth-link{color:var(--accent-primary);text-decoration:none;font-weight:500}
+        .success-msg{background:var(--success-bg);color:var(--accent-success);padding:var(--space-4);border-radius:var(--radius-lg);margin-bottom:var(--space-4);text-align:center;display:none}
+        .success-msg.show{display:block}
+        .back-link{position:absolute;top:var(--space-6);left:var(--space-6);color:var(--text-secondary);text-decoration:none;font-weight:500}
     </style>
 </head>
 <body>
-    
+
     <a href="/" class="back-link">← Back to Home</a>
-    
+
     <main class="auth-page">
-        <div class="auth-container animate-fade-in-up">
-            <div class="auth-card">
-                <div class="auth-header">
-                    <a href="/" class="auth-logo">AI Tools Hub</a>
-                    <h1 class="auth-title">Welcome Back</h1>
-                    <p class="auth-subtitle">Sign in to save favorites and create collections</p>
-                </div>
-                
-                <div class="success-message" id="successMessage">
-                    ✅ Account created successfully! You can now sign in.
-                </div>
-                
-                <!-- Tabs -->
-                <div class="tabs">
-                    <div class="tab active" data-tab="signin">Sign In</div>
-                    <div class="tab" data-tab="signup">Sign Up</div>
-                </div>
-                
-                <!-- Sign In Form -->
-                <div class="tab-content active" id="signin">
-                    <form id="signinForm">
-                        <div class="form-group">
-                            <label class="form-label" for="signinEmail">Email</label>
-                            <input 
-                                type="email" 
-                                id="signinEmail" 
-                                class="form-input"
-                                placeholder="you@example.com"
-                                required
-                            >
-                        </div>
-                        
-                        <div class="form-group">
-                            <label class="form-label" for="signinPassword">Password</label>
-                            <input 
-                                type="password" 
-                                id="signinPassword" 
-                                class="form-input"
-                                placeholder="••••••••"
-                                required
-                            >
-                        </div>
-                        
-                        <div class="form-error" id="signinError"></div>
-                        
-                        <button type="submit" class="auth-btn" id="signinBtn">
-                            Sign In
-                        </button>
-                    </form>
-                </div>
-                
-                <!-- Sign Up Form -->
-                <div class="tab-content" id="signup">
-                    <form id="signupForm">
-                        <div class="form-group">
-                            <label class="form-label" for="signupName">Full Name</label>
-                            <input 
-                                type="text" 
-                                id="signupName" 
-                                class="form-input"
-                                placeholder="Your name"
-                                required
-                            >
-                        </div>
-                        
-                        <div class="form-group">
-                            <label class="form-label" for="signupEmail">Email</label>
-                            <input 
-                                type="email" 
-                                id="signupEmail" 
-                                class="form-input"
-                                placeholder="you@example.com"
-                                required
-                            >
-                        </div>
-                        
-                        <div class="form-group">
-                            <label class="form-label" for="signupPassword">Password</label>
-                            <input 
-                                type="password" 
-                                id="signupPassword" 
-                                class="form-input"
-                                placeholder="At least 6 characters"
-                                required
-                                minlength="6"
-                            >
-                        </div>
-                        
-                        <div class="form-error" id="signupError"></div>
-                        
-                        <button type="submit" class="auth-btn" id="signupBtn">
-                            Create Account
-                        </button>
-                    </form>
-                </div>
-                
-                <div class="divider">
-                    <span class="divider-line"></span>
-                    <span class="divider-text">or</span>
-                    <span class="divider-line"></span>
-                </div>
-                
-                <button class="google-btn" id="googleBtn">
-                    <svg class="google-icon" viewBox="0 0 24 24">
-                        <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-                        <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-                        <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
-                        <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
-                    </svg>
-                    Continue with Google
-                </button>
-                
-                <div class="auth-footer">
-                    <p>By continuing, you agree to our <a href="terms.html" class="auth-link">Terms</a> and <a href="privacy.html" class="auth-link">Privacy Policy</a></p>
-                </div>
+        <div class="auth-card animate-fade-in-up">
+            <div class="auth-header">
+                <a href="/" class="auth-logo">AI Tools Hub</a>
+                <h1 class="auth-title">Welcome Back</h1>
+                <p class="auth-subtitle">Sign in to save favorites and create collections</p>
+            </div>
+
+            <div class="success-msg" id="successMsg">✅ Account created! You can now sign in.</div>
+
+            <div class="tabs">
+                <div class="tab active" data-tab="signin">Sign In</div>
+                <div class="tab" data-tab="signup">Sign Up</div>
+            </div>
+
+            <!-- Sign In -->
+            <div class="tab-content active" id="signin">
+                <form id="signinForm">
+                    <div class="form-group">
+                        <label class="form-label">Email</label>
+                        <input type="email" id="signinEmail" class="form-input" placeholder="you@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Password</label>
+                        <input type="password" id="signinPassword" class="form-input" placeholder="••••••••" required>
+                    </div>
+                    <div class="form-error" id="signinError"></div>
+                    <button type="submit" class="auth-btn" id="signinBtn">Sign In</button>
+                </form>
+            </div>
+
+            <!-- Sign Up -->
+            <div class="tab-content" id="signup">
+                <form id="signupForm">
+                    <div class="form-group">
+                        <label class="form-label">Full Name</label>
+                        <input type="text" id="signupName" class="form-input" placeholder="Your name" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Email</label>
+                        <input type="email" id="signupEmail" class="form-input" placeholder="you@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Password</label>
+                        <input type="password" id="signupPassword" class="form-input" placeholder="At least 6 characters" required minlength="6">
+                    </div>
+                    <div class="form-error" id="signupError"></div>
+                    <button type="submit" class="auth-btn" id="signupBtn">Create Account</button>
+                </form>
+            </div>
+
+            <div class="divider">
+                <span class="divider-line"></span>
+                <span class="divider-text">or</span>
+                <span class="divider-line"></span>
+            </div>
+
+            <button class="google-btn" id="googleBtn">
+                <svg width="20" height="20" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+                Continue with Google
+            </button>
+
+            <div class="auth-footer">
+                <p>By continuing, you agree to our <a href="terms.html" class="auth-link">Terms</a> and <a href="privacy.html" class="auth-link">Privacy Policy</a></p>
             </div>
         </div>
     </main>
 
-    <!-- Scripts -->
     <script src="assets/js/config.js"></script>
     <script type="module" src="assets/js/firebase.js"></script>
-    
+
     <script type="module">
-        // Tab switching
-        const tabs = document.querySelectorAll('.tab');
-        const tabContents = document.querySelectorAll('.tab-content');
-        
-        tabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-                const target = tab.dataset.tab;
-                
-                tabs.forEach(t => t.classList.remove('active'));
-                tabContents.forEach(c => c.classList.remove('active'));
-                
+        // Tabs
+        document.querySelectorAll('.tab').forEach(tab=>{
+            tab.addEventListener('click',()=>{
+                document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c=>c.classList.remove('active'));
                 tab.classList.add('active');
-                document.getElementById(target).classList.add('active');
+                document.getElementById(tab.dataset.tab).classList.add('active');
             });
         });
-        
-        // Don't auto-redirect if user is intentionally on login page
-        let hasRedirected = false;
-        
-        // Wait longer for Firebase to fully initialize
-        setTimeout(() => {
-            if (window.FirebaseService?.isReady) {
-                const user = window.FirebaseService.getCurrentUser();
-                
-                // Only redirect if user is logged in and hasn't manually visited login page
-                if (user && !hasRedirected && !sessionStorage.getItem('allowLoginPage')) {
-                    hasRedirected = true;
-                    
-                    if (user.isAdmin) {
-                        window.location.href = '/admin.html';
-                    } else {
-                        window.location.href = '/tools.html';
-                    }
-                }
+
+        // Check if logged in
+        setTimeout(()=>{
+            if(window.FirebaseService?.isReady){
+                const u=window.FirebaseService.getCurrentUser();
+                if(u){location.href=u.isAdmin?'/admin.html':'/tools.html'}
             }
-        }, 2000);
-        
-        // Clear session flag when leaving page
-        window.addEventListener('beforeunload', () => {
-            sessionStorage.removeItem('allowLoginPage');
-        });
-        
-        // Sign In Form
-        document.getElementById('signinForm').addEventListener('submit', async (e) => {
+        },1500);
+
+        // Sign In
+        document.getElementById('signinForm').addEventListener('submit',async e=>{
             e.preventDefault();
-            
-            const email = document.getElementById('signinEmail').value.trim();
-            const password = document.getElementById('signinPassword').value;
-            const btn = document.getElementById('signinBtn');
-            const errorEl = document.getElementById('signinError');
-            
-            btn.disabled = true;
-            btn.textContent = 'Signing in...';
-            errorEl.classList.remove('show');
-            errorEl.textContent = '';
-            
-            try {
-                if (window.FirebaseService?.isReady) {
-                    const result = await window.FirebaseService.signIn(email, password);
-                    
-                    if (result.success) {
-                        // Show success message
-                        btn.textContent = '✅ Success! Redirecting...';
-                        
-                        // Wait for auth state to fully update
-                        await new Promise(resolve => setTimeout(resolve, 1500));
-                        
-                        // Get fresh user data
-                        const user = window.FirebaseService.getCurrentUser();
-                        
-                        // Redirect based on role
-                        if (user && user.isAdmin) {
-                            window.location.href = '/admin.html';
-                        } else {
-                            window.location.href = '/tools.html';
-                        }
-                    } else {
-                        errorEl.textContent = result.error || 'Invalid email or password';
-                        errorEl.classList.add('show');
-                        btn.disabled = false;
-                        btn.textContent = 'Sign In';
+            const email=document.getElementById('signinEmail').value.trim();
+            const password=document.getElementById('signinPassword').value;
+            const btn=document.getElementById('signinBtn');
+            const err=document.getElementById('signinError');
+
+            btn.disabled=true;btn.textContent='Signing in...';err.classList.remove('show');
+
+            try{
+                if(window.FirebaseService?.isReady){
+                    const r=await window.FirebaseService.signIn(email,password);
+                    if(r.success){
+                        btn.textContent='✅ Success!';
+                        await new Promise(r=>setTimeout(r,1000));
+                        const u=window.FirebaseService.getCurrentUser();
+                        location.href=u?.isAdmin?'/admin.html':'/tools.html';
+                    }else{
+                        err.textContent=r.error;err.classList.add('show');
+                        btn.disabled=false;btn.textContent='Sign In';
                     }
-                } else {
-                    // Demo mode fallback
-                    console.log('Firebase not ready, using demo mode');
-                    alert('Firebase not configured. Demo mode active.');
-                    localStorage.setItem('demoUser', JSON.stringify({ email }));
-                    window.location.href = '/tools.html';
+                }else{
+                    localStorage.setItem('cachedUser',JSON.stringify({email}));
+                    location.href='/tools.html';
                 }
-            } catch (error) {
-                console.error('Sign in error:', error);
-                errorEl.textContent = error.message || 'An error occurred. Please try again.';
-                errorEl.classList.add('show');
-                btn.disabled = false;
-                btn.textContent = 'Sign In';
+            }catch(error){
+                err.textContent=error.message;err.classList.add('show');
+                btn.disabled=false;btn.textContent='Sign In';
             }
         });
-        
-        // Sign Up Form
-        document.getElementById('signupForm').addEventListener('submit', async (e) => {
+
+        // Sign Up
+        document.getElementById('signupForm').addEventListener('submit',async e=>{
             e.preventDefault();
-            
-            const name = document.getElementById('signupName').value.trim();
-            const email = document.getElementById('signupEmail').value.trim();
-            const password = document.getElementById('signupPassword').value;
-            const btn = document.getElementById('signupBtn');
-            const errorEl = document.getElementById('signupError');
-            
-            btn.disabled = true;
-            btn.textContent = 'Creating account...';
-            errorEl.classList.remove('show');
-            errorEl.textContent = '';
-            
-            try {
-                if (window.FirebaseService?.isReady) {
-                    const result = await window.FirebaseService.signUp(email, password, name);
-                    
-                    if (result.success) {
-                        // Show success message
-                        document.getElementById('successMessage').classList.add('show');
-                        
-                        // Switch to sign in tab
-                        tabs[0].click();
-                        
-                        // Pre-fill email
-                        document.getElementById('signinEmail').value = email;
-                        
-                        // Reset form
+            const name=document.getElementById('signupName').value.trim();
+            const email=document.getElementById('signupEmail').value.trim();
+            const password=document.getElementById('signupPassword').value;
+            const btn=document.getElementById('signupBtn');
+            const err=document.getElementById('signupError');
+
+            btn.disabled=true;btn.textContent='Creating account...';err.classList.remove('show');
+
+            try{
+                if(window.FirebaseService?.isReady){
+                    const r=await window.FirebaseService.signUp(email,password,name);
+                    if(r.success){
+                        document.getElementById('successMsg').classList.add('show');
+                        document.querySelector('[data-tab="signin"]').click();
+                        document.getElementById('signinEmail').value=email;
                         e.target.reset();
-                        
-                        // Hide success message after 5 seconds
-                        setTimeout(() => {
-                            document.getElementById('successMessage').classList.remove('show');
-                        }, 5000);
-                    } else {
-                        errorEl.textContent = result.error || 'Account creation failed';
-                        errorEl.classList.add('show');
+                    }else{
+                        err.textContent=r.error;err.classList.add('show');
                     }
-                } else {
-                    alert('Firebase not configured. Demo mode active.');
                 }
-                
-                btn.disabled = false;
-                btn.textContent = 'Create Account';
-                
-            } catch (error) {
-                console.error('Sign up error:', error);
-                errorEl.textContent = error.message || 'An error occurred. Please try again.';
-                errorEl.classList.add('show');
-                btn.disabled = false;
-                btn.textContent = 'Create Account';
+                btn.disabled=false;btn.textContent='Create Account';
+            }catch(error){
+                err.textContent=error.message;err.classList.add('show');
+                btn.disabled=false;btn.textContent='Create Account';
             }
         });
-        
+
         // Google Sign In
-        document.getElementById('googleBtn').addEventListener('click', async () => {
-            const btn = document.getElementById('googleBtn');
-            const originalText = btn.textContent;
-            
-            try {
-                btn.disabled = true;
-                btn.textContent = 'Signing in with Google...';
-                
-                if (window.FirebaseService?.isReady) {
-                    const result = await window.FirebaseService.signInWithGoogle();
-                    
-                    if (result.success) {
-                        btn.textContent = '✅ Success! Redirecting...';
-                        
-                        // Wait for auth state to update
-                        await new Promise(resolve => setTimeout(resolve, 1500));
-                        
-                        const user = window.FirebaseService.getCurrentUser();
-                        
-                        if (user && user.isAdmin) {
-                            window.location.href = '/admin.html';
-                        } else {
-                            window.location.href = '/tools.html';
-                        }
-                    } else {
-                        alert(result.error || 'Google sign in failed');
-                        btn.disabled = false;
-                        btn.textContent = originalText;
+        document.getElementById('googleBtn').addEventListener('click',async()=>{
+            const btn=document.getElementById('googleBtn');
+            btn.disabled=true;btn.textContent='Signing in...';
+
+            try{
+                if(window.FirebaseService?.isReady){
+                    const r=await window.FirebaseService.signInWithGoogle();
+                    if(r.success){
+                        btn.textContent='✅ Success!';
+                        await new Promise(r=>setTimeout(r,1000));
+                        const u=window.FirebaseService.getCurrentUser();
+                        location.href=u?.isAdmin?'/admin.html':'/tools.html';
+                    }else{
+                        alert(r.error);
+                        btn.disabled=false;btn.innerHTML='<svg width="20" height="20" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg> Continue with Google';
                     }
-                } else {
-                    alert('Firebase not configured. Demo mode active.');
-                    btn.disabled = false;
-                    btn.textContent = originalText;
                 }
-            } catch (error) {
-                console.error('Google sign in error:', error);
-                alert(error.message || 'Google sign in failed');
-                btn.disabled = false;
-                btn.textContent = originalText;
+            }catch(error){
+                alert(error.message);
+                btn.disabled=false;
             }
         });
     </script>
-
 </body>
 </html>

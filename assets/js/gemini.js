@@ -1,184 +1,70 @@
 /* ============================================
-   AI Tools Hub - Gemini API Integration
-   AI-Powered Features
+   AI Tools Hub - Gemini AI Integration
    ============================================ */
 
 class GeminiAPI {
-  constructor(apiKey) {
-    this.apiKey = apiKey;
-    this.baseURL = 'https://generativelanguage.googleapis.com/v1beta/models';
-    this.model = 'gemini-1.5-flash';
-  }
-
-  /**
-   * Generate description for a tool
-   */
-  async generateDescription(toolName, toolUrl) {
-    const prompt = `Generate a concise, professional description (2-3 sentences) for an AI tool called "${toolName}". 
-    URL: ${toolUrl}
-    Make it engaging and highlight key features. No marketing fluff.`;
-
-    try {
-      const response = await this.callGemini(prompt);
-      return response;
-    } catch (error) {
-      console.error('Error generating description:', error);
-      return null;
+    constructor() {
+        this.apiKey = window.CONFIG?.gemini?.apiKey;
+        this.model = 'gemini-1.5-flash';
+        this.baseURL = 'https://generativelanguage.googleapis.com/v1beta/models';
     }
-  }
 
-  /**
-   * Generate keywords for a tool
-   */
-  async generateKeywords(toolName, description) {
-    const prompt = `Generate 5-7 relevant keywords for this tool:
-    Name: ${toolName}
-    Description: ${description}
-    
-    Return only comma-separated keywords, no explanation.`;
-
-    try {
-      const response = await this.callGemini(prompt);
-      return response;
-    } catch (error) {
-      console.error('Error generating keywords:', error);
-      return null;
+    async call(prompt) {
+        if (!this.apiKey) throw new Error('API key not configured');
+        
+        const res = await fetch(`${this.baseURL}/${this.model}:generateContent?key=${this.apiKey}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                contents: [{ parts: [{ text: prompt }] }],
+                generationConfig: { temperature: 0.7, maxOutputTokens: 1024 }
+            })
+        });
+        
+        if (!res.ok) throw new Error(`API error: ${res.status}`);
+        
+        const data = await res.json();
+        return data.candidates?.[0]?.content?.parts?.[0]?.text?.trim() || null;
     }
-  }
 
-  /**
-   * Suggest category for a tool
-   */
-  async suggestCategory(toolName, description) {
-    const categories = window.DB_HELPERS.getCategories().join(', ');
-    
-    const prompt = `Based on this tool, suggest the MOST appropriate category from this list:
-    ${categories}
-    
-    Tool: ${toolName}
-    Description: ${description}
-    
-    Return ONLY the category name, nothing else.`;
-
-    try {
-      const response = await this.callGemini(prompt);
-      return response;
-    } catch (error) {
-      console.error('Error suggesting category:', error);
-      return null;
+    async generateDescription(name, url) {
+        return this.call(`Write a 2-3 sentence professional description for the tool "${name}" (${url}). Be concise and highlight key features.`);
     }
-  }
 
-  /**
-   * Process bulk data (AI Bulk Processor feature)
-   */
-  async processBulkData(rawData) {
-    const prompt = `Convert this raw tool data into structured JSON format:
-    
-    ${rawData}
-    
-    Return a JSON array where each tool has:
-    - name (string)
-    - description (string, 2-3 sentences)
-    - category (string, choose from: AI Tools, Development Tools, Design Tools, OSINT & Security, Business Tools, etc.)
-    - tags (array of 3-5 strings)
-    - keywords (string, comma-separated)
-    
-    Return ONLY valid JSON, no explanation.`;
-
-    try {
-      const response = await this.callGemini(prompt);
-      // Try to parse JSON
-      const jsonMatch = response.match(/\[[\s\S]*\]/);
-      if (jsonMatch) {
-        return JSON.parse(jsonMatch[0]);
-      }
-      return null;
-    } catch (error) {
-      console.error('Error processing bulk data:', error);
-      return null;
+    async generateKeywords(name, desc) {
+        return this.call(`Generate 5-7 comma-separated keywords for: ${name} - ${desc}`);
     }
-  }
 
-  /**
-   * Core API call to Gemini
-   */
-  async callGemini(prompt) {
-    const url = `${this.baseURL}/${this.model}:generateContent?key=${this.apiKey}`;
-    
-    const requestBody = {
-      contents: [{
-        parts: [{
-          text: prompt
-        }]
-      }],
-      generationConfig: {
-        temperature: 0.7,
-        topK: 40,
-        topP: 0.95,
-        maxOutputTokens: 1024,
-      }
-    };
-
-    try {
-      const response = await fetch(url, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(requestBody)
-      });
-
-      if (!response.ok) {
-        throw new Error(`Gemini API error: ${response.status}`);
-      }
-
-      const data = await response.json();
-      
-      if (data.candidates && data.candidates[0]?.content?.parts?.[0]?.text) {
-        return data.candidates[0].content.parts[0].text.trim();
-      }
-      
-      throw new Error('Invalid response from Gemini API');
-      
-    } catch (error) {
-      console.error('Gemini API call failed:', error);
-      throw error;
+    async suggestCategory(name, desc) {
+        const cats = 'AI Tools, Development Tools, Design Tools, OSINT & Security, Business Tools, Productivity, Learning Resources, Video Tools, Audio Tools, Social Media Tools';
+        return this.call(`From these categories: ${cats}\n\nWhich fits best for: ${name} - ${desc}\n\nReturn ONLY the category name.`);
     }
-  }
 
-  /**
-   * Check if API is working
-   */
-  async testConnection() {
-    try {
-      const response = await this.callGemini('Say "API working" if you can read this.');
-      return response.toLowerCase().includes('api working');
-    } catch (error) {
-      return false;
+    async processBulkData(rawData) {
+        const prompt = `Convert this raw tool data to JSON array. Each tool needs: name, description (2-3 sentences), category, tags (array), keywords (comma string), link. Verify URLs look real. Return ONLY valid JSON array.\n\nData:\n${rawData}`;
+        
+        const result = await this.call(prompt);
+        const match = result?.match(/\[[\s\S]*\]/);
+        return match ? JSON.parse(match[0]) : null;
     }
-  }
+
+    async verifyTool(name, url, desc) {
+        const prompt = `Verify if this tool is legitimate:
+Name: ${name}
+URL: ${url}
+Description: ${desc}
+
+Check if:
+1. Name is real and not gibberish
+2. URL looks legitimate
+3. Description makes sense
+
+Return JSON: {"valid": true/false, "confidence": 0-100, "reason": "explanation"}`;
+
+        const result = await this.call(prompt);
+        const match = result?.match(/\{[\s\S]*\}/);
+        return match ? JSON.parse(match[0]) : { valid: false, confidence: 0, reason: 'Parse error' };
+    }
 }
 
-// Initialize Gemini API when config is loaded
-let geminiAPI = null;
-
-function initGemini() {
-  if (window.CONFIG?.gemini?.apiKey) {
-    geminiAPI = new GeminiAPI(window.CONFIG.gemini.apiKey);
-    console.log('✅ Gemini API initialized');
-  } else {
-    console.warn('⚠️ Gemini API key not configured');
-  }
-}
-
-// Auto-initialize when DOM is ready
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initGemini);
-} else {
-  initGemini();
-}
-
-// Export
-window.GeminiAPI = GeminiAPI;
-window.geminiAPI = geminiAPI;
+window.geminiAPI = new GeminiAPI();

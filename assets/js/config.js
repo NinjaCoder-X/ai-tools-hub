@@ -5,47 +5,42 @@
 
 // Firebase Configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyBfHNz-1t9wZT1W2fZfKTdBHzHeZwqiCLs",
-  authDomain: "ai-tools-hub-bd40e.firebaseapp.com",
-  projectId: "ai-tools-hub-bd40e",
-  storageBucket: "ai-tools-hub-bd40e.firebasestorage.app",
-  messagingSenderId: "41654847803",
-  appId: "1:41654847803:web:76274d905ab5d1ec114f1e"
+    apiKey: "AIzaSyBfHNz-1t9wZT1W2fZfKTdBHzHeZwqiCLs",
+    authDomain: "ai-tools-hub-bd40e.firebaseapp.com",
+    projectId: "ai-tools-hub-bd40e",
+    storageBucket: "ai-tools-hub-bd40e.firebasestorage.app",
+    messagingSenderId: "41654847803",
+    appId: "1:41654847803:web:76274d905ab5d1ec114f1e"
 };
 
 // Gemini API Configuration
 const geminiConfig = {
-  apiKey: "AIzaSyANokUTAde-JbZ55HOU1oQnpC1hRlYaZWg",
-  model: "gemini-1.5-flash",
-  endpoint: "https://generativelanguage.googleapis.com/v1beta/models"
+    apiKey: "AIzaSyANokUTAde-JbZ55HOU1oQnpC1hRlYaZWg",
+    model: "gemini-1.5-flash",
+    endpoint: "https://generativelanguage.googleapis.com/v1beta/models"
 };
 
 // Admin Configuration
 const adminConfig = {
-  adminEmail: "vvsithum241@gmail.com"
+    adminEmail: "vvsithum241@gmail.com"
 };
 
 // App Configuration
 const appConfig = {
-  appName: "AI Tools Hub",
-  appVersion: "1.0.0",
-  appUrl: "https://vihanga.dpdns.org",
-  creatorName: "NinjaCoder-X",
-  socialLinks: {
-    facebook: "https://www.facebook.com/heyitsvihanga/",
-    instagram: "https://www.instagram.com/heyitsvihanga/"
-  },
-  searchDebounceTime: 300,
-  itemsPerPage: 24,
-  defaultCategory: "All Categories"
+    appName: "AI Tools Hub",
+    appVersion: "2.0.0",
+    appUrl: "https://vihanga.dpdns.org",
+    creatorName: "NinjaCoder-X",
+    socialLinks: {
+        facebook: "https://www.facebook.com/heyitsvihanga/",
+        instagram: "https://www.instagram.com/heyitsvihanga/"
+    }
 };
 
-// Export configurations
+// Export
 window.CONFIG = {
-  firebase: firebaseConfig,
-  gemini: geminiConfig,
-  admin: adminConfig,
-  app: appConfig
+    firebase: firebaseConfig,
+    gemini: geminiConfig,
+    admin: adminConfig,
+    app: appConfig
 };
-
-console.log('✅ Configuration loaded successfully');
