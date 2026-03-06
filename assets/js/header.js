@@ -9,6 +9,12 @@ const headerHTML = `
                 <li><a href="/about.html" class="nav-link" id="nav-about">About</a></li>
                 <li><a href="/contact.html" class="nav-link" id="nav-contact">Contact</a></li>
                 
+                <li>
+                    <a href="https://buymeacoffee.com/heyitsvihanga" target="_blank" class="btn hover-scale" style="background: #FFDD00; color: #000000; border: none; font-weight: 700; padding: 0.5rem 1rem; border-radius: var(--radius-lg);">
+                        ☕ Support Us
+                    </a>
+                </li>
+                
                 <li style="cursor:pointer; font-size:1.2rem; padding:0 0.5rem; user-select:none;" onclick="window.toggleGlobalTheme()" title="Toggle Dark/Light Mode">🌓</li>
                 
                 <li class="show-logged-out"><a href="/login.html" class="btn btn-primary">Get Started</a></li>
