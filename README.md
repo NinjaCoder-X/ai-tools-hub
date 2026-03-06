@@ -2,7 +2,7 @@
 
 **Your ultimate directory for discovering 150+ AI tools, OSINT resources, and digital platforms.**
 
-Built with modern web technologies and powered by AI.
+Built with modern web technologies, powered by AI, and optimized for edge-network performance.
 
 ---
 
@@ -16,80 +16,86 @@ Built with modern web technologies and powered by AI.
 ## ✨ Features
 
 ### 🔍 **Discovery & Search**
+
 - Instant search across 150+ tools
-- Smart categorization (15+ categories)
-- Advanced filtering system
+- Smart categorization with a **Dedicated Categories Hub**
+- Advanced filtering and sorting system
 - AI-powered search suggestions
 
 ### 🤖 **AI-Powered Features**
+
 - **Gemini API Integration** for intelligent tool processing
 - **Auto Description Generator** - AI creates missing descriptions
 - **Smart Categorization** - AI suggests best categories
 - **Bulk Data Processor** - Upload raw data, AI structures it
-- **Verification System** - AI checks if tools are legitimate
+- **Verification System** - AI checks if submitted tools are legitimate
 
-### 👤 **User Features**
-- Firebase authentication (Email + Google)
-- Save favorite tools
-- Create custom collections
+### 👤 **User Experience**
+
+- **Zero-Flicker Authentication** (Email + Google via Firebase)
+- **Instant Dark/Light Mode** with global memory toggle
+- Save favorite tools and create custom collections
 - Rate and review tools
-- Personal dashboard
+- Personal dashboard and profile management
 - Export favorites as JSON
 
-### 👑 **Admin Dashboard**
-- Add tools manually or with AI assist
-- **AI Bulk Processor** - Process multiple tools at once
-- Manage existing tools
-- View analytics & insights
-- Approve/reject submissions
+### 👑 **Admin Dashboard & Monetization**
 
-### 🎨 **Design**
-- Ultra-modern light theme (2025 design)
-- 50+ custom animations
-- Glassmorphism effects
-- Fully responsive
-- Load time < 2 seconds
-- Optimized for all devices
+- Add tools manually or with AI assist
+- Review and approve user-submitted tools
+- **AI Bulk Processor** - Process multiple tools at once
+- **Native Sponsorship Ad Slots** for affiliate marketing
+- **Buy Me a Coffee** integrated tip jar
+- **Google AdSense** ready
+
+### 🎨 **Design & Architecture**
+
+- Ultra-modern UI (2025 design) with glassmorphism effects
+- Modular component architecture (global dynamic header)
+- 50+ custom CSS animations
+- Fully responsive and mobile-optimized
+- SEO Optimized (`sitemap.xml` & `robots.txt` included)
 
 ---
 
 ## 🛠️ Tech Stack
 
 ### Frontend
+
 - **HTML5** - Semantic markup
 - **CSS3** - Custom properties, Grid, Flexbox
 - **Vanilla JavaScript** - ES6+ modules
 - **TailwindCSS** principles (via custom CSS)
 
 ### Backend & Services
+
 - **Firebase Authentication** - User management
-- **Firestore Database** - Real-time data
+- **Firestore Database** - Real-time data & security rules
 - **Firebase Hosting** - Fast delivery
 - **Cloudflare Pages** - Edge deployment
+- **Cloudflare Web Analytics** - Privacy-first traffic monitoring
 - **Google Gemini API** - AI processing
-
-### Deployment
-- **GitHub** - Version control
-- **Cloudflare Pages** - Auto-deployment
-- **Custom Domain** - DNS configuration
 
 ---
 
 ## 📁 Project Structure
 
-```
+```text
 ai-tools-hub/
 │
-├── index.html              # Landing page
-├── tools.html              # Full directory
-├── tool.html               # Single tool detail
+├── index.html              # Landing page with Featured & Sponsors
+├── tools.html              # Full directory & search
+├── tool.html               # Single tool detail & reviews
+├── categories.html         # Dynamic category browsing hub
 ├── login.html              # Authentication
 ├── profile.html            # User dashboard
-├── admin.html              # Admin panel
+├── admin.html              # Admin panel & AI bulk processor
 ├── about.html              # About page
-├── contact.html            # Contact form
+├── contact.html            # Contact & tool submission form
 ├── privacy.html            # Privacy policy
 ├── terms.html              # Terms of service
+├── sitemap.xml             # SEO Sitemap
+├── robots.txt              # Search engine directives
 │
 ├── assets/
 │   ├── css/
@@ -99,17 +105,18 @@ ai-tools-hub/
 │   │
 │   ├── js/
 │   │   ├── config.js       # Firebase & API config
-│   │   ├── database.js     # 150+ tools data
-│   │   ├── firebase.js     # Firebase integration
-│   │   ├── gemini.js       # AI features
+│   │   ├── database.js     # 150+ tools data & helpers
+│   │   ├── firebase.js     # Firebase integration logic
+│   │   ├── gemini.js       # AI features & prompts
+│   │   ├── header.js       # Global modular navigation
 │   │   └── utils.js        # Helper functions
 │   │
 │   └── images/
 │       └── icons/          # Category icons
 │
-├── _headers                # Cloudflare headers
-├── _redirects              # URL redirects
+├── _headers                # Cloudflare caching rules
 └── README.md               # This file
+
 ```
 
 ---
@@ -119,8 +126,9 @@ ai-tools-hub/
 ### 1. Clone Repository
 
 ```bash
-git clone https://github.com/YOUR-USERNAME/ai-tools-hub.git
+git clone [https://github.com/YOUR-USERNAME/ai-tools-hub.git](https://github.com/YOUR-USERNAME/ai-tools-hub.git)
 cd ai-tools-hub
+
 ```
 
 ### 2. Configure Firebase
@@ -134,7 +142,7 @@ const firebaseConfig = {
   projectId: "YOUR_PROJECT_ID",
   storageBucket: "YOUR_PROJECT.appspot.com",
   messagingSenderId: "YOUR_SENDER_ID",
-  appId: "YOUR_APP_ID"
+  appId: "YOUR_APP_ID",
 };
 ```
 
@@ -146,20 +154,22 @@ In `assets/js/config.js`:
 const geminiConfig = {
   apiKey: "YOUR_GEMINI_API_KEY",
   model: "gemini-1.5-flash",
-  endpoint: "https://generativelanguage.googleapis.com/v1beta/models"
+  endpoint:
+    "[https://generativelanguage.googleapis.com/v1beta/models](https://generativelanguage.googleapis.com/v1beta/models)",
 };
 ```
 
 ### 4. Deploy to Cloudflare Pages
 
 1. Push to GitHub
-2. Connect to Cloudflare Pages
+2. Connect your repository to Cloudflare Pages
 3. Deploy!
 
 ```bash
 git add .
 git commit -m "Initial deployment"
 git push origin main
+
 ```
 
 ---
@@ -175,34 +185,43 @@ git push origin main
   category: "Main Category",
   subcategory: "Sub Category",
   tags: ["tag1", "tag2", "tag3"],
-  link: "https://tool-url.com",
+  link: "[https://tool-url.com](https://tool-url.com)", // Or Affiliate Link
   keywords: "search keywords"
 }
+
 ```
 
 ### Firestore Collections
 
-```
+```text
 users/
   {userId}/
     - email
     - displayName
     - role (user/admin)
     - createdAt
-    
+
     favorites/
       {toolId}/
         - name
         - link
         - description
         - addedAt
-    
+
     collections/
       {collectionId}/
         - name
         - description
         - tools[]
         - createdAt
+
+pending_tools/ (User Submissions)
+  {documentId}/
+    - name
+    - url
+    - description
+    - aiVerified (boolean)
+    - timestamp
 
 ratings/
   {ratingId}/
@@ -212,48 +231,7 @@ ratings/
     - review
     - updatedAt
 
-contact_messages/
-  {messageId}/
-    - name
-    - email
-    - subject
-    - message
-    - timestamp
 ```
-
----
-
-## 🤖 AI Features Guide
-
-### Bulk Tool Processor
-
-1. Go to Admin Dashboard
-2. Click "AI Bulk Processor" tab
-3. Paste raw data in ANY format:
-   ```
-   ChatGPT | https://chatgpt.com
-   Midjourney - AI image generator
-   GitHub Copilot
-   ```
-4. Click "Process with AI"
-5. AI will:
-   - Extract tool names and URLs
-   - Generate descriptions
-   - Create keywords
-   - Categorize tools
-   - **Verify legitimacy**
-   - Output clean JSON
-
-### Auto Description Generator
-
-1. Add tool manually
-2. Enter name and URL
-3. Click "Generate with AI"
-4. AI fills in:
-   - Description
-   - Keywords
-   - Category suggestion
-   - Tags
 
 ---
 
@@ -265,29 +243,36 @@ contact_messages/
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
-    
+
+    // User Profiles
     match /users/{userId} {
       allow read: if true;
-      allow write: if request.auth.uid == userId;
-      
+      allow write: if request.auth != null && request.auth.uid == userId;
+
       match /favorites/{toolId} {
         allow read: if true;
-        allow write: if request.auth.uid == userId;
+        allow write: if request.auth != null && request.auth.uid == userId;
       }
     }
-    
+
+    // Public tool submissions
+    match /pending_tools/{document=**} {
+      allow create: if true;
+      allow read, update, delete: if request.auth != null;
+    }
+
+    // Ratings
     match /ratings/{ratingId} {
       allow read: if true;
       allow create: if request.auth != null;
-      allow update, delete: if request.auth.uid == resource.data.userId;
+      allow update, delete: if request.auth != null && request.auth.uid == resource.data.userId;
     }
   }
 }
+
 ```
 
-### Admin Access
-
-Only `vvsithum241@gmail.com` has admin privileges.
+_Note: Only the designated admin email has access to the Admin Dashboard and approval queues._
 
 ---
 
@@ -297,42 +282,13 @@ Only `vvsithum241@gmail.com` has admin privileges.
 - **Lighthouse Score:** 95+
 - **First Contentful Paint:** < 1s
 - **Time to Interactive:** < 2s
-- **Mobile Optimized:** 100%
 
 ### Optimizations
-- Lazy loading images
-- Debounced search (300ms)
-- Minified assets
-- Cloudflare CDN
-- Edge caching
 
----
-
-## 🎨 Customization
-
-### Change Theme Colors
-
-Edit `assets/css/themes.css`:
-
-```css
-:root {
-  --accent-primary: #6366f1;  /* Change primary color */
-  --accent-secondary: #ec4899; /* Change secondary color */
-}
-```
-
-### Add New Category
-
-1. Update `database.js`:
-   ```javascript
-   category: "New Category"
-   ```
-
-2. Add category icon in `getToolIcon()` function
-
-### Modify Animations
-
-Edit `assets/css/animations.css` - 50+ animations ready to use.
+- **Modular JavaScript:** Header is injected dynamically to reduce HTML bloat.
+- **Debounced Search:** (300ms) prevents lag during rapid typing.
+- **Edge Caching:** Cloudflare CDN ensures instant delivery globally.
+- **Anti-Flicker Script:** Checks local storage for themes and auth states before the DOM paints.
 
 ---
 
@@ -367,7 +323,7 @@ MIT License - Feel free to use for your own projects!
 
 - **Google Gemini** - AI capabilities
 - **Firebase** - Backend infrastructure
-- **Cloudflare** - Edge deployment
+- **Cloudflare** - Edge deployment & Analytics
 - **Community** - Tool submissions
 
 ---
@@ -377,18 +333,12 @@ MIT License - Feel free to use for your own projects!
 - **Email:** vvsithum241@gmail.com
 - **Website:** https://vihanga.dpdns.org
 - **Issues:** GitHub Issues
+- **Tip Jar:** [Buy Me a Coffee](https://buymeacoffee.com/heyitsvihanga)
 
 ---
 
 **Made with ❤️ by NinjaCoder-X**
+
 ```
 
----
-
-## 🎯 FINAL STEP: Push Everything!
-
-```bash
-git add .
-git commit -m "Complete AI Tools Hub - Production Ready"
-git push origin main
 ```
