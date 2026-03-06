@@ -35,29 +35,8 @@
 <body>
 
     <!-- HEADER -->
-    <header class="header" id="header">
-        <nav class="nav container">
-            <a href="/" class="logo">AI Tools Hub</a>
-            <ul class="nav-links">
-                <li><a href="/" class="nav-link">Home</a></li>
-                <li><a href="tools.html" class="nav-link">Tools</a></li>
-                <li><a href="about.html" class="nav-link active">About</a></li>
-                <li><a href="contact.html" class="nav-link">Contact</a></li>
-                <li id="authLoading"><div style="width:100px;height:38px;background:var(--bg-tertiary);border-radius:var(--radius-lg);animation:pulse 1.5s infinite"></div></li>
-                <li id="guestNav" style="display:none"><a href="login.html" class="btn btn-primary">Get Started</a></li>
-                <li id="userNav" style="display:none">
-                    <div style="display:flex;align-items:center;gap:0.75rem">
-                        <a href="profile.html" style="display:flex;align-items:center;gap:0.5rem;text-decoration:none;color:var(--text-primary);font-weight:600;padding:0.5rem 0.75rem;border-radius:var(--radius-lg);background:var(--bg-tertiary)">
-                            <span id="userAvatar" style="width:32px;height:32px;background:var(--bg-gradient-1);border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-size:0.875rem;font-weight:700">U</span>
-                            <span id="userName">User</span>
-                        </a>
-                        <button onclick="handleLogout()" class="btn btn-ghost">Logout</button>
-                    </div>
-                </li>
-                <li id="adminNav" style="display:none"><a href="admin.html" class="btn btn-secondary">👑 Admin</a></li>
-            </ul>
-        </nav>
-    </header>
+    <div id="site-header"></div>
+    <script src="assets/js/header.js"></script>
 
     <!-- HERO -->
     <section class="about-hero">
@@ -136,12 +115,6 @@
         // Reveal animation
         const obs=new IntersectionObserver(e=>e.forEach(el=>{if(el.isIntersecting)el.target.classList.add('active')}),{threshold:0.1});
         document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
-    </script>
-
-    <script type="module">
-        function updateHeader(u){document.getElementById('authLoading').style.display='none';if(u){localStorage.setItem('cachedUser',JSON.stringify({email:u.email,displayName:u.displayName,photoURL:u.photoURL,isAdmin:u.isAdmin}));document.getElementById('guestNav').style.display='none';document.getElementById('userNav').style.display='block';document.getElementById('userName').textContent=u.displayName||u.email?.split('@')[0]||'User';document.getElementById('userAvatar').textContent=(u.displayName||u.email||'U')[0].toUpperCase();document.getElementById('adminNav').style.display=u.isAdmin?'block':'none'}else{localStorage.removeItem('cachedUser');document.getElementById('guestNav').style.display='block';document.getElementById('userNav').style.display='none';document.getElementById('adminNav').style.display='none'}}
-        var attempts=0;var check=setInterval(()=>{attempts++;if(window.FirebaseService?.isReady){clearInterval(check);updateHeader(window.FirebaseService.getCurrentUser());window.FirebaseService.onAuthChange(updateHeader)}else if(attempts>=30){clearInterval(check);if(!localStorage.getItem('cachedUser')){document.getElementById('authLoading').style.display='none';document.getElementById('guestNav').style.display='block'}}},100);
-        window.handleLogout=async()=>{if(confirm('Logout?')){localStorage.removeItem('cachedUser');document.getElementById('guestNav').style.display='block';document.getElementById('userNav').style.display='none';document.getElementById('adminNav').style.display='none';if(window.FirebaseService?.isReady)await window.FirebaseService.logOut();location.href='/'}}
     </script>
 </body>
 </html>

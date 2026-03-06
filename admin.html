@@ -402,22 +402,8 @@
 <body>
     
     <!-- HEADER -->
-    <header class="header theme-transition" id="header">
-        <nav class="nav container">
-            <a href="/" class="logo">AI Tools Hub</a>
-            <ul class="nav-links">
-                <li><a href="/" class="nav-link">Home</a></li>
-                <li><a href="tools.html" class="nav-link">Tools</a></li>
-                <li><a href="admin.html" class="nav-link active" data-admin-only>Admin</a></li>
-                <li data-user-menu style="display: none;">
-                    <div style="display: flex; align-items: center; gap: 0.5rem;">
-                        <span data-user-name style="font-weight: 500;"></span>
-                        <button onclick="FirebaseService.logOut()" class="btn btn-ghost">Logout</button>
-                    </div>
-                </li>
-            </ul>
-        </nav>
-    </header>
+    <div id="site-header"></div>
+    <script src="assets/js/header.js"></script>
 
     <main class="admin-page">
         <!-- Admin Header -->
