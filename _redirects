@@ -1,5 +1,1 @@
-# Force HTTPS
-http://* https://:splat 301!
-
-# Fallback for missing pages (Custom 404 behavior)
-/* /index.html 404
+/* /index.html 200
