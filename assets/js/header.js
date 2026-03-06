@@ -9,6 +9,8 @@ const headerHTML = `
                 <li><a href="/about.html" class="nav-link" id="nav-about">About</a></li>
                 <li><a href="/contact.html" class="nav-link" id="nav-contact">Contact</a></li>
                 
+                <li style="cursor:pointer; font-size:1.2rem; padding:0 0.5rem; user-select:none;" onclick="window.toggleGlobalTheme()" title="Toggle Dark/Light Mode">🌓</li>
+                
                 <li class="show-logged-out"><a href="/login.html" class="btn btn-primary">Get Started</a></li>
                 
                 <li class="show-logged-in">
@@ -27,10 +29,10 @@ const headerHTML = `
     </header>
 `;
 
-// 1. Inject Header
+// Inject Header
 document.getElementById('site-header').outerHTML = headerHTML;
 
-// 2. Highlight Active Link
+// Highlight Active Link
 const path = window.location.pathname;
 if(path.includes('tools')) document.getElementById('nav-tools').classList.add('active');
 else if(path.includes('categories')) document.getElementById('nav-categories').classList.add('active');
@@ -38,7 +40,19 @@ else if(path.includes('about')) document.getElementById('nav-about').classList.a
 else if(path.includes('contact')) document.getElementById('nav-contact').classList.add('active');
 else if(path === '/' || path.includes('index')) document.getElementById('nav-home').classList.add('active');
 
-// 3. Populate User Data
+// Theme Toggle Logic
+window.toggleGlobalTheme = () => {
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    if (currentTheme === 'dark') {
+        document.documentElement.removeAttribute('data-theme');
+        localStorage.setItem('theme', 'light');
+    } else {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        localStorage.setItem('theme', 'dark');
+    }
+};
+
+// Populate User Data
 function populateUserData() {
     try {
         const c = localStorage.getItem('cachedUser');

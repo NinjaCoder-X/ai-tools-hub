@@ -11,8 +11,15 @@
     <link rel="stylesheet" href="assets/css/main.css">
     <link rel="stylesheet" href="assets/css/animations.css">
     <script>
-        /* Instant Anti-Flicker Check */
+        /* Instant Anti-Flicker & Theme Check */
         (function () {
+            // 1. Theme Check (Remembers user preference or system default)
+            var theme = localStorage.getItem('theme');
+            if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+
+            // 2. Auth Check
             var c = localStorage.getItem('cachedUser');
             if (c) {
                 document.documentElement.classList.add('is-logged-in');
@@ -51,7 +58,8 @@
             font-size: var(--text-3xl);
             font-weight: 800;
             background: var(--bg-gradient-1);
-            -webkit-background-clip: text; background-clip: text;
+            -webkit-background-clip: text;
+            background-clip: text;
             -webkit-text-fill-color: transparent;
             display: block;
             text-decoration: none;
