@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,9 +8,22 @@
     <link rel="stylesheet" href="assets/css/themes.css">
     <link rel="stylesheet" href="assets/css/main.css">
     <link rel="stylesheet" href="assets/css/animations.css">
-    </head>
+    <script>
+        /* Instant Anti-Flicker Check */
+        (function () {
+            var c = localStorage.getItem('cachedUser');
+            if (c) {
+                document.documentElement.classList.add('is-logged-in');
+                try { if (JSON.parse(c).isAdmin) document.documentElement.classList.add('is-admin'); } catch (e) { }
+            } else {
+                document.documentElement.classList.add('is-logged-out');
+            }
+        })();
+    </script>
+</head>
+
 <body>
-    
+
     <div id="site-header"></div>
     <script src="assets/js/header.js"></script>
 
@@ -19,22 +33,23 @@
                 <h3 class="modal-title">Add to Collection</h3>
                 <button class="modal-close" onclick="closeCollectionModal()">×</button>
             </div>
-            <div id="collectionList" style="display:flex; flex-direction:column; gap:var(--space-3); max-height: 300px; overflow-y: auto;">
-                </div>
+            <div id="collectionList"
+                style="display:flex; flex-direction:column; gap:var(--space-3); max-height: 300px; overflow-y: auto;">
+            </div>
         </div>
     </div>
 
     <script src="assets/js/config.js"></script>
     <script src="assets/js/database.js"></script>
     <script type="module" src="assets/js/firebase.js"></script>
-    
+
     <script type="module">
         let currentTool = null;
         const urlParams = new URLSearchParams(window.location.search);
         const toolName = urlParams.get('name');
-        
+
         if (!toolName) window.location.href = '/tools.html';
-        
+
         document.addEventListener('DOMContentLoaded', () => {
             currentTool = window.DB_HELPERS.getToolByName(toolName);
             // ... (keep the rest of your loadToolData logic here) ...
@@ -47,12 +62,12 @@
                 window.location.href = '/login.html';
                 return;
             }
-            
+
             const modal = document.getElementById('collectionModal');
             const list = document.getElementById('collectionList');
             list.innerHTML = '<div style="text-align:center; padding:var(--space-4);">Loading...</div>';
             modal.classList.add('show');
-            
+
             try {
                 const collections = await window.FirebaseService.getCollections();
                 if (collections.length === 0) {
@@ -78,10 +93,11 @@
             btn.innerHTML = 'Adding...'; btn.disabled = true;
             try {
                 const res = await window.FirebaseService.addToolToCollection(colId, currentTool);
-                if (res.success) { btn.innerHTML = '✅ Added!'; setTimeout(closeCollectionModal, 1000); } 
+                if (res.success) { btn.innerHTML = '✅ Added!'; setTimeout(closeCollectionModal, 1000); }
                 else { alert('Error: ' + res.error); btn.innerHTML = originalText; btn.disabled = false; }
             } catch (e) { alert('Error adding tool'); btn.innerHTML = originalText; btn.disabled = false; }
         };
     </script>
 </body>
+
 </html>

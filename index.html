@@ -1,17 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Discover 150+ curated AI tools, OSINT resources, development tools and more. Your ultimate free directory.">
+    <meta name="description"
+        content="Discover 150+ curated AI tools, OSINT resources, development tools and more. Your ultimate free directory.">
     <title>AI Tools Hub - Discover Amazing AI Tools</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
     <link rel="stylesheet" href="assets/css/themes.css">
     <link rel="stylesheet" href="assets/css/main.css">
     <link rel="stylesheet" href="assets/css/animations.css">
+    <script>
+        /* Instant Anti-Flicker Check */
+        (function () {
+            var c = localStorage.getItem('cachedUser');
+            if (c) {
+                document.documentElement.classList.add('is-logged-in');
+                try { if (JSON.parse(c).isAdmin) document.documentElement.classList.add('is-admin'); } catch (e) { }
+            } else {
+                document.documentElement.classList.add('is-logged-out');
+            }
+        })();
+    </script>
 </head>
+
 <body>
-    
+
     <div id="site-header"></div>
     <script src="assets/js/header.js"></script>
 
@@ -19,15 +35,27 @@
         <div class="container">
             <div class="hero-content">
                 <h1 class="hero-title animate-fade-in-up">Discover the Future of AI Tools</h1>
-                <p class="hero-subtitle animate-fade-in-up stagger-1">Your ultimate directory for AI-powered tools, OSINT resources, development platforms, and learning resources.</p>
-                <div class="animate-fade-in-up stagger-2" style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-top:2rem">
+                <p class="hero-subtitle animate-fade-in-up stagger-1">Your ultimate directory for AI-powered tools,
+                    OSINT resources, development platforms, and learning resources.</p>
+                <div class="animate-fade-in-up stagger-2"
+                    style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-top:2rem">
                     <a href="tools.html" class="btn btn-primary">Explore 150+ Tools</a>
                     <a href="#featured" class="btn btn-secondary">Browse Categories</a>
                 </div>
-                <div class="animate-fade-in-up stagger-3" style="display:flex;gap:3rem;justify-content:center;margin-top:4rem;flex-wrap:wrap">
-                    <div style="text-align:center"><div class="gradient-text" style="font-size:2.5rem;font-weight:800">150+</div><div style="color:var(--text-tertiary)">Curated Tools</div></div>
-                    <div style="text-align:center"><div class="gradient-text" style="font-size:2.5rem;font-weight:800">15+</div><div style="color:var(--text-tertiary)">Categories</div></div>
-                    <div style="text-align:center"><div class="gradient-text" style="font-size:2.5rem;font-weight:800">100%</div><div style="color:var(--text-tertiary)">Free Access</div></div>
+                <div class="animate-fade-in-up stagger-3"
+                    style="display:flex;gap:3rem;justify-content:center;margin-top:4rem;flex-wrap:wrap">
+                    <div style="text-align:center">
+                        <div class="gradient-text" style="font-size:2.5rem;font-weight:800">150+</div>
+                        <div style="color:var(--text-tertiary)">Curated Tools</div>
+                    </div>
+                    <div style="text-align:center">
+                        <div class="gradient-text" style="font-size:2.5rem;font-weight:800">15+</div>
+                        <div style="color:var(--text-tertiary)">Categories</div>
+                    </div>
+                    <div style="text-align:center">
+                        <div class="gradient-text" style="font-size:2.5rem;font-weight:800">100%</div>
+                        <div style="color:var(--text-tertiary)">Free Access</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -36,15 +64,19 @@
     <section id="featured" style="padding:80px 0;background:var(--bg-secondary)">
         <div class="container">
             <h2 style="font-size:2.5rem;font-weight:800;text-align:center;margin-bottom:1rem">Featured Tools</h2>
-            <p style="text-align:center;color:var(--text-secondary);margin-bottom:3rem">Handpicked tools to supercharge your workflow</p>
-            <div id="featured-tools" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.5rem"></div>
-            <div style="text-align:center;margin-top:3rem"><a href="tools.html" class="btn btn-primary">View All Tools →</a></div>
+            <p style="text-align:center;color:var(--text-secondary);margin-bottom:3rem">Handpicked tools to supercharge
+                your workflow</p>
+            <div id="featured-tools"
+                style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.5rem"></div>
+            <div style="text-align:center;margin-top:3rem"><a href="tools.html" class="btn btn-primary">View All Tools
+                    →</a></div>
         </div>
     </section>
 
     <footer style="background:var(--bg-tertiary);padding:60px 20px 30px;margin-top:80px">
         <div class="container" style="text-align:center;padding-top:2rem;border-top:1px solid var(--border-light)">
-            <p style="color:var(--text-tertiary);font-size:0.9rem">© 2024 AI Tools Hub. Created by <strong style="color:var(--accent-primary)">NinjaCoder-X</strong></p>
+            <p style="color:var(--text-tertiary);font-size:0.9rem">© 2024 AI Tools Hub. Created by <strong
+                    style="color:var(--accent-primary)">NinjaCoder-X</strong></p>
         </div>
     </footer>
 
@@ -65,4 +97,5 @@
         });
     </script>
 </body>
+
 </html>

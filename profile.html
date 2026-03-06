@@ -1,21 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Profile - AI Tools Hub</title>
     <link rel="stylesheet" href="assets/css/themes.css">
     <link rel="stylesheet" href="assets/css/main.css">
-    </head>
+    <script>
+        /* Instant Anti-Flicker Check */
+        (function () {
+            var c = localStorage.getItem('cachedUser');
+            if (c) {
+                document.documentElement.classList.add('is-logged-in');
+                try { if (JSON.parse(c).isAdmin) document.documentElement.classList.add('is-admin'); } catch (e) { }
+            } else {
+                document.documentElement.classList.add('is-logged-out');
+            }
+        })();
+    </script>
+</head>
+
 <body>
-    
+
     <div id="site-header"></div>
     <script src="assets/js/header.js"></script>
 
     <script src="assets/js/config.js"></script>
     <script src="assets/js/database.js"></script>
     <script type="module" src="assets/js/firebase.js"></script>
-    
+
     <script type="module">
         // ... (keep your loadProfile, loadFavorites, etc logic) ...
 
@@ -26,7 +40,7 @@
                     const btn = event.currentTarget;
                     btn.disabled = true;
                     btn.textContent = 'Deleting...';
-                    
+
                     try {
                         const result = await window.FirebaseService.deleteAccount();
                         if (result.success) {
@@ -48,4 +62,5 @@
         };
     </script>
 </body>
+
 </html>

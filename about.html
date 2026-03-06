@@ -1,37 +1,167 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Learn about AI Tools Hub - Your ultimate directory for AI tools.">
     <title>About - AI Tools Hub</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
     <link rel="stylesheet" href="assets/css/themes.css">
     <link rel="stylesheet" href="assets/css/main.css">
     <link rel="stylesheet" href="assets/css/animations.css">
+    <script>
+        /* Instant Anti-Flicker Check */
+        (function () {
+            var c = localStorage.getItem('cachedUser');
+            if (c) {
+                document.documentElement.classList.add('is-logged-in');
+                try { if (JSON.parse(c).isAdmin) document.documentElement.classList.add('is-admin'); } catch (e) { }
+            } else {
+                document.documentElement.classList.add('is-logged-out');
+            }
+        })();
+    </script>
     <style>
-        .about-hero{padding:140px 0 80px;background:var(--bg-gradient-hero);text-align:center}
-        .about-section{padding:80px 0}
-        .about-section:nth-child(even){background:var(--bg-secondary)}
-        .section-title{font-size:var(--text-4xl);font-weight:800;text-align:center;margin-bottom:var(--space-4);background:var(--bg-gradient-1);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-        .features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:var(--space-8);margin-top:var(--space-12)}
-        .feature-card{text-align:center;padding:var(--space-8)}
-        .feature-icon{font-size:4rem;margin-bottom:var(--space-4)}
-        .feature-title{font-size:var(--text-xl);font-weight:700;margin-bottom:var(--space-3)}
-        .feature-desc{color:var(--text-secondary);line-height:1.7}
-        .stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:var(--space-8);margin-top:var(--space-12)}
-        .stat-card{text-align:center;padding:var(--space-6)}
-        .stat-number{font-size:4rem;font-weight:900;background:var(--bg-gradient-1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1;margin-bottom:var(--space-2)}
-        .stat-label{color:var(--text-secondary)}
-        .creator-section{max-width:800px;margin:0 auto;text-align:center}
-        .creator-avatar{width:120px;height:120px;background:var(--bg-gradient-1);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:3rem;margin:0 auto var(--space-6);box-shadow:var(--shadow-xl)}
-        .creator-name{font-size:var(--text-3xl);font-weight:800;margin-bottom:var(--space-3)}
-        .creator-bio{color:var(--text-secondary);font-size:var(--text-lg);line-height:1.8;margin-bottom:var(--space-6)}
-        .social-links{display:flex;gap:var(--space-4);justify-content:center}
-        .social-link{display:inline-flex;align-items:center;gap:var(--space-2);padding:var(--space-3) var(--space-6);background:var(--bg-card);border:2px solid var(--border-light);border-radius:var(--radius-lg);text-decoration:none;color:var(--text-primary);font-weight:500;transition:all var(--duration-fast)}
-        .social-link:hover{border-color:var(--accent-primary);transform:translateY(-2px)}
+        .about-hero {
+            padding: 140px 0 80px;
+            background: var(--bg-gradient-hero);
+            text-align: center
+        }
+
+        .about-section {
+            padding: 80px 0
+        }
+
+        .about-section:nth-child(even) {
+            background: var(--bg-secondary)
+        }
+
+        .section-title {
+            font-size: var(--text-4xl);
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: var(--space-4);
+            background: var(--bg-gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--space-8);
+            margin-top: var(--space-12)
+        }
+
+        .feature-card {
+            text-align: center;
+            padding: var(--space-8)
+        }
+
+        .feature-icon {
+            font-size: 4rem;
+            margin-bottom: var(--space-4)
+        }
+
+        .feature-title {
+            font-size: var(--text-xl);
+            font-weight: 700;
+            margin-bottom: var(--space-3)
+        }
+
+        .feature-desc {
+            color: var(--text-secondary);
+            line-height: 1.7
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-8);
+            margin-top: var(--space-12)
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: var(--space-6)
+        }
+
+        .stat-number {
+            font-size: 4rem;
+            font-weight: 900;
+            background: var(--bg-gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1;
+            margin-bottom: var(--space-2)
+        }
+
+        .stat-label {
+            color: var(--text-secondary)
+        }
+
+        .creator-section {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center
+        }
+
+        .creator-avatar {
+            width: 120px;
+            height: 120px;
+            background: var(--bg-gradient-1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            margin: 0 auto var(--space-6);
+            box-shadow: var(--shadow-xl)
+        }
+
+        .creator-name {
+            font-size: var(--text-3xl);
+            font-weight: 800;
+            margin-bottom: var(--space-3)
+        }
+
+        .creator-bio {
+            color: var(--text-secondary);
+            font-size: var(--text-lg);
+            line-height: 1.8;
+            margin-bottom: var(--space-6)
+        }
+
+        .social-links {
+            display: flex;
+            gap: var(--space-4);
+            justify-content: center
+        }
+
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-2);
+            padding: var(--space-3) var(--space-6);
+            background: var(--bg-card);
+            border: 2px solid var(--border-light);
+            border-radius: var(--radius-lg);
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 500;
+            transition: all var(--duration-fast)
+        }
+
+        .social-link:hover {
+            border-color: var(--accent-primary);
+            transform: translateY(-2px)
+        }
     </style>
+
 </head>
+
 <body>
 
     <!-- HEADER -->
@@ -42,7 +172,8 @@
     <section class="about-hero">
         <div class="container">
             <h1 class="hero-title animate-fade-in-up">About AI Tools Hub</h1>
-            <p class="hero-subtitle animate-fade-in-up stagger-1" style="max-width:700px;margin:0 auto">Your trusted directory for discovering the best AI-powered tools and digital resources.</p>
+            <p class="hero-subtitle animate-fade-in-up stagger-1" style="max-width:700px;margin:0 auto">Your trusted
+                directory for discovering the best AI-powered tools and digital resources.</p>
         </div>
     </section>
 
@@ -51,10 +182,22 @@
         <div class="container">
             <h2 class="section-title reveal">By The Numbers</h2>
             <div class="stats-grid">
-                <div class="stat-card reveal stagger-1"><div class="stat-number">150+</div><div class="stat-label">Curated Tools</div></div>
-                <div class="stat-card reveal stagger-2"><div class="stat-number">15+</div><div class="stat-label">Categories</div></div>
-                <div class="stat-card reveal stagger-3"><div class="stat-number">100%</div><div class="stat-label">Free Access</div></div>
-                <div class="stat-card reveal stagger-4"><div class="stat-number">24/7</div><div class="stat-label">Available</div></div>
+                <div class="stat-card reveal stagger-1">
+                    <div class="stat-number">150+</div>
+                    <div class="stat-label">Curated Tools</div>
+                </div>
+                <div class="stat-card reveal stagger-2">
+                    <div class="stat-number">15+</div>
+                    <div class="stat-label">Categories</div>
+                </div>
+                <div class="stat-card reveal stagger-3">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">Free Access</div>
+                </div>
+                <div class="stat-card reveal stagger-4">
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">Available</div>
+                </div>
             </div>
         </div>
     </section>
@@ -64,12 +207,36 @@
         <div class="container">
             <h2 class="section-title reveal">What Makes Us Different</h2>
             <div class="features-grid">
-                <div class="feature-card reveal stagger-1"><div class="feature-icon animate-float">🎯</div><h3 class="feature-title">Curated Quality</h3><p class="feature-desc">Every tool is hand-picked and verified.</p></div>
-                <div class="feature-card reveal stagger-2"><div class="feature-icon animate-float">⚡</div><h3 class="feature-title">Lightning Fast</h3><p class="feature-desc">Search 150+ tools instantly.</p></div>
-                <div class="feature-card reveal stagger-3"><div class="feature-icon animate-float">🤖</div><h3 class="feature-title">AI-Powered</h3><p class="feature-desc">Smart search powered by Google Gemini.</p></div>
-                <div class="feature-card reveal stagger-4"><div class="feature-icon animate-float">🎨</div><h3 class="feature-title">Beautiful Design</h3><p class="feature-desc">Modern, clean, and obsessively crafted.</p></div>
-                <div class="feature-card reveal stagger-5"><div class="feature-icon animate-float">🔒</div><h3 class="feature-title">Privacy First</h3><p class="feature-desc">Your data is yours. Always.</p></div>
-                <div class="feature-card reveal stagger-6"><div class="feature-icon animate-float">💚</div><h3 class="feature-title">100% Free</h3><p class="feature-desc">No paywalls, ever.</p></div>
+                <div class="feature-card reveal stagger-1">
+                    <div class="feature-icon animate-float">🎯</div>
+                    <h3 class="feature-title">Curated Quality</h3>
+                    <p class="feature-desc">Every tool is hand-picked and verified.</p>
+                </div>
+                <div class="feature-card reveal stagger-2">
+                    <div class="feature-icon animate-float">⚡</div>
+                    <h3 class="feature-title">Lightning Fast</h3>
+                    <p class="feature-desc">Search 150+ tools instantly.</p>
+                </div>
+                <div class="feature-card reveal stagger-3">
+                    <div class="feature-icon animate-float">🤖</div>
+                    <h3 class="feature-title">AI-Powered</h3>
+                    <p class="feature-desc">Smart search powered by Google Gemini.</p>
+                </div>
+                <div class="feature-card reveal stagger-4">
+                    <div class="feature-icon animate-float">🎨</div>
+                    <h3 class="feature-title">Beautiful Design</h3>
+                    <p class="feature-desc">Modern, clean, and obsessively crafted.</p>
+                </div>
+                <div class="feature-card reveal stagger-5">
+                    <div class="feature-icon animate-float">🔒</div>
+                    <h3 class="feature-title">Privacy First</h3>
+                    <p class="feature-desc">Your data is yours. Always.</p>
+                </div>
+                <div class="feature-card reveal stagger-6">
+                    <div class="feature-icon animate-float">💚</div>
+                    <h3 class="feature-title">100% Free</h3>
+                    <p class="feature-desc">No paywalls, ever.</p>
+                </div>
             </div>
         </div>
     </section>
@@ -80,10 +247,13 @@
             <div class="creator-section reveal">
                 <div class="creator-avatar animate-glow">👨‍💻</div>
                 <h2 class="creator-name">NinjaCoder-X</h2>
-                <p class="creator-bio">Hi! I'm a passionate developer who believes in making technology accessible to everyone.</p>
+                <p class="creator-bio">Hi! I'm a passionate developer who believes in making technology accessible to
+                    everyone.</p>
                 <div class="social-links">
-                    <a href="https://www.facebook.com/heyitsvihanga/" target="_blank" class="social-link"><span>📘</span> Facebook</a>
-                    <a href="https://www.instagram.com/heyitsvihanga/" target="_blank" class="social-link"><span>📸</span> Instagram</a>
+                    <a href="https://www.facebook.com/heyitsvihanga/" target="_blank"
+                        class="social-link"><span>📘</span> Facebook</a>
+                    <a href="https://www.instagram.com/heyitsvihanga/" target="_blank"
+                        class="social-link"><span>📸</span> Instagram</a>
                 </div>
             </div>
         </div>
@@ -102,19 +272,21 @@
 
     <!-- FOOTER -->
     <footer style="background:var(--bg-tertiary);padding:40px 20px;text-align:center">
-        <p style="color:var(--text-tertiary);font-size:0.9rem">© 2024 AI Tools Hub. Created by <strong style="color:var(--accent-primary)">NinjaCoder-X</strong></p>
+        <p style="color:var(--text-tertiary);font-size:0.9rem">© 2024 AI Tools Hub. Created by <strong
+                style="color:var(--accent-primary)">NinjaCoder-X</strong></p>
     </footer>
 
     <script src="assets/js/config.js"></script>
     <script type="module" src="assets/js/firebase.js"></script>
 
     <script>
-        (function(){var c=localStorage.getItem('cachedUser');if(c){try{var u=JSON.parse(c);document.getElementById('authLoading').style.display='none';document.getElementById('guestNav').style.display='none';document.getElementById('userNav').style.display='block';document.getElementById('userName').textContent=u.displayName||u.email?.split('@')[0]||'User';document.getElementById('userAvatar').textContent=(u.displayName||u.email||'U')[0].toUpperCase();if(u.isAdmin)document.getElementById('adminNav').style.display='block';}catch(e){}}})();
-        window.addEventListener('scroll',()=>{document.getElementById('header').classList.toggle('scrolled',window.scrollY>50)});
+        (function () { var c = localStorage.getItem('cachedUser'); if (c) { try { var u = JSON.parse(c); document.getElementById('authLoading').style.display = 'none'; document.getElementById('guestNav').style.display = 'none'; document.getElementById('userNav').style.display = 'block'; document.getElementById('userName').textContent = u.displayName || u.email?.split('@')[0] || 'User'; document.getElementById('userAvatar').textContent = (u.displayName || u.email || 'U')[0].toUpperCase(); if (u.isAdmin) document.getElementById('adminNav').style.display = 'block'; } catch (e) { } } })();
+        window.addEventListener('scroll', () => { document.getElementById('header').classList.toggle('scrolled', window.scrollY > 50) });
 
         // Reveal animation
-        const obs=new IntersectionObserver(e=>e.forEach(el=>{if(el.isIntersecting)el.target.classList.add('active')}),{threshold:0.1});
-        document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+        const obs = new IntersectionObserver(e => e.forEach(el => { if (el.isIntersecting) el.target.classList.add('active') }), { threshold: 0.1 });
+        document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
     </script>
 </body>
+
 </html>

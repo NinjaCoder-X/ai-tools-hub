@@ -11,6 +11,13 @@
     padding: 0 var(--space-6);
 }
 
+/* ============================================
+   Anti-Flicker Auth States
+   ============================================ */
+html.is-logged-in .show-logged-out { display: none !important; }
+html.is-logged-out .show-logged-in { display: none !important; }
+html:not(.is-admin) .show-admin { display: none !important; }
+
 /* ========== HEADER ========== */
 .header {
     position: fixed;

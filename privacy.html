@@ -1,28 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Privacy Policy - AI Tools Hub</title>
-    
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
-    
+
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
+
     <link rel="stylesheet" href="assets/css/themes.css">
     <link rel="stylesheet" href="assets/css/main.css">
-    
+
+    <script>
+        /* Instant Anti-Flicker Check */
+        (function () {
+            var c = localStorage.getItem('cachedUser');
+            if (c) {
+                document.documentElement.classList.add('is-logged-in');
+                try { if (JSON.parse(c).isAdmin) document.documentElement.classList.add('is-admin'); } catch (e) { }
+            } else {
+                document.documentElement.classList.add('is-logged-out');
+            }
+        })();
+    </script>
+
     <style>
-        .legal-page { padding: 140px 0 80px; }
-        .legal-container { max-width: 800px; margin: 0 auto; }
-        .legal-title { font-size: var(--text-5xl); font-weight: 900; margin-bottom: var(--space-4); background: var(--bg-gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .legal-updated { color: var(--text-tertiary); margin-bottom: var(--space-12); }
-        .legal-section { margin-bottom: var(--space-10); }
-        .legal-section h2 { font-size: var(--text-2xl); font-weight: 700; margin-bottom: var(--space-4); }
-        .legal-section p { color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-4); }
-        .legal-section ul { color: var(--text-secondary); line-height: 1.8; margin-left: var(--space-6); margin-bottom: var(--space-4); }
+        .legal-page {
+            padding: 140px 0 80px;
+        }
+
+        .legal-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .legal-title {
+            font-size: var(--text-5xl);
+            font-weight: 900;
+            margin-bottom: var(--space-4);
+            background: var(--bg-gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .legal-updated {
+            color: var(--text-tertiary);
+            margin-bottom: var(--space-12);
+        }
+
+        .legal-section {
+            margin-bottom: var(--space-10);
+        }
+
+        .legal-section h2 {
+            font-size: var(--text-2xl);
+            font-weight: 700;
+            margin-bottom: var(--space-4);
+        }
+
+        .legal-section p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: var(--space-4);
+        }
+
+        .legal-section ul {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-left: var(--space-6);
+            margin-bottom: var(--space-4);
+        }
     </style>
 </head>
+
 <body>
-    
+
     <div id="site-header"></div>
     <script src="assets/js/header.js"></script>
 
@@ -30,12 +83,13 @@
         <div class="container legal-container">
             <h1 class="legal-title">Privacy Policy</h1>
             <p class="legal-updated">Last updated: December 2024</p>
-            
+
             <div class="legal-section">
                 <h2>1. Introduction</h2>
-                <p>Welcome to AI Tools Hub. We are committed to protecting your personal information and your right to privacy.</p>
+                <p>Welcome to AI Tools Hub. We are committed to protecting your personal information and your right to
+                    privacy.</p>
             </div>
-            
+
             <div class="legal-section">
                 <h2>2. Information We Collect</h2>
                 <ul>
@@ -45,7 +99,7 @@
                     <li>Contact form submissions</li>
                 </ul>
             </div>
-            
+
             <div class="legal-section">
                 <h2>3. How We Use Your Information</h2>
                 <ul>
@@ -55,12 +109,12 @@
                     <li>Improve our website</li>
                 </ul>
             </div>
-            
+
             <div class="legal-section">
                 <h2>4. Data Storage</h2>
                 <p>Your data is stored securely using Firebase (Google Cloud Platform).</p>
             </div>
-            
+
             <div class="legal-section">
                 <h2>5. Your Rights</h2>
                 <ul>
@@ -70,12 +124,13 @@
                     <li>Opt-out of communications</li>
                 </ul>
             </div>
-            
+
             <div class="legal-section">
                 <h2>6. Contact Us</h2>
-                <p>Email: <a href="mailto:vvsithum241@gmail.com" style="color: var(--accent-primary);">vvsithum241@gmail.com</a></p>
+                <p>Email: <a href="mailto:vvsithum241@gmail.com"
+                        style="color: var(--accent-primary);">vvsithum241@gmail.com</a></p>
             </div>
-            
+
             <div style="text-align: center; margin-top: var(--space-12);">
                 <a href="/" class="btn btn-primary">Back to Home</a>
             </div>
@@ -83,12 +138,13 @@
     </main>
 
     <footer style="background: var(--bg-tertiary); padding: 40px 20px; text-align: center; margin-top: 80px;">
-        <p style="color: var(--text-tertiary); font-size: 0.9rem;">© 2024 AI Tools Hub. Created by <strong style="color: var(--accent-primary);">NinjaCoder-X</strong></p>
+        <p style="color: var(--text-tertiary); font-size: 0.9rem;">© 2024 AI Tools Hub. Created by <strong
+                style="color: var(--accent-primary);">NinjaCoder-X</strong></p>
     </footer>
 
     <script src="assets/js/config.js"></script>
     <script type="module" src="assets/js/firebase.js"></script>
-    
+
     <script>
         window.addEventListener('scroll', () => {
             const header = document.getElementById('header');
@@ -98,4 +154,5 @@
 
 
 </body>
+
 </html>

@@ -1,43 +1,228 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign In - AI Tools Hub</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
     <link rel="stylesheet" href="assets/css/themes.css">
     <link rel="stylesheet" href="assets/css/main.css">
     <link rel="stylesheet" href="assets/css/animations.css">
+    <script>
+        /* Instant Anti-Flicker Check */
+        (function () {
+            var c = localStorage.getItem('cachedUser');
+            if (c) {
+                document.documentElement.classList.add('is-logged-in');
+                try { if (JSON.parse(c).isAdmin) document.documentElement.classList.add('is-admin'); } catch (e) { }
+            } else {
+                document.documentElement.classList.add('is-logged-out');
+            }
+        })();
+    </script>
     <style>
-        .auth-page{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:var(--space-6);background:var(--bg-gradient-hero)}
-        .auth-card{background:var(--bg-card);border-radius:var(--radius-2xl);padding:var(--space-10);box-shadow:var(--shadow-2xl);border:1px solid var(--border-light);width:100%;max-width:440px}
-        .auth-header{text-align:center;margin-bottom:var(--space-8)}
-        .auth-logo{font-size:var(--text-3xl);font-weight:800;background:var(--bg-gradient-1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;display:block;text-decoration:none;margin-bottom:var(--space-2)}
-        .auth-title{font-size:var(--text-2xl);font-weight:700;margin-bottom:var(--space-2)}
-        .auth-subtitle{color:var(--text-secondary);font-size:var(--text-sm)}
-        .tabs{display:flex;background:var(--bg-tertiary);border-radius:var(--radius-lg);padding:var(--space-1);margin-bottom:var(--space-6)}
-        .tab{flex:1;padding:var(--space-3);text-align:center;border-radius:var(--radius-md);font-weight:500;cursor:pointer;transition:all var(--duration-fast);color:var(--text-secondary)}
-        .tab.active{background:var(--bg-card);color:var(--text-primary);box-shadow:var(--shadow-sm)}
-        .tab-content{display:none}
-        .tab-content.active{display:block;animation:fadeIn var(--duration-base)}
-        .form-error{color:var(--accent-error);font-size:var(--text-sm);margin-top:var(--space-2);display:none}
-        .form-error.show{display:block}
-        .auth-btn{width:100%;padding:var(--space-4);background:var(--bg-gradient-1);color:white;border:none;border-radius:var(--radius-lg);font-family:var(--font-primary);font-size:var(--text-base);font-weight:600;cursor:pointer;transition:all var(--duration-fast)}
-        .auth-btn:hover{transform:translateY(-2px);box-shadow:var(--shadow-primary)}
-        .auth-btn:disabled{opacity:0.7;cursor:not-allowed;transform:none}
-        .divider{display:flex;align-items:center;gap:var(--space-4);margin:var(--space-6) 0}
-        .divider-line{flex:1;height:1px;background:var(--border-light)}
-        .divider-text{color:var(--text-muted);font-size:var(--text-sm)}
-        .google-btn{width:100%;padding:var(--space-4);background:var(--bg-primary);border:2px solid var(--border-light);border-radius:var(--radius-lg);font-family:var(--font-primary);font-size:var(--text-base);font-weight:500;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:var(--space-3);transition:all var(--duration-fast);color:var(--text-primary)}
-        .google-btn:hover{border-color:var(--accent-primary);background:var(--interactive-hover)}
-        .google-btn:disabled{opacity:0.7;cursor:not-allowed}
-        .auth-footer{text-align:center;margin-top:var(--space-6);font-size:var(--text-sm);color:var(--text-secondary)}
-        .auth-link{color:var(--accent-primary);text-decoration:none;font-weight:500}
-        .success-msg{background:var(--success-bg);color:var(--accent-success);padding:var(--space-4);border-radius:var(--radius-lg);margin-bottom:var(--space-4);text-align:center;display:none}
-        .success-msg.show{display:block}
-        .back-link{position:absolute;top:var(--space-6);left:var(--space-6);color:var(--text-secondary);text-decoration:none;font-weight:500}
+        .auth-page {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: var(--space-6);
+            background: var(--bg-gradient-hero)
+        }
+
+        .auth-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-2xl);
+            padding: var(--space-10);
+            box-shadow: var(--shadow-2xl);
+            border: 1px solid var(--border-light);
+            width: 100%;
+            max-width: 440px
+        }
+
+        .auth-header {
+            text-align: center;
+            margin-bottom: var(--space-8)
+        }
+
+        .auth-logo {
+            font-size: var(--text-3xl);
+            font-weight: 800;
+            background: var(--bg-gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: block;
+            text-decoration: none;
+            margin-bottom: var(--space-2)
+        }
+
+        .auth-title {
+            font-size: var(--text-2xl);
+            font-weight: 700;
+            margin-bottom: var(--space-2)
+        }
+
+        .auth-subtitle {
+            color: var(--text-secondary);
+            font-size: var(--text-sm)
+        }
+
+        .tabs {
+            display: flex;
+            background: var(--bg-tertiary);
+            border-radius: var(--radius-lg);
+            padding: var(--space-1);
+            margin-bottom: var(--space-6)
+        }
+
+        .tab {
+            flex: 1;
+            padding: var(--space-3);
+            text-align: center;
+            border-radius: var(--radius-md);
+            font-weight: 500;
+            cursor: pointer;
+            transition: all var(--duration-fast);
+            color: var(--text-secondary)
+        }
+
+        .tab.active {
+            background: var(--bg-card);
+            color: var(--text-primary);
+            box-shadow: var(--shadow-sm)
+        }
+
+        .tab-content {
+            display: none
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn var(--duration-base)
+        }
+
+        .form-error {
+            color: var(--accent-error);
+            font-size: var(--text-sm);
+            margin-top: var(--space-2);
+            display: none
+        }
+
+        .form-error.show {
+            display: block
+        }
+
+        .auth-btn {
+            width: 100%;
+            padding: var(--space-4);
+            background: var(--bg-gradient-1);
+            color: white;
+            border: none;
+            border-radius: var(--radius-lg);
+            font-family: var(--font-primary);
+            font-size: var(--text-base);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--duration-fast)
+        }
+
+        .auth-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-primary)
+        }
+
+        .auth-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: var(--space-4);
+            margin: var(--space-6) 0
+        }
+
+        .divider-line {
+            flex: 1;
+            height: 1px;
+            background: var(--border-light)
+        }
+
+        .divider-text {
+            color: var(--text-muted);
+            font-size: var(--text-sm)
+        }
+
+        .google-btn {
+            width: 100%;
+            padding: var(--space-4);
+            background: var(--bg-primary);
+            border: 2px solid var(--border-light);
+            border-radius: var(--radius-lg);
+            font-family: var(--font-primary);
+            font-size: var(--text-base);
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-3);
+            transition: all var(--duration-fast);
+            color: var(--text-primary)
+        }
+
+        .google-btn:hover {
+            border-color: var(--accent-primary);
+            background: var(--interactive-hover)
+        }
+
+        .google-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed
+        }
+
+        .auth-footer {
+            text-align: center;
+            margin-top: var(--space-6);
+            font-size: var(--text-sm);
+            color: var(--text-secondary)
+        }
+
+        .auth-link {
+            color: var(--accent-primary);
+            text-decoration: none;
+            font-weight: 500
+        }
+
+        .success-msg {
+            background: var(--success-bg);
+            color: var(--accent-success);
+            padding: var(--space-4);
+            border-radius: var(--radius-lg);
+            margin-bottom: var(--space-4);
+            text-align: center;
+            display: none
+        }
+
+        .success-msg.show {
+            display: block
+        }
+
+        .back-link {
+            position: absolute;
+            top: var(--space-6);
+            left: var(--space-6);
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500
+        }
     </style>
 </head>
+
 <body>
 
     <a href="/" class="back-link">← Back to Home</a>
@@ -86,7 +271,8 @@
                     </div>
                     <div class="form-group">
                         <label class="form-label">Password</label>
-                        <input type="password" id="signupPassword" class="form-input" placeholder="At least 6 characters" required minlength="6">
+                        <input type="password" id="signupPassword" class="form-input"
+                            placeholder="At least 6 characters" required minlength="6">
                     </div>
                     <div class="form-error" id="signupError"></div>
                     <button type="submit" class="auth-btn" id="signupBtn">Create Account</button>
@@ -100,12 +286,22 @@
             </div>
 
             <button class="google-btn" id="googleBtn">
-                <svg width="20" height="20" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+                <svg width="20" height="20" viewBox="0 0 24 24">
+                    <path fill="#4285F4"
+                        d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+                    <path fill="#34A853"
+                        d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+                    <path fill="#FBBC05"
+                        d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
+                    <path fill="#EA4335"
+                        d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
+                </svg>
                 Continue with Google
             </button>
 
             <div class="auth-footer">
-                <p>By continuing, you agree to our <a href="terms.html" class="auth-link">Terms</a> and <a href="privacy.html" class="auth-link">Privacy Policy</a></p>
+                <p>By continuing, you agree to our <a href="terms.html" class="auth-link">Terms</a> and <a
+                        href="privacy.html" class="auth-link">Privacy Policy</a></p>
             </div>
         </div>
     </main>
@@ -115,108 +311,109 @@
 
     <script type="module">
         // Tabs
-        document.querySelectorAll('.tab').forEach(tab=>{
-            tab.addEventListener('click',()=>{
-                document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
-                document.querySelectorAll('.tab-content').forEach(c=>c.classList.remove('active'));
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
                 tab.classList.add('active');
                 document.getElementById(tab.dataset.tab).classList.add('active');
             });
         });
 
         // Check if logged in
-        setTimeout(()=>{
-            if(window.FirebaseService?.isReady){
-                const u=window.FirebaseService.getCurrentUser();
-                if(u){location.href=u.isAdmin?'/admin.html':'/tools.html'}
+        setTimeout(() => {
+            if (window.FirebaseService?.isReady) {
+                const u = window.FirebaseService.getCurrentUser();
+                if (u) { location.href = u.isAdmin ? '/admin.html' : '/tools.html' }
             }
-        },1500);
+        }, 1500);
 
         // Sign In
-        document.getElementById('signinForm').addEventListener('submit',async e=>{
+        document.getElementById('signinForm').addEventListener('submit', async e => {
             e.preventDefault();
-            const email=document.getElementById('signinEmail').value.trim();
-            const password=document.getElementById('signinPassword').value;
-            const btn=document.getElementById('signinBtn');
-            const err=document.getElementById('signinError');
+            const email = document.getElementById('signinEmail').value.trim();
+            const password = document.getElementById('signinPassword').value;
+            const btn = document.getElementById('signinBtn');
+            const err = document.getElementById('signinError');
 
-            btn.disabled=true;btn.textContent='Signing in...';err.classList.remove('show');
+            btn.disabled = true; btn.textContent = 'Signing in...'; err.classList.remove('show');
 
-            try{
-                if(window.FirebaseService?.isReady){
-                    const r=await window.FirebaseService.signIn(email,password);
-                    if(r.success){
-                        btn.textContent='✅ Success!';
-                        await new Promise(r=>setTimeout(r,1000));
-                        const u=window.FirebaseService.getCurrentUser();
-                        location.href=u?.isAdmin?'/admin.html':'/tools.html';
-                    }else{
-                        err.textContent=r.error;err.classList.add('show');
-                        btn.disabled=false;btn.textContent='Sign In';
+            try {
+                if (window.FirebaseService?.isReady) {
+                    const r = await window.FirebaseService.signIn(email, password);
+                    if (r.success) {
+                        btn.textContent = '✅ Success!';
+                        await new Promise(r => setTimeout(r, 1000));
+                        const u = window.FirebaseService.getCurrentUser();
+                        location.href = u?.isAdmin ? '/admin.html' : '/tools.html';
+                    } else {
+                        err.textContent = r.error; err.classList.add('show');
+                        btn.disabled = false; btn.textContent = 'Sign In';
                     }
-                }else{
-                    localStorage.setItem('cachedUser',JSON.stringify({email}));
-                    location.href='/tools.html';
+                } else {
+                    localStorage.setItem('cachedUser', JSON.stringify({ email }));
+                    location.href = '/tools.html';
                 }
-            }catch(error){
-                err.textContent=error.message;err.classList.add('show');
-                btn.disabled=false;btn.textContent='Sign In';
+            } catch (error) {
+                err.textContent = error.message; err.classList.add('show');
+                btn.disabled = false; btn.textContent = 'Sign In';
             }
         });
 
         // Sign Up
-        document.getElementById('signupForm').addEventListener('submit',async e=>{
+        document.getElementById('signupForm').addEventListener('submit', async e => {
             e.preventDefault();
-            const name=document.getElementById('signupName').value.trim();
-            const email=document.getElementById('signupEmail').value.trim();
-            const password=document.getElementById('signupPassword').value;
-            const btn=document.getElementById('signupBtn');
-            const err=document.getElementById('signupError');
+            const name = document.getElementById('signupName').value.trim();
+            const email = document.getElementById('signupEmail').value.trim();
+            const password = document.getElementById('signupPassword').value;
+            const btn = document.getElementById('signupBtn');
+            const err = document.getElementById('signupError');
 
-            btn.disabled=true;btn.textContent='Creating account...';err.classList.remove('show');
+            btn.disabled = true; btn.textContent = 'Creating account...'; err.classList.remove('show');
 
-            try{
-                if(window.FirebaseService?.isReady){
-                    const r=await window.FirebaseService.signUp(email,password,name);
-                    if(r.success){
+            try {
+                if (window.FirebaseService?.isReady) {
+                    const r = await window.FirebaseService.signUp(email, password, name);
+                    if (r.success) {
                         document.getElementById('successMsg').classList.add('show');
                         document.querySelector('[data-tab="signin"]').click();
-                        document.getElementById('signinEmail').value=email;
+                        document.getElementById('signinEmail').value = email;
                         e.target.reset();
-                    }else{
-                        err.textContent=r.error;err.classList.add('show');
+                    } else {
+                        err.textContent = r.error; err.classList.add('show');
                     }
                 }
-                btn.disabled=false;btn.textContent='Create Account';
-            }catch(error){
-                err.textContent=error.message;err.classList.add('show');
-                btn.disabled=false;btn.textContent='Create Account';
+                btn.disabled = false; btn.textContent = 'Create Account';
+            } catch (error) {
+                err.textContent = error.message; err.classList.add('show');
+                btn.disabled = false; btn.textContent = 'Create Account';
             }
         });
 
         // Google Sign In
-        document.getElementById('googleBtn').addEventListener('click',async()=>{
-            const btn=document.getElementById('googleBtn');
-            btn.disabled=true;btn.textContent='Signing in...';
+        document.getElementById('googleBtn').addEventListener('click', async () => {
+            const btn = document.getElementById('googleBtn');
+            btn.disabled = true; btn.textContent = 'Signing in...';
 
-            try{
-                if(window.FirebaseService?.isReady){
-                    const r=await window.FirebaseService.signInWithGoogle();
-                    if(r.success){
-                        btn.textContent='✅ Success!';
-                        await new Promise(r=>setTimeout(r,1000));
-                        const u=window.FirebaseService.getCurrentUser();
-                        location.href=u?.isAdmin?'/admin.html':'/tools.html';
-                    }else{
+            try {
+                if (window.FirebaseService?.isReady) {
+                    const r = await window.FirebaseService.signInWithGoogle();
+                    if (r.success) {
+                        btn.textContent = '✅ Success!';
+                        await new Promise(r => setTimeout(r, 1000));
+                        const u = window.FirebaseService.getCurrentUser();
+                        location.href = u?.isAdmin ? '/admin.html' : '/tools.html';
+                    } else {
                         alert(r.error);
-                        btn.disabled=false;btn.innerHTML='<svg width="20" height="20" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg> Continue with Google';
+                        btn.disabled = false; btn.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg> Continue with Google';
                     }
                 }
-            }catch(error){
+            } catch (error) {
                 alert(error.message);
-                btn.disabled=false;
+                btn.disabled = false;
             }
         });
     </script>
 </body>
+
 </html>
