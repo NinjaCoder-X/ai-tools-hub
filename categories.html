@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Browse all tool categories on AI Tools Hub.">
+    <title>Categories - AI Tools Hub</title>
+
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
+    <link rel="stylesheet" href="assets/css/themes.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/animations.css">
+
+    <script>
+        /* Instant Anti-Flicker Check */
+        (function () {
+            var c = localStorage.getItem('cachedUser');
+            if (c) {
+                document.documentElement.classList.add('is-logged-in');
+                try { if (JSON.parse(c).isAdmin) document.documentElement.classList.add('is-admin'); } catch (e) { }
+            } else {
+                document.documentElement.classList.add('is-logged-out');
+            }
+        })();
+    </script>
+
+    <style>
+        .categories-hero {
+            padding: 140px 0 80px;
+            background: var(--bg-gradient-hero);
+            text-align: center;
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: var(--space-6);
+            padding: var(--space-10) 0;
+        }
+
+        .category-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-xl);
+            padding: var(--space-8) var(--space-6);
+            border: 1px solid var(--border-light);
+            text-align: center;
+            text-decoration: none;
+            transition: all var(--duration-base) var(--ease-smooth);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .category-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-xl);
+            border-color: var(--accent-primary);
+        }
+
+        .category-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--interactive-hover);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            margin-bottom: var(--space-4);
+            transition: all var(--duration-base) var(--ease-smooth);
+        }
+
+        .category-card:hover .category-icon {
+            background: var(--bg-gradient-1);
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .category-name {
+            font-size: var(--text-xl);
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: var(--space-2);
+        }
+
+        .category-count {
+            color: var(--text-secondary);
+            font-size: var(--text-sm);
+            background: var(--bg-secondary);
+            padding: var(--space-1) var(--space-3);
+            border-radius: var(--radius-full);
+            font-weight: 600;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="site-header"></div>
+    <script src="assets/js/header.js"></script>
+
+    <section class="categories-hero">
+        <div class="container">
+            <h1 class="hero-title animate-fade-in-up">Browse by Category</h1>
+            <p class="hero-subtitle animate-fade-in-up stagger-1">Explore our curated collection of tools organized by
+                their primary function.</p>
+        </div>
+    </section>
+
+    <section class="container">
+        <div class="categories-grid" id="categoriesGrid">
+        </div>
+    </section>
+
+    <footer style="background:var(--bg-tertiary);padding:40px 20px;margin-top:60px;text-align:center">
+        <p style="color:var(--text-tertiary);font-size:0.9rem">© 2024 AI Tools Hub. Created by <strong
+                style="color:var(--accent-primary)">NinjaCoder-X</strong></p>
+    </footer>
+
+    <script src="assets/js/config.js"></script>
+    <script src="assets/js/database.js"></script>
+    <script type="module" src="assets/js/firebase.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const tools = window.DB_HELPERS.getAllTools();
+            const categoryCounts = {};
+
+            // Automatically count how many tools are in each category
+            tools.forEach(tool => {
+                const cat = tool.category || 'Uncategorized';
+                categoryCounts[cat] = (categoryCounts[cat] || 0) + 1;
+            });
+
+            const container = document.getElementById('categoriesGrid');
+
+            // Sort categories alphabetically
+            const sortedCategories = Object.keys(categoryCounts).sort();
+
+            // Function to map categories to nice icons
+            function getIcon(catName) {
+                const icons = {
+                    'AI': '🤖', 'Development': '💻', 'Design': '🎨', 'OSINT': '🔍',
+                    'Security': '🔒', 'Business': '💼', 'Productivity': '⚡',
+                    'Learning': '📚', 'Video': '🎬', 'Audio': '🎵', 'Social': '📱',
+                    'Marketing': '📊', 'Media': '🎞️', 'Utilities': '🧰', 'Data': '📈', 'Career': '🚀'
+                };
+                for (const [key, icon] of Object.entries(icons)) {
+                    if (catName.toLowerCase().includes(key.toLowerCase())) return icon;
+                }
+                return '📁';
+            }
+
+            // Generate the cards!
+            container.innerHTML = sortedCategories.map((cat, i) => `
+                <a href="tools.html?category=${encodeURIComponent(cat)}" class="category-card" style="animation: fadeInUp 0.5s ${i * 0.05}s both;">
+                    <div class="category-icon">${getIcon(cat)}</div>
+                    <h3 class="category-name">${cat}</h3>
+                    <span class="category-count">${categoryCounts[cat]} Tools</span>
+                </a>
+            `).join('');
+        });
+    </script>
+</body>
+
+</html>

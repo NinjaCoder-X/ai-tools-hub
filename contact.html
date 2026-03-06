@@ -6,12 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Get in touch with AI Tools Hub.">
     <title>Contact - AI Tools Hub</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
-    
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
+
     <link rel="stylesheet" href="assets/css/themes.css">
     <link rel="stylesheet" href="assets/css/main.css">
     <link rel="stylesheet" href="assets/css/animations.css">
-    
+
     <script>
         /* Instant Anti-Flicker Check */
         (function () {
@@ -24,47 +25,186 @@
             }
         })();
     </script>
-    
+
     <style>
-        .contact-hero { padding: 140px 0 80px; background: var(--bg-gradient-hero); text-align: center }
-        .contact-content { padding: 80px 0 }
-        .contact-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: var(--space-12); max-width: 1200px; margin: 0 auto }
-        .info-card { background: var(--bg-card); padding: var(--space-6); border-radius: var(--radius-xl); border: 1px solid var(--border-light); margin-bottom: var(--space-6); transition: all var(--duration-base) }
-        .info-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg) }
-        .info-icon { font-size: 2.5rem; margin-bottom: var(--space-3) }
-        .info-title { font-size: var(--text-xl); font-weight: 700; margin-bottom: var(--space-2) }
-        .info-text { color: var(--text-secondary); line-height: 1.6 }
-        .info-link { color: var(--accent-primary); text-decoration: none; font-weight: 500 }
-        .contact-form { background: var(--bg-card); padding: var(--space-10); border-radius: var(--radius-2xl); border: 1px solid var(--border-light); box-shadow: var(--shadow-xl) }
-        .form-title { font-size: var(--text-2xl); font-weight: 700; margin-bottom: var(--space-6) }
-        .form-submit { width: 100%; padding: var(--space-4); background: var(--bg-gradient-1); color: white; border: none; border-radius: var(--radius-lg); font-size: var(--text-lg); font-weight: 600; cursor: pointer; transition: all var(--duration-fast) }
-        .form-submit:hover { transform: translateY(-2px); box-shadow: var(--shadow-primary) }
-        .success-msg, .error-msg { padding: var(--space-4); border-radius: var(--radius-lg); margin-bottom: var(--space-4); text-align: center; display: none }
-        .success-msg { background: var(--success-bg); color: var(--accent-success) }
-        .error-msg { background: var(--error-bg); color: var(--accent-error) }
-        .success-msg.show, .error-msg.show { display: block }
-        
+        .contact-hero {
+            padding: 140px 0 80px;
+            background: var(--bg-gradient-hero);
+            text-align: center
+        }
+
+        .contact-content {
+            padding: 80px 0
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: var(--space-12);
+            max-width: 1200px;
+            margin: 0 auto
+        }
+
+        .info-card {
+            background: var(--bg-card);
+            padding: var(--space-6);
+            border-radius: var(--radius-xl);
+            border: 1px solid var(--border-light);
+            margin-bottom: var(--space-6);
+            transition: all var(--duration-base)
+        }
+
+        .info-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg)
+        }
+
+        .info-icon {
+            font-size: 2.5rem;
+            margin-bottom: var(--space-3)
+        }
+
+        .info-title {
+            font-size: var(--text-xl);
+            font-weight: 700;
+            margin-bottom: var(--space-2)
+        }
+
+        .info-text {
+            color: var(--text-secondary);
+            line-height: 1.6
+        }
+
+        .info-link {
+            color: var(--accent-primary);
+            text-decoration: none;
+            font-weight: 500
+        }
+
+        .contact-form {
+            background: var(--bg-card);
+            padding: var(--space-10);
+            border-radius: var(--radius-2xl);
+            border: 1px solid var(--border-light);
+            box-shadow: var(--shadow-xl)
+        }
+
+        .form-title {
+            font-size: var(--text-2xl);
+            font-weight: 700;
+            margin-bottom: var(--space-6)
+        }
+
+        .form-submit {
+            width: 100%;
+            padding: var(--space-4);
+            background: var(--bg-gradient-1);
+            color: white;
+            border: none;
+            border-radius: var(--radius-lg);
+            font-size: var(--text-lg);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--duration-fast)
+        }
+
+        .form-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-primary)
+        }
+
+        .success-msg,
+        .error-msg {
+            padding: var(--space-4);
+            border-radius: var(--radius-lg);
+            margin-bottom: var(--space-4);
+            text-align: center;
+            display: none
+        }
+
+        .success-msg {
+            background: var(--success-bg);
+            color: var(--accent-success)
+        }
+
+        .error-msg {
+            background: var(--error-bg);
+            color: var(--accent-error)
+        }
+
+        .success-msg.show,
+        .error-msg.show {
+            display: block
+        }
+
         /* Modal CSS added here so it can pop up properly */
         .modal {
-            display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(4px);
-            z-index: 1000; align-items: center; justify-content: center; padding: var(--space-4);
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(4px);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: var(--space-4);
         }
-        .modal.show { display: flex; animation: fadeIn var(--duration-base) var(--ease-smooth); }
-        .modal-content {
-            background: var(--bg-card); border-radius: var(--radius-2xl); padding: var(--space-8);
-            max-width: 500px; width: 100%; box-shadow: var(--shadow-2xl); position: relative;
-        }
-        .modal-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--space-6); }
-        .modal-title { font-size: var(--text-2xl); font-weight: 700; }
-        .modal-close {
-            width: 36px; height: 36px; border-radius: 50%; background: var(--bg-tertiary);
-            border: none; cursor: pointer; display: flex; align-items: center; justify-content: center;
-            font-size: 1.5rem; color: var(--text-secondary); transition: all 0.2s;
-        }
-        .modal-close:hover { background: var(--error-bg); color: var(--accent-error); }
 
-        @media(max-width:968px) { .contact-grid { grid-template-columns: 1fr } }
+        .modal.show {
+            display: flex;
+            animation: fadeIn var(--duration-base) var(--ease-smooth);
+        }
+
+        .modal-content {
+            background: var(--bg-card);
+            border-radius: var(--radius-2xl);
+            padding: var(--space-8);
+            max-width: 500px;
+            width: 100%;
+            box-shadow: var(--shadow-2xl);
+            position: relative;
+        }
+
+        .modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: var(--space-6);
+        }
+
+        .modal-title {
+            font-size: var(--text-2xl);
+            font-weight: 700;
+        }
+
+        .modal-close {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--bg-tertiary);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            transition: all 0.2s;
+        }
+
+        .modal-close:hover {
+            background: var(--error-bg);
+            color: var(--accent-error);
+        }
+
+        @media(max-width:968px) {
+            .contact-grid {
+                grid-template-columns: 1fr
+            }
+        }
     </style>
 </head>
 
@@ -76,7 +216,8 @@
     <section class="contact-hero">
         <div class="container">
             <h1 class="hero-title animate-fade-in-up">Get In Touch</h1>
-            <p class="hero-subtitle animate-fade-in-up stagger-1">Have a question or tool to submit? We'd love to hear from you!</p>
+            <p class="hero-subtitle animate-fade-in-up stagger-1">Have a question or tool to submit? We'd love to hear
+                from you!</p>
         </div>
     </section>
 
@@ -87,20 +228,25 @@
                     <div class="info-card reveal">
                         <div class="info-icon">✉️</div>
                         <h3 class="info-title">Email</h3>
-                        <p class="info-text"><a href="mailto:vvsithum241@gmail.com" class="info-link">vvsithum241@gmail.com</a></p>
+                        <p class="info-text"><a href="mailto:vvsithum241@gmail.com"
+                                class="info-link">vvsithum241@gmail.com</a></p>
                     </div>
                     <div class="info-card reveal stagger-1">
                         <div class="info-icon">📱</div>
                         <h3 class="info-title">Social</h3>
-                        <p class="info-text"><a href="https://www.facebook.com/heyitsvihanga/" target="_blank" class="info-link">Facebook</a> • <a href="https://www.instagram.com/heyitsvihanga/" target="_blank" class="info-link">Instagram</a></p>
+                        <p class="info-text"><a href="https://www.facebook.com/heyitsvihanga/" target="_blank"
+                                class="info-link">Facebook</a> • <a href="https://www.instagram.com/heyitsvihanga/"
+                                target="_blank" class="info-link">Instagram</a></p>
                     </div>
-                    
-                    <div class="info-card reveal stagger-2 hover-scale" style="cursor:pointer; border: 2px solid var(--accent-primary);" onclick="window.showSubmitModal()">
+
+                    <div class="info-card reveal stagger-2 hover-scale"
+                        style="cursor:pointer; border: 2px solid var(--accent-primary);"
+                        onclick="window.showSubmitModal()">
                         <div class="info-icon">🚀</div>
                         <h3 class="info-title">Submit a Tool</h3>
                         <p class="info-text">Know an amazing tool? Click here to submit!</p>
                     </div>
-                    
+
                     <div class="info-card reveal stagger-3">
                         <div class="info-icon">⚡</div>
                         <h3 class="info-title">Quick Response</h3>
@@ -113,8 +259,10 @@
                     <div class="success-msg" id="successMsg">✅ Message sent successfully!</div>
                     <div class="error-msg" id="errorMsg">❌ Something went wrong. Try again.</div>
                     <form id="contactForm">
-                        <div class="form-group"><label class="form-label">Name *</label><input type="text" id="name" class="form-input" placeholder="John Doe" required></div>
-                        <div class="form-group"><label class="form-label">Email *</label><input type="email" id="email" class="form-input" placeholder="you@example.com" required></div>
+                        <div class="form-group"><label class="form-label">Name *</label><input type="text" id="name"
+                                class="form-input" placeholder="John Doe" required></div>
+                        <div class="form-group"><label class="form-label">Email *</label><input type="email" id="email"
+                                class="form-input" placeholder="you@example.com" required></div>
                         <div class="form-group"><label class="form-label">Subject *</label>
                             <select id="subject" class="form-input" required>
                                 <option value="">Select a subject</option>
@@ -124,7 +272,9 @@
                                 <option value="other">Other</option>
                             </select>
                         </div>
-                        <div class="form-group"><label class="form-label">Message *</label><textarea id="message" class="form-input" style="min-height:150px;resize:vertical" placeholder="Tell us more..." required></textarea></div>
+                        <div class="form-group"><label class="form-label">Message *</label><textarea id="message"
+                                class="form-input" style="min-height:150px;resize:vertical"
+                                placeholder="Tell us more..." required></textarea></div>
                         <button type="submit" class="form-submit" id="submitBtn">Send Message</button>
                     </form>
                 </div>
@@ -152,7 +302,8 @@
                 </div>
                 <div class="form-group">
                     <label class="form-label">Short Description *</label>
-                    <textarea id="subDesc" class="form-input" style="min-height:80px; resize:vertical;" placeholder="What does this tool do?" required></textarea>
+                    <textarea id="subDesc" class="form-input" style="min-height:80px; resize:vertical;"
+                        placeholder="What does this tool do?" required></textarea>
                 </div>
                 <div id="subStatus" class="alert" style="display:none; margin-bottom:var(--space-4);"></div>
                 <button type="submit" class="btn btn-primary" id="subBtn" style="width:100%; padding:var(--space-4);">
@@ -163,13 +314,14 @@
     </div>
 
     <footer style="background:var(--bg-tertiary);padding:40px 20px;text-align:center;margin-top:60px;">
-        <p style="color:var(--text-tertiary);font-size:0.9rem">© 2024 AI Tools Hub. Created by <strong style="color:var(--accent-primary)">NinjaCoder-X</strong></p>
+        <p style="color:var(--text-tertiary);font-size:0.9rem">© 2026 AI Tools Hub. Created by <strong
+                style="color:var(--accent-primary)">NinjaCoder-X</strong></p>
     </footer>
 
     <script src="assets/js/config.js"></script>
     <script type="module" src="assets/js/firebase.js"></script>
     <script src="assets/js/gemini.js"></script>
-    
+
     <script>
         // Form Animation Observers
         const obs = new IntersectionObserver(e => e.forEach(el => { if (el.isIntersecting) el.target.classList.add('active') }), { threshold: 0.1 });
@@ -214,7 +366,7 @@
                 if (window.geminiAPI) {
                     try {
                         aiResult = await window.geminiAPI.verifyTool(name, url, desc);
-                    } catch(err) {
+                    } catch (err) {
                         console.warn("Gemini API failed, bypassing to admin review", err);
                         aiResult = { valid: false, confidence: 0, reason: "AI Verification Failed - Requires manual check" };
                     }
@@ -230,7 +382,7 @@
 
                 if (window.FirebaseService && window.FirebaseService.isReady) {
                     const res = await window.FirebaseService.submitPendingTool(toolData);
-                    
+
                     if (res.success) {
                         if (aiResult.valid) {
                             status.textContent = '✅ AI verified! Sent to admins for final approval.';
@@ -258,4 +410,5 @@
         });
     </script>
 </body>
+
 </html>

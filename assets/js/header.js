@@ -5,6 +5,7 @@ const headerHTML = `
             <ul class="nav-links">
                 <li><a href="/" class="nav-link" id="nav-home">Home</a></li>
                 <li><a href="/tools.html" class="nav-link" id="nav-tools">Tools</a></li>
+                <li><a href="/categories.html" class="nav-link" id="nav-categories">Categories</a></li>
                 <li><a href="/about.html" class="nav-link" id="nav-about">About</a></li>
                 <li><a href="/contact.html" class="nav-link" id="nav-contact">Contact</a></li>
                 
@@ -31,12 +32,13 @@ document.getElementById('site-header').outerHTML = headerHTML;
 
 // 2. Highlight Active Link
 const path = window.location.pathname;
-if (path.includes('tools')) document.getElementById('nav-tools').classList.add('active');
-else if (path.includes('about')) document.getElementById('nav-about').classList.add('active');
-else if (path.includes('contact')) document.getElementById('nav-contact').classList.add('active');
-else if (path === '/' || path.includes('index')) document.getElementById('nav-home').classList.add('active');
+if(path.includes('tools')) document.getElementById('nav-tools').classList.add('active');
+else if(path.includes('categories')) document.getElementById('nav-categories').classList.add('active');
+else if(path.includes('about')) document.getElementById('nav-about').classList.add('active');
+else if(path.includes('contact')) document.getElementById('nav-contact').classList.add('active');
+else if(path === '/' || path.includes('index')) document.getElementById('nav-home').classList.add('active');
 
-// 3. Populate User Data (No visibility toggling, just populating data)
+// 3. Populate User Data
 function populateUserData() {
     try {
         const c = localStorage.getItem('cachedUser');
@@ -44,22 +46,22 @@ function populateUserData() {
             const u = JSON.parse(c);
             const userName = document.getElementById('userName');
             const userAvatar = document.getElementById('userAvatar');
-
+            
             if (userName) userName.textContent = u.displayName || u.email?.split('@')[0] || 'User';
             if (userAvatar) {
-                if (u.photoURL) userAvatar.innerHTML = `<img src="${u.photoURL}" style="width:100%;height:100%;border-radius:50%;object-fit:cover">`;
+                if(u.photoURL) userAvatar.innerHTML = `<img src="${u.photoURL}" style="width:100%;height:100%;border-radius:50%;object-fit:cover">`;
                 else userAvatar.textContent = (u.displayName || u.email || 'U')[0].toUpperCase();
             }
         }
-    } catch (e) { }
+    } catch(e) {}
 }
 populateUserData();
 
 // Global Logout
 window.handleLogout = async () => {
-    if (confirm('Logout?')) {
+    if(confirm('Logout?')) {
         localStorage.removeItem('cachedUser');
-        if (window.FirebaseService?.isReady) await window.FirebaseService.logOut();
+        if(window.FirebaseService?.isReady) await window.FirebaseService.logOut();
         window.location.href = '/';
     }
 };
@@ -68,7 +70,7 @@ window.handleLogout = async () => {
 document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('scroll', () => {
         const header = document.getElementById('header');
-        if (header) header.classList.toggle('scrolled', window.scrollY > 50);
+        if(header) header.classList.toggle('scrolled', window.scrollY > 50);
     });
 
     let attempts = 0;
@@ -77,7 +79,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (window.FirebaseService?.isReady) {
             clearInterval(checkAuth);
             window.FirebaseService.onAuthChange((u) => {
-                // Keep classes in sync if server overrides local storage
                 if (u) {
                     document.documentElement.classList.remove('is-logged-out');
                     document.documentElement.classList.add('is-logged-in');

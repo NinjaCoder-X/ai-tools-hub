@@ -9,9 +9,11 @@
     <title>AI Tools Hub - Discover Amazing AI Tools</title>
     <link rel="icon"
         href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
+
     <link rel="stylesheet" href="assets/css/themes.css">
     <link rel="stylesheet" href="assets/css/main.css">
     <link rel="stylesheet" href="assets/css/animations.css">
+
     <script>
         /* Instant Anti-Flicker Check */
         (function () {
@@ -24,6 +26,71 @@
             }
         })();
     </script>
+
+    <style>
+        /* Modal CSS for Home Page */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(4px);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: var(--space-4);
+        }
+
+        .modal.show {
+            display: flex;
+            animation: fadeIn var(--duration-base) var(--ease-smooth);
+        }
+
+        .modal-content {
+            background: var(--bg-card);
+            border-radius: var(--radius-2xl);
+            padding: var(--space-8);
+            max-width: 500px;
+            width: 100%;
+            box-shadow: var(--shadow-2xl);
+            position: relative;
+        }
+
+        .modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: var(--space-6);
+        }
+
+        .modal-title {
+            font-size: var(--text-2xl);
+            font-weight: 700;
+        }
+
+        .modal-close {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--bg-tertiary);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            transition: all 0.2s;
+        }
+
+        .modal-close:hover {
+            background: var(--error-bg);
+            color: var(--accent-error);
+        }
+    </style>
 </head>
 
 <body>
@@ -40,7 +107,7 @@
                 <div class="animate-fade-in-up stagger-2"
                     style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-top:2rem">
                     <a href="tools.html" class="btn btn-primary">Explore 150+ Tools</a>
-                    <a href="#featured" class="btn btn-secondary">Browse Categories</a>
+                    <a href="categories.html" class="btn btn-secondary">Browse Directory</a>
                 </div>
                 <div class="animate-fade-in-up stagger-3"
                     style="display:flex;gap:3rem;justify-content:center;margin-top:4rem;flex-wrap:wrap">
@@ -73,9 +140,63 @@
         </div>
     </section>
 
-    <footer style="background:var(--bg-tertiary);padding:60px 20px 30px;margin-top:80px">
+    <section style="padding: 100px 0; background: var(--bg-primary); position: relative; overflow: hidden;">
+        <div class="container" style="text-align: center; position: relative; z-index: 2;">
+            <div class="card"
+                style="max-width: 800px; margin: 0 auto; background: var(--bg-gradient-hero); border: 2px solid var(--accent-primary); box-shadow: var(--shadow-primary); padding: var(--space-10);">
+                <div style="font-size: 4rem; margin-bottom: var(--space-4); animation: float 4s ease-in-out infinite;">
+                    🤖</div>
+                <h2
+                    style="font-size: var(--text-3xl); font-weight: 900; margin-bottom: var(--space-4); background: var(--bg-gradient-1); background-clip: text; -webkit-background-clip: text; color: transparent;">
+                    Know an Amazing Tool?</h2>
+                <p
+                    style="color: var(--text-secondary); font-size: var(--text-lg); margin-bottom: var(--space-6); max-width: 600px; margin-left: auto; margin-right: auto;">
+                    Help us grow the community! Submit a tool, and our AI will verify it instantly before sending it to
+                    the admins.
+                </p>
+                <button class="btn btn-primary hover-scale"
+                    style="font-size: var(--text-lg); padding: var(--space-4) var(--space-8);"
+                    onclick="window.showSubmitModal()">
+                    🚀 Submit a Tool Now
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <div class="modal" id="submitToolModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">🚀 Submit a Tool</h3>
+                <button class="modal-close" onclick="window.hideSubmitModal()">×</button>
+            </div>
+            <form id="submitToolForm">
+                <p style="color:var(--text-secondary); margin-bottom:var(--space-4);">
+                    Our AI will verify the tool before sending it to the admins for approval.
+                </p>
+                <div class="form-group">
+                    <label class="form-label">Tool Name *</label>
+                    <input type="text" id="subName" class="form-input" placeholder="e.g., ChatGPT" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Tool URL *</label>
+                    <input type="url" id="subUrl" class="form-input" placeholder="https://..." required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Short Description *</label>
+                    <textarea id="subDesc" class="form-input" style="min-height:80px"
+                        placeholder="What does this tool do?" required></textarea>
+                </div>
+                <div id="subStatus" class="alert" style="display:none; margin-bottom:var(--space-4);"></div>
+                <button type="submit" class="btn btn-primary" id="subBtn" style="width:100%">
+                    Submit for AI Review
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <footer style="background:var(--bg-tertiary);padding:60px 20px 30px;">
         <div class="container" style="text-align:center;padding-top:2rem;border-top:1px solid var(--border-light)">
-            <p style="color:var(--text-tertiary);font-size:0.9rem">© 2024 AI Tools Hub. Created by <strong
+            <p style="color:var(--text-tertiary);font-size:0.9rem">© 2026 AI Tools Hub. Created by <strong
                     style="color:var(--accent-primary)">NinjaCoder-X</strong></p>
         </div>
     </footer>
@@ -83,7 +204,10 @@
     <script src="assets/js/config.js"></script>
     <script src="assets/js/database.js"></script>
     <script type="module" src="assets/js/firebase.js"></script>
+    <script src="assets/js/gemini.js"></script>
+
     <script>
+        // Load Featured Tools
         document.addEventListener('DOMContentLoaded', () => {
             const container = document.getElementById('featured-tools');
             const tools = window.DB_HELPERS?.getFeaturedTools() || [];
@@ -94,6 +218,52 @@
                     <a href="${t.link}" target="_blank" class="btn btn-secondary" style="width:100%">Visit Tool →</a>
                 </div>
             `).join('');
+        });
+
+        // Modal Logic
+        window.showSubmitModal = () => document.getElementById('submitToolModal').classList.add('show');
+        window.hideSubmitModal = () => document.getElementById('submitToolModal').classList.remove('show');
+
+        // AI Submission Logic
+        document.getElementById('submitToolForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('subBtn');
+            const status = document.getElementById('subStatus');
+            const name = document.getElementById('subName').value;
+            const url = document.getElementById('subUrl').value;
+            const desc = document.getElementById('subDesc').value;
+
+            btn.disabled = true;
+            btn.textContent = '🤖 AI is reviewing...';
+            status.style.display = 'none';
+            status.className = 'alert';
+
+            try {
+                let aiResult = { valid: true, confidence: 100, reason: "Auto-passed" };
+                if (window.geminiAPI) {
+                    try { aiResult = await window.geminiAPI.verifyTool(name, url, desc); }
+                    catch (err) { aiResult = { valid: false, confidence: 0, reason: "AI Check Failed - Manual Review Needed" }; }
+                }
+
+                const toolData = { name, url, description: desc, aiVerified: aiResult.valid, aiConfidence: aiResult.confidence, aiReason: aiResult.reason || "Looks good" };
+
+                if (window.FirebaseService && window.FirebaseService.isReady) {
+                    const res = await window.FirebaseService.submitPendingTool(toolData);
+                    if (res.success) {
+                        status.textContent = aiResult.valid ? '✅ AI verified! Sent to admins.' : '⚠️ AI flagged details. Sent for manual review.';
+                        status.classList.add(aiResult.valid ? 'alert-success' : 'alert-warning');
+                        status.style.display = 'block';
+                        e.target.reset();
+                        btn.textContent = 'Submit Another';
+                    } else throw new Error(res.error);
+                } else throw new Error("Database not ready.");
+            } catch (err) {
+                status.textContent = '❌ Error: ' + err.message;
+                status.classList.add('alert-error');
+                status.style.display = 'block';
+                btn.textContent = 'Try Again';
+            }
+            btn.disabled = false;
         });
     </script>
 </body>
