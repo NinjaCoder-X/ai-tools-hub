@@ -224,7 +224,7 @@
                 <div class="card hover-lift">
                     <h3 style="font-weight:700;margin-bottom:0.5rem">${t.name}</h3>
                     <p style="color:var(--text-secondary);font-size:0.9rem;margin-bottom:1rem;line-height:1.6">${t.description}</p>
-                    <a href="${t.link}" target="_blank" class="btn btn-secondary" style="width:100%">Visit Tool →</a>
+                    <a href="/redirect.html?url=${encodeURIComponent(t.link)}" target="_blank" class="btn btn-secondary" style="width:100%">Visit Tool →</a>
                 </div>
             `).join('');
         });
