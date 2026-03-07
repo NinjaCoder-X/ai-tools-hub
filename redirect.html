@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirecting... - AI Tools Hub</title>
+    <link rel="stylesheet" href="assets/css/themes.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <script>
+        // Apply theme immediately
+        var theme = localStorage.getItem('theme');
+        if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.setAttribute('data-theme', 'dark');
+        }
+    </script>
+    <style>
+        .redirect-container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: var(--bg-primary);
+            text-align: center;
+            padding: var(--space-4);
+        }
+
+        .redirect-card {
+            background: var(--bg-card);
+            padding: var(--space-8);
+            border-radius: var(--radius-2xl);
+            box-shadow: var(--shadow-2xl);
+            border: 1px solid var(--border-light);
+            max-width: 600px;
+            width: 100%;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid var(--bg-secondary);
+            border-top-color: var(--accent-primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto var(--space-6);
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .ad-slot {
+            margin: var(--space-6) 0;
+            min-height: 250px;
+            /* Space for Monetag Banner */
+            background: var(--bg-secondary);
+            border: 2px dashed var(--border-light);
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-tertiary);
+        }
+    </style>
+    <script>(function (s) { s.dataset.zone = '10695435', s.src = 'https://nap5k.com/tag.min.js' })([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+</head>
+
+<body>
+
+    <div class="redirect-container">
+        <div class="redirect-card">
+            <div class="spinner"></div>
+            <h2 style="font-size: 1.8rem; margin-bottom: var(--space-2);">Taking you to your destination...</h2>
+            <p style="color: var(--text-secondary); margin-bottom: var(--space-6);">
+                Redirecting automatically in <strong id="countdown"
+                    style="color: var(--accent-primary); font-size: 1.2rem;">4</strong> seconds.
+            </p>
+
+            <div class="ad-slot">
+                [Monetag Ad Space]
+            </div>
+            <a href="#" id="manualLink"
+                style="color: var(--text-tertiary); font-size: 0.9rem; text-decoration: underline;">Click here if you
+                are not redirected</a>
+        </div>
+    </div>
+
+    <script>
+        // Get the target URL from the address bar
+        const urlParams = new URLSearchParams(window.location.search);
+        const targetUrl = urlParams.get('url');
+
+        if (!targetUrl) {
+            window.location.href = '/tools.html'; // Fallback if no URL
+        } else {
+            document.getElementById('manualLink').href = targetUrl;
+
+            // Countdown Logic
+            let seconds = 4;
+            const countdownEl = document.getElementById('countdown');
+
+            const timer = setInterval(() => {
+                seconds--;
+                countdownEl.textContent = seconds;
+
+                if (seconds <= 0) {
+                    clearInterval(timer);
+                    window.location.href = targetUrl;
+                }
+            }, 1000);
+        }
+    </script>
+</body>
+
+</html>

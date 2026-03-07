@@ -186,7 +186,7 @@
             document.getElementById('tName').textContent = currentTool.name;
             document.getElementById('tCategory').textContent = currentTool.category || 'Uncategorized';
             document.getElementById('tDesc').textContent = currentTool.description;
-            document.getElementById('tLink').href = currentTool.link;
+            document.getElementById('tLink').href = '/redirect.html?url=' + encodeURIComponent(currentTool.link);
 
             // Generate Tags
             if (currentTool.tags && currentTool.tags.length > 0) {

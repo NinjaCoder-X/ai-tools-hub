@@ -255,12 +255,13 @@
                     <p class="tool-description">${t.description}</p>
                     <div class="tool-actions">
                         <a href="tool.html?name=${encodeURIComponent(t.name)}" class="btn btn-secondary">Details</a>
-                        <a href="${t.link}" target="_blank" class="btn btn-primary">Visit →</a>
+                        <a href="/redirect.html?url=${encodeURIComponent(t.link)}" target="_blank" class="btn btn-primary">Visit →</a>
                     </div>
                 </div>
             `).join('');
         }
     </script>
+    <script src="assets/js/bonus-ad.js"></script>
 </body>
 
 </html>
