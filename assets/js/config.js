@@ -15,9 +15,7 @@ const firebaseConfig = {
 
 // Gemini API Configuration
 const geminiConfig = {
-  apiKey: "AIzaSyANokUTAde-JbZ55HOU1oQnpC1hRlYaZWg",
-  model: "gemini-1.5-flash",
-  endpoint: "https://generativelanguage.googleapis.com/v1beta/models"
+  model: "gemini-1.5-flash"
 };
 
 // Admin Configuration

@@ -4,15 +4,12 @@
 
 class GeminiAPI {
   constructor() {
-    this.apiKey = window.CONFIG?.gemini?.apiKey;
-    this.model = 'gemini-1.5-flash';
-    this.baseURL = 'https://generativelanguage.googleapis.com/v1beta/models';
+    // We no longer need an API key here! We call our secure local endpoint.
+    this.baseURL = '/api/gemini';
   }
 
   async call(prompt) {
-    if (!this.apiKey) throw new Error('API key not configured');
-
-    const res = await fetch(`${this.baseURL}/${this.model}:generateContent?key=${this.apiKey}`, {
+    const res = await fetch(this.baseURL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -24,6 +21,8 @@ class GeminiAPI {
     if (!res.ok) throw new Error(`API error: ${res.status}`);
 
     const data = await res.json();
+    if (data.error) throw new Error(data.error);
+
     return data.candidates?.[0]?.content?.parts?.[0]?.text?.trim() || null;
   }
 
