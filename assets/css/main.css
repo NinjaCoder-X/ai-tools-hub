@@ -489,6 +489,11 @@ html:not(.is-admin) .show-admin {
 .social-link.instagram:hover { border-color: #e1306c; background: #fff2f6; }
 .social-link.facebook:hover { border-color: #1877f2; background: #f0f4ff; }
 
+/* Dark Mode Social Link Overrides */
+[data-theme="dark"] .social-link.github:hover { border-color: #f8f8f8; background: rgba(255, 255, 255, 0.1); }
+[data-theme="dark"] .social-link.instagram:hover { border-color: #e1306c; background: rgba(225, 48, 108, 0.1); }
+[data-theme="dark"] .social-link.facebook:hover { border-color: #1877f2; background: rgba(24, 119, 242, 0.1); }
+
 .github:hover { color: #333; }
 .instagram:hover { color: #e1306c; }
 .facebook:hover { color: #1877f2; }
