@@ -40,11 +40,20 @@ class GeminiAPI {
   }
 
   async processBulkData(rawData) {
-    const prompt = `Convert this raw tool data to JSON array. Each tool needs: name, description (2-3 sentences), category, tags (array), keywords (comma string), link. Verify URLs look real. Return ONLY valid JSON array.\n\nData:\n${rawData}`;
+    const prompt = `Convert this raw tool data to a JSON array. Each tool needs: name, description (2-3 sentences), category, tags (array), keywords (comma string), link. Verify URLs look real. Return ONLY a valid JSON array, without any markdown formatting.\n\nData:\n${rawData}`;
 
     const result = await this.call(prompt);
-    const match = result?.match(/\[[\s\S]*\]/);
-    return match ? JSON.parse(match[0]) : null;
+    if (!result) return null;
+
+    try {
+      // Strip markdown code blocks if Gemini includes them
+      const cleaned = result.replace(/```json\n?/gi, '').replace(/```\n?/g, '').trim();
+      const match = cleaned.match(/\[[\s\S]*\]/);
+      return match ? JSON.parse(match[0]) : JSON.parse(cleaned);
+    } catch (e) {
+      console.error("Failed to parse bulk data JSON:", e, "Raw output:", result);
+      throw new Error("AI returned invalid JSON data. Please try again.");
+    }
   }
 
   async verifyTool(name, url, desc) {
@@ -58,11 +67,20 @@ Check if:
 2. URL looks legitimate
 3. Description makes sense
 
-Return JSON: {"valid": true/false, "confidence": 0-100, "reason": "explanation"}`;
+Return ONLY a raw JSON object with no markdown formatting: {"valid": true/false, "confidence": 0-100, "reason": "explanation"}`;
 
     const result = await this.call(prompt);
-    const match = result?.match(/\{[\s\S]*\}/);
-    return match ? JSON.parse(match[0]) : { valid: false, confidence: 0, reason: 'Parse error' };
+    if (!result) return { valid: false, confidence: 0, reason: 'No response from AI' };
+
+    try {
+      // Strip markdown code blocks if Gemini includes them
+      const cleaned = result.replace(/```json\n?/gi, '').replace(/```\n?/g, '').trim();
+      const match = cleaned.match(/\{[\s\S]*\}/);
+      return match ? JSON.parse(match[0]) : JSON.parse(cleaned);
+    } catch (e) {
+      console.error("Failed to parse verify tool JSON:", e, "Raw output:", result);
+      return { valid: false, confidence: 0, reason: 'Parse error from AI response' };
+    }
   }
 }
 
