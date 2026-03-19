@@ -18,7 +18,14 @@ class GeminiAPI {
       })
     });
 
-    if (!res.ok) throw new Error(`API error: ${res.status}`);
+    if (!res.ok) {
+      try {
+        const errorData = await res.json();
+        throw new Error(errorData.error || `HTTP Error: ${res.status}`);
+      } catch(e) {
+        throw new Error(`API error: ${res.status}`);
+      }
+    }
 
     const data = await res.json();
     if (data.error) {
