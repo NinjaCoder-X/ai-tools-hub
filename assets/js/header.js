@@ -50,6 +50,10 @@ const headerHTML = `
     <header class="header theme-transition" id="header" style="position: relative;">
         <nav class="nav container" style="display: flex; justify-content: space-between; align-items: center;">
             <a href="/" class="logo">AI Tools Hub</a>
+            <span class="header-badge badge-slide">
+                <span class="badge-icon">✨</span>
+                Made by NinjaCoder-X
+            </span>
             
             <button id="mobileMenuBtn" class="mobile-menu-btn" aria-label="Toggle Menu">☰</button>
 
