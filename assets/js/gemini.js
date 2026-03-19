@@ -21,7 +21,10 @@ class GeminiAPI {
     if (!res.ok) throw new Error(`API error: ${res.status}`);
 
     const data = await res.json();
-    if (data.error) throw new Error(data.error);
+    if (data.error) {
+      const errorMsg = typeof data.error === 'object' ? data.error.message : data.error;
+      throw new Error(errorMsg || "Unknown Google API Error");
+    }
 
     return data.candidates?.[0]?.content?.parts?.[0]?.text?.trim() || null;
   }

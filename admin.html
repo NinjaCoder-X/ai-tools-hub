@@ -1063,8 +1063,10 @@ Canva | https://canva.com | Graphic design platform`;
 
             } catch (error) {
                 log('Error: ' + error.message, 'error');
-                document.getElementById('processorError').classList.add('show');
-                processingStatus.classList.remove('show');
+                const errorDiv = document.getElementById('processorError');
+                errorDiv.innerHTML = `❌ Processing failed: <strong>${error.message}</strong>`;
+                errorDiv.classList.add('show');
+                // Notice we removed the line that hides the processingStatus so logs stay visible!
             }
 
             processBtn.disabled = false;
