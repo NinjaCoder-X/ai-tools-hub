@@ -1,39 +1,37 @@
 /* ============================================
-   AI Tools Hub - Gemini AI Integration
+   AI Tools Hub - Gemini AI Integration (Secure)
    ============================================ */
 
 class GeminiAPI {
   constructor() {
-    // We no longer need an API key here! We call our secure local endpoint.
+    // Points to the Cloudflare Pages Function we just made
     this.baseURL = '/api/gemini';
   }
 
   async call(prompt) {
-    const res = await fetch(this.baseURL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        contents: [{ parts: [{ text: prompt }] }],
-        generationConfig: { temperature: 0.7, maxOutputTokens: 1024 }
-      })
-    });
+    try {
+      const res = await fetch(this.baseURL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          contents: [{ parts: [{ text: prompt }] }],
+          generationConfig: { temperature: 0.7, maxOutputTokens: 1024 }
+        })
+      });
 
-    if (!res.ok) {
-      try {
-        const errorData = await res.json();
-        throw new Error(errorData.error || `HTTP Error: ${res.status}`);
-      } catch(e) {
-        throw new Error(`API error: ${res.status}`);
+      const data = await res.json();
+
+      // Catch HTTP errors or Google API errors
+      if (!res.ok || data.error) {
+        const errorMsg = data.error?.message || data.error || `HTTP Error: ${res.status}`;
+        throw new Error(errorMsg);
       }
-    }
 
-    const data = await res.json();
-    if (data.error) {
-      const errorMsg = typeof data.error === 'object' ? data.error.message : data.error;
-      throw new Error(errorMsg || "Unknown Google API Error");
-    }
+      return data.candidates?.[0]?.content?.parts?.[0]?.text?.trim() || null;
 
-    return data.candidates?.[0]?.content?.parts?.[0]?.text?.trim() || null;
+    } catch (error) {
+      throw new Error(error.message);
+    }
   }
 
   async generateDescription(name, url) {
@@ -56,13 +54,12 @@ class GeminiAPI {
     if (!result) return null;
 
     try {
-      // Strip markdown code blocks if Gemini includes them
+      // Strip markdown code blocks
       const cleaned = result.replace(/```json\n?/gi, '').replace(/```\n?/g, '').trim();
       const match = cleaned.match(/\[[\s\S]*\]/);
       return match ? JSON.parse(match[0]) : JSON.parse(cleaned);
     } catch (e) {
-      console.error("Failed to parse bulk data JSON:", e, "Raw output:", result);
-      throw new Error("AI returned invalid JSON data. Please try again.");
+      throw new Error("AI returned invalid JSON formatting. Please try again.");
     }
   }
 
@@ -83,12 +80,10 @@ Return ONLY a raw JSON object with no markdown formatting: {"valid": true/false,
     if (!result) return { valid: false, confidence: 0, reason: 'No response from AI' };
 
     try {
-      // Strip markdown code blocks if Gemini includes them
       const cleaned = result.replace(/```json\n?/gi, '').replace(/```\n?/g, '').trim();
       const match = cleaned.match(/\{[\s\S]*\}/);
       return match ? JSON.parse(match[0]) : JSON.parse(cleaned);
     } catch (e) {
-      console.error("Failed to parse verify tool JSON:", e, "Raw output:", result);
       return { valid: false, confidence: 0, reason: 'Parse error from AI response' };
     }
   }
