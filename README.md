@@ -340,5 +340,6 @@ MIT License - Feel free to use for your own projects!
 **Made with ❤️ by NinjaCoder-X**
 
 ```
+Made by Vihanga Sithum
 
 ```
