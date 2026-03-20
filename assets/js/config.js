@@ -13,11 +13,6 @@ const firebaseConfig = {
   appId: "1:41654847803:web:76274d905ab5d1ec114f1e"
 };
 
-// Gemini API Configuration
-const geminiConfig = {
-  model: "gemini-1.5-flash"
-};
-
 // Admin Configuration
 const adminConfig = {
   adminEmail: "vvsithum241@gmail.com"
