@@ -297,6 +297,86 @@
             } catch (e) { alert('Error adding tool'); btn.innerHTML = originalText; btn.disabled = false; }
         };
     </script>
+    <div id="adblockModal" class="adblock-overlay">
+        <div class="adblock-card">
+            <div class="adblock-icon">🛑</div>
+            <h2 class="adblock-title">Adblocker Detected</h2>
+            <p class="adblock-text">
+                We noticed you are using an adblocker. The <strong>AI Tools Hub</strong> is kept free and maintained
+                through display ads. Please consider disabling your adblocker or whitelisting our site to support us!
+            </p>
+            <div class="adblock-buttons">
+                <button class="btn btn-primary" onclick="window.location.reload()">I've Disabled It (Refresh)</button>
+                <!--<button class="btn btn-ghost" onclick="dismissAdblock()">Continue anyway</button>-->
+            </div>
+        </div>
+    </div>
+
+    <style>
+        /* Adblock Modal Styles */
+        .adblock-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 99999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .adblock-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .adblock-card {
+            background: var(--bg-card, #1e1e2e);
+            /* Falls back to dark gray if var fails */
+            padding: 40px;
+            border-radius: var(--radius-2xl, 16px);
+            border: 1px solid var(--border-light, #333);
+            max-width: 450px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            transform: translateY(20px);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .adblock-overlay.show .adblock-card {
+            transform: translateY(0);
+        }
+
+        .adblock-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .adblock-title {
+            color: var(--text-primary, #fff);
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .adblock-text {
+            color: var(--text-secondary, #aaa);
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+
+        .adblock-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+    </style>
 </body>
 
 </html>
