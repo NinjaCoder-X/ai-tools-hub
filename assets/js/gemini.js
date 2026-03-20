@@ -14,8 +14,8 @@ class GeminiAPI {
 
       // If a schema is provided, lock the AI into strict JSON output mode
       if (schema) {
-        config.responseMimeType = "application/json";
-        config.responseJsonSchema = schema;
+        config.response_mime_type = "application/json";
+        config.response_schema = schema; // NOTE: The REST API uses 'response_schema', NOT 'response_json_schema'
       }
 
       const res = await fetch(this.baseURL, {
