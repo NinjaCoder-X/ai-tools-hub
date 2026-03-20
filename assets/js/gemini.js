@@ -7,14 +7,22 @@ class GeminiAPI {
     this.baseURL = '/api/gemini';
   }
 
-  async call(prompt) {
+  // Added a second parameter 'expectJson' to force the AI into JSON mode
+  async call(prompt, expectJson = false) {
     try {
+      const config = { temperature: 0.7, maxOutputTokens: 2048 };
+
+      // If we need structured data, force Google to ONLY return valid JSON
+      if (expectJson) {
+        config.responseMimeType = "application/json";
+      }
+
       const res = await fetch(this.baseURL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           contents: [{ parts: [{ text: prompt }] }],
-          generationConfig: { temperature: 0.7, maxOutputTokens: 1024 }
+          generationConfig: config
         })
       });
 
@@ -46,22 +54,37 @@ class GeminiAPI {
   }
 
   async processBulkData(rawData) {
-    const prompt = `Convert this raw tool data to a JSON array. Each tool needs: name, description (2-3 sentences), category, tags (array), keywords (comma string), link. Verify URLs look real. Return ONLY a valid JSON array, without any markdown formatting.\n\nData:\n${rawData}`;
+    const prompt = `You are a data extraction API. Convert this raw tool data into a JSON array of objects. 
+Each object must have exactly these keys: "name" (string), "description" (string, 2-3 sentences), "category" (string), "tags" (array of strings), "keywords" (string of space-separated words), "link" (string URL).
+If a URL is missing or fake, do your best to infer or leave it as provided. YOU MUST RETURN ONLY A VALID JSON ARRAY.
 
-    const result = await this.call(prompt);
+Raw Data:
+${rawData}`;
+
+    // Pass 'true' to trigger JSON mode
+    const result = await this.call(prompt, true);
     if (!result) return null;
 
     try {
-      const cleaned = result.replace(/```json\n?/gi, '').replace(/```\n?/g, '').trim();
-      const match = cleaned.match(/\[[\s\S]*\]/);
-      return match ? JSON.parse(match[0]) : JSON.parse(cleaned);
+      return JSON.parse(result);
     } catch (e) {
-      throw new Error("AI returned invalid JSON formatting. Please try again.");
+      // Iron-clad fallback in case it still injects markdown somehow
+      try {
+        const cleaned = result.replace(/```json\n?/gi, '').replace(/```\n?/g, '').trim();
+        const startIndex = cleaned.indexOf('[');
+        const endIndex = cleaned.lastIndexOf(']');
+        if (startIndex !== -1 && endIndex !== -1) {
+          return JSON.parse(cleaned.substring(startIndex, endIndex + 1));
+        }
+      } catch (err) { }
+
+      // Show exactly what the AI returned so we aren't guessing blindly
+      throw new Error(`Failed to parse. AI Output snippet: ${result.substring(0, 80)}...`);
     }
   }
 
   async verifyTool(name, url, desc) {
-    const prompt = `Verify if this tool is legitimate:
+    const prompt = `You are a verification API. Verify if this tool is legitimate:
 Name: ${name}
 URL: ${url}
 Description: ${desc}
@@ -71,16 +94,23 @@ Check if:
 2. URL looks legitimate
 3. Description makes sense
 
-Return ONLY a raw JSON object with no markdown formatting: {"valid": true/false, "confidence": 0-100, "reason": "explanation"}`;
+Return ONLY a valid JSON object with exactly these keys: "valid" (boolean), "confidence" (number 0-100), "reason" (string explanation).`;
 
-    const result = await this.call(prompt);
+    // Pass 'true' to trigger JSON mode
+    const result = await this.call(prompt, true);
     if (!result) return { valid: false, confidence: 0, reason: 'No response from AI' };
 
     try {
-      const cleaned = result.replace(/```json\n?/gi, '').replace(/```\n?/g, '').trim();
-      const match = cleaned.match(/\{[\s\S]*\}/);
-      return match ? JSON.parse(match[0]) : JSON.parse(cleaned);
+      return JSON.parse(result);
     } catch (e) {
+      try {
+        const cleaned = result.replace(/```json\n?/gi, '').replace(/```\n?/g, '').trim();
+        const startIndex = cleaned.indexOf('{');
+        const endIndex = cleaned.lastIndexOf('}');
+        if (startIndex !== -1 && endIndex !== -1) {
+          return JSON.parse(cleaned.substring(startIndex, endIndex + 1));
+        }
+      } catch (err) { }
       return { valid: false, confidence: 0, reason: 'Parse error from AI response' };
     }
   }
