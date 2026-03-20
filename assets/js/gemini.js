@@ -4,7 +4,6 @@
 
 class GeminiAPI {
   constructor() {
-    // Points to the Cloudflare Pages Function we just made
     this.baseURL = '/api/gemini';
   }
 
@@ -21,7 +20,6 @@ class GeminiAPI {
 
       const data = await res.json();
 
-      // Catch HTTP errors or Google API errors
       if (!res.ok || data.error) {
         const errorMsg = data.error?.message || data.error || `HTTP Error: ${res.status}`;
         throw new Error(errorMsg);
@@ -54,7 +52,6 @@ class GeminiAPI {
     if (!result) return null;
 
     try {
-      // Strip markdown code blocks
       const cleaned = result.replace(/```json\n?/gi, '').replace(/```\n?/g, '').trim();
       const match = cleaned.match(/\[[\s\S]*\]/);
       return match ? JSON.parse(match[0]) : JSON.parse(cleaned);
