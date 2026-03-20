@@ -7,15 +7,14 @@ class GeminiAPI {
     this.baseURL = '/api/gemini';
   }
 
-  // Updated to accept an optional schema object for strict JSON enforcing
   async call(prompt, schema = null) {
     try {
       const config = { temperature: 0.7, maxOutputTokens: 2048 };
 
-      // If a schema is provided, lock the AI into strict JSON output mode
+      // Use the exact camelCase properties required by the REST API
       if (schema) {
-        config.response_mime_type = "application/json";
-        config.response_schema = schema; // NOTE: The REST API uses 'response_schema', NOT 'response_json_schema'
+        config.responseMimeType = "application/json";
+        config.responseJsonSchema = schema;
       }
 
       const res = await fetch(this.baseURL, {
@@ -61,7 +60,6 @@ If a URL is missing or fake, do your best to infer it or leave it as provided.
 Raw Data:
 ${rawData}`;
 
-    // Define the exact JSON blueprint Google requires
     const schema = {
       type: "array",
       description: "A list of digital tools extracted from the raw text.",
@@ -87,9 +85,12 @@ ${rawData}`;
     if (!result) return null;
 
     try {
-      return JSON.parse(result);
+      // Strip markdown code blocks just in case Gemini includes them
+      const cleaned = result.replace(/```json\n?/gi, '').replace(/```\n?/g, '').trim();
+      return JSON.parse(cleaned);
     } catch (e) {
-      throw new Error(`Failed to parse. AI Output snippet: ${result.substring(0, 80)}...`);
+      // This new error message proves the browser loaded the fresh file!
+      throw new Error(`Parse failed. AI Output snippet: ${result.substring(0, 80)}...`);
     }
   }
 
@@ -104,13 +105,12 @@ Check if:
 2. URL looks legitimate
 3. Description makes sense`;
 
-    // Define the exact JSON blueprint Google requires
     const schema = {
       type: "object",
       properties: {
         valid: { type: "boolean", description: "True if the tool appears legitimate, false otherwise." },
-        confidence: { type: "integer", description: "A score from 0 to 100 indicating confidence in the verification." },
-        reason: { type: "string", description: "A short explanation of why it was marked valid or invalid." }
+        confidence: { type: "integer", description: "A score from 0 to 100 indicating confidence." },
+        reason: { type: "string", description: "A short explanation." }
       },
       required: ["valid", "confidence", "reason"]
     };
@@ -119,7 +119,8 @@ Check if:
     if (!result) return { valid: false, confidence: 0, reason: 'No response from AI' };
 
     try {
-      return JSON.parse(result);
+      const cleaned = result.replace(/```json\n?/gi, '').replace(/```\n?/g, '').trim();
+      return JSON.parse(cleaned);
     } catch (e) {
       return { valid: false, confidence: 0, reason: 'Parse error from AI response' };
     }
