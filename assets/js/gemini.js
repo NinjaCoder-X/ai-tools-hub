@@ -7,14 +7,15 @@ class GeminiAPI {
     this.baseURL = '/api/gemini';
   }
 
-  // Added a second parameter 'expectJson' to force the AI into JSON mode
-  async call(prompt, expectJson = false) {
+  // Updated to accept an optional schema object for strict JSON enforcing
+  async call(prompt, schema = null) {
     try {
       const config = { temperature: 0.7, maxOutputTokens: 2048 };
 
-      // If we need structured data, force Google to ONLY return valid JSON
-      if (expectJson) {
+      // If a schema is provided, lock the AI into strict JSON output mode
+      if (schema) {
         config.responseMimeType = "application/json";
+        config.responseJsonSchema = schema;
       }
 
       const res = await fetch(this.baseURL, {
@@ -54,31 +55,40 @@ class GeminiAPI {
   }
 
   async processBulkData(rawData) {
-    const prompt = `You are a data extraction API. Convert this raw tool data into a JSON array of objects. 
-Each object must have exactly these keys: "name" (string), "description" (string, 2-3 sentences), "category" (string), "tags" (array of strings), "keywords" (string of space-separated words), "link" (string URL).
-If a URL is missing or fake, do your best to infer or leave it as provided. YOU MUST RETURN ONLY A VALID JSON ARRAY.
+    const prompt = `You are a data extraction API. Convert this raw tool data into a structured array of tools.
+If a URL is missing or fake, do your best to infer it or leave it as provided.
 
 Raw Data:
 ${rawData}`;
 
-    // Pass 'true' to trigger JSON mode
-    const result = await this.call(prompt, true);
+    // Define the exact JSON blueprint Google requires
+    const schema = {
+      type: "array",
+      description: "A list of digital tools extracted from the raw text.",
+      items: {
+        type: "object",
+        properties: {
+          name: { type: "string", description: "The name of the tool." },
+          description: { type: "string", description: "A 2-3 sentence professional description." },
+          category: { type: "string", description: "The primary category for this tool." },
+          tags: {
+            type: "array",
+            items: { type: "string" },
+            description: "A list of relevant tags (e.g., 'ai', 'free', 'beta')."
+          },
+          keywords: { type: "string", description: "A space-separated list of search keywords." },
+          link: { type: "string", description: "The URL to access the tool." }
+        },
+        required: ["name", "description", "category", "tags", "keywords", "link"]
+      }
+    };
+
+    const result = await this.call(prompt, schema);
     if (!result) return null;
 
     try {
       return JSON.parse(result);
     } catch (e) {
-      // Iron-clad fallback in case it still injects markdown somehow
-      try {
-        const cleaned = result.replace(/```json\n?/gi, '').replace(/```\n?/g, '').trim();
-        const startIndex = cleaned.indexOf('[');
-        const endIndex = cleaned.lastIndexOf(']');
-        if (startIndex !== -1 && endIndex !== -1) {
-          return JSON.parse(cleaned.substring(startIndex, endIndex + 1));
-        }
-      } catch (err) { }
-
-      // Show exactly what the AI returned so we aren't guessing blindly
       throw new Error(`Failed to parse. AI Output snippet: ${result.substring(0, 80)}...`);
     }
   }
@@ -92,25 +102,25 @@ Description: ${desc}
 Check if:
 1. Name is real and not gibberish
 2. URL looks legitimate
-3. Description makes sense
+3. Description makes sense`;
 
-Return ONLY a valid JSON object with exactly these keys: "valid" (boolean), "confidence" (number 0-100), "reason" (string explanation).`;
+    // Define the exact JSON blueprint Google requires
+    const schema = {
+      type: "object",
+      properties: {
+        valid: { type: "boolean", description: "True if the tool appears legitimate, false otherwise." },
+        confidence: { type: "integer", description: "A score from 0 to 100 indicating confidence in the verification." },
+        reason: { type: "string", description: "A short explanation of why it was marked valid or invalid." }
+      },
+      required: ["valid", "confidence", "reason"]
+    };
 
-    // Pass 'true' to trigger JSON mode
-    const result = await this.call(prompt, true);
+    const result = await this.call(prompt, schema);
     if (!result) return { valid: false, confidence: 0, reason: 'No response from AI' };
 
     try {
       return JSON.parse(result);
     } catch (e) {
-      try {
-        const cleaned = result.replace(/```json\n?/gi, '').replace(/```\n?/g, '').trim();
-        const startIndex = cleaned.indexOf('{');
-        const endIndex = cleaned.lastIndexOf('}');
-        if (startIndex !== -1 && endIndex !== -1) {
-          return JSON.parse(cleaned.substring(startIndex, endIndex + 1));
-        }
-      } catch (err) { }
       return { valid: false, confidence: 0, reason: 'Parse error from AI response' };
     }
   }
