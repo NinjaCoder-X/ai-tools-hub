@@ -7,7 +7,10 @@
     <title>Redirecting... - AI Tools Hub</title>
     <link rel="stylesheet" href="assets/css/themes.css">
     <link rel="stylesheet" href="assets/css/main.css">
+
     <script src="https://quge5.com/88/tag.min.js" data-zone="221528" async data-cfasync="false"></script>
+    <script>(function (s) { s.dataset.zone = '10695435', s.src = 'https://nap5k.com/tag.min.js' })([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+
     <script>
         // Apply theme immediately
         var theme = localStorage.getItem('theme');
@@ -15,6 +18,7 @@
             document.documentElement.setAttribute('data-theme', 'dark');
         }
     </script>
+
     <style>
         .redirect-container {
             min-height: 100vh;
@@ -53,79 +57,6 @@
             }
         }
 
-        .ad-slot {
-            margin: var(--space-6) 0;
-            min-height: 250px;
-            /* Space for Monetag Banner */
-            background: var(--bg-secondary);
-            border: 2px dashed var(--border-light);
-            border-radius: var(--radius-lg);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-tertiary);
-        }
-    </style>
-    <script>(function (s) { s.dataset.zone = '10695435', s.src = 'https://nap5k.com/tag.min.js' })([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
-</head>
-
-<body>
-
-    <div class="redirect-container">
-        <div class="redirect-card">
-            <div class="spinner"></div>
-            <h2 style="font-size: 1.8rem; margin-bottom: var(--space-2);">Taking you to your destination...</h2>
-            <p style="color: var(--text-secondary); margin-bottom: var(--space-6);">
-                Redirecting automatically in <strong id="countdown"
-                    style="color: var(--accent-primary); font-size: 1.2rem;">4</strong> seconds.
-            </p>
-            <a href="#" id="manualLink"
-                style="color: var(--text-tertiary); font-size: 0.9rem; text-decoration: underline;">Click here if you
-                are not redirected</a>
-        </div>
-    </div>
-
-    <script>
-        // Get the target URL from the address bar
-        const urlParams = new URLSearchParams(window.location.search);
-        const targetUrl = urlParams.get('url');
-
-        if (!targetUrl) {
-            window.location.href = '/tools.html'; // Fallback if no URL
-        } else {
-            document.getElementById('manualLink').href = targetUrl;
-
-            // Countdown Logic
-            let seconds = 4;
-            const countdownEl = document.getElementById('countdown');
-
-            const timer = setInterval(() => {
-                seconds--;
-                countdownEl.textContent = seconds;
-
-                if (seconds <= 0) {
-                    clearInterval(timer);
-                    window.location.href = targetUrl;
-                }
-            }, 1000);
-        }
-    </script>
-    <div id="adblockModal" class="adblock-overlay">
-        <div class="adblock-card">
-            <div class="adblock-icon">🛑</div>
-            <h2 class="adblock-title">Adblocker Detected</h2>
-            <p class="adblock-text">
-                We noticed you are using an adblocker. The <strong>AI Tools Hub</strong> is kept free and maintained
-                through display ads. Please consider disabling your adblocker or whitelisting our site to support us!
-            </p>
-            <div class="adblock-buttons">
-                <button class="btn btn-primary" onclick="window.location.reload()">I've Disabled It (Refresh)</button>
-                <!--<button class="btn btn-ghost" onclick="dismissAdblock()">Continue anyway</button>-->
-            </div>
-        </div>
-    </div>
-
-    <style>
         /* Adblock Modal Styles */
         .adblock-overlay {
             position: fixed;
@@ -151,7 +82,6 @@
 
         .adblock-card {
             background: var(--bg-card, #1e1e2e);
-            /* Falls back to dark gray if var fails */
             padding: 40px;
             border-radius: var(--radius-2xl, 16px);
             border: 1px solid var(--border-light, #333);
@@ -159,7 +89,7 @@
             text-align: center;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
             transform: translateY(20px);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: all 0.4s ease;
         }
 
         .adblock-overlay.show .adblock-card {
@@ -189,7 +119,108 @@
             flex-direction: column;
             gap: 10px;
         }
+
+        .monetize-btn {
+            background: var(--accent-primary, #6366f1);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            padding: 15px 40px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .monetize-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.6);
+        }
     </style>
+</head>
+
+<body>
+
+    <div class="redirect-container">
+        <div class="redirect-card">
+            <div class="spinner"></div>
+            <h2 style="font-size: 1.8rem; margin-bottom: var(--space-2);">Taking you to your destination...</h2>
+
+            <div id="actionContainer"
+                style="margin-bottom: var(--space-6); min-height: 60px; display: flex; align-items: center; justify-content: center;">
+                <p style="color: var(--text-secondary); margin: 0;">
+                    Redirecting automatically in <strong id="countdown"
+                        style="color: var(--accent-primary); font-size: 1.2rem;">4</strong> seconds.
+                </p>
+            </div>
+
+            <a href="#" id="manualLink"
+                style="color: var(--text-tertiary); font-size: 0.9rem; text-decoration: underline;">
+                Click here if you are not redirected
+            </a>
+        </div>
+    </div>
+
+    <div id="adblockModal" class="adblock-overlay">
+        <div class="adblock-card">
+            <div class="adblock-icon">🛑</div>
+            <h2 class="adblock-title">Adblocker Detected</h2>
+            <p class="adblock-text">
+                We noticed you are using an adblocker. The <strong>AI Tools Hub</strong> is kept free and maintained
+                through display ads. Please consider disabling your adblocker or whitelisting our site to support us!
+            </p>
+            <div class="adblock-buttons">
+                <button class="btn btn-primary" onclick="window.location.reload()">I've Disabled It (Refresh)</button>
+                <button class="btn btn-ghost" onclick="dismissAdblock()">Continue anyway</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const targetUrl = urlParams.get('url');
+
+        if (!targetUrl) {
+            window.location.href = '/';
+        } else {
+            document.getElementById('manualLink').href = targetUrl;
+
+            let seconds = 4;
+            const countdownEl = document.getElementById('countdown');
+            const manualLink = document.getElementById('manualLink');
+            const actionContainer = document.getElementById('actionContainer');
+
+            const timer = setInterval(() => {
+                seconds--;
+                if (countdownEl) countdownEl.textContent = seconds;
+
+                if (seconds <= 0) {
+                    clearInterval(timer);
+
+                    // Hide the manual fallback link
+                    manualLink.style.display = 'none';
+
+                    // Inject the Monetag Button
+                    actionContainer.innerHTML = `
+                        <button id="monetizeBtn" class="monetize-btn">
+                            Continue to Tool 🚀
+                        </button>
+                    `;
+
+                    // The Double-Route Click Action
+                    document.getElementById('monetizeBtn').addEventListener('click', (e) => {
+                        e.preventDefault();
+                        // 1. Open your Monetag Ad in a new background tab
+                        window.open('https://omg10.com/4/10695679', '_blank');
+                        // 2. Redirect the current tab to the AI tool
+                        window.location.href = targetUrl;
+                    });
+                }
+            }, 1000);
+        }
+    </script>
+
     <script src="assets/js/detector.js"></script>
 </body>
 

@@ -3,28 +3,28 @@
    ============================================ */
 
 document.addEventListener("DOMContentLoaded", () => {
-    // 1. Try to load our bait file dynamically
+    // 1. Inject the bait file
     const baitScript = document.createElement('script');
-    baitScript.src = 'assets/js/ads.js'; // The honeypot file
+    baitScript.src = 'assets/js/ads.js';
     baitScript.async = true;
     document.head.appendChild(baitScript);
 
-    // 2. Wait 500ms to see if the adblocker intercepted it
+    // 2. Wait 500ms and check the trap
     setTimeout(() => {
         if (window.adblockerBaitLoaded === undefined) {
-            // Bait was blocked! Check if they recently dismissed the popup
+            // Adblocker caught!
             if (localStorage.getItem('adblockDismissed') !== 'true') {
                 const modal = document.getElementById('adblockModal');
                 if (modal) {
                     modal.classList.add('show');
-                    document.body.style.overflow = 'hidden'; // Stop background scrolling
+                    document.body.style.overflow = 'hidden';
                 }
             }
         }
     }, 500);
 });
 
-// 3. Handle the dismiss button
+// 3. Dismissal Functionality
 window.dismissAdblock = () => {
     const modal = document.getElementById('adblockModal');
     if (modal) {
@@ -35,6 +35,6 @@ window.dismissAdblock = () => {
         localStorage.setItem('adblockDismissed', 'true');
         setTimeout(() => {
             localStorage.removeItem('adblockDismissed');
-        }, 86400000); // 24 hours
+        }, 86400000);
     }
 };
