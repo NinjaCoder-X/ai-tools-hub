@@ -11,7 +11,7 @@ class GeminiAPI {
     try {
       const config = { temperature: 0.7, maxOutputTokens: 2048 };
 
-      // Use the exact camelCase properties required by the REST API
+      // Using EXACT camelCase from the official Google documentation
       if (schema) {
         config.responseMimeType = "application/json";
         config.responseJsonSchema = schema;
@@ -54,42 +54,54 @@ class GeminiAPI {
   }
 
   async processBulkData(rawData) {
-    const prompt = `You are a data extraction API. Convert this raw tool data into a structured array of tools.
+    const prompt = `You are a data extraction API. Convert this raw tool data into a structured JSON object containing a "tools" array.
 If a URL is missing or fake, do your best to infer it or leave it as provided.
 
 Raw Data:
 ${rawData}`;
 
+    // Wrapping the array in a top-level object for maximum REST API safety
     const schema = {
-      type: "array",
-      description: "A list of digital tools extracted from the raw text.",
-      items: {
-        type: "object",
-        properties: {
-          name: { type: "string", description: "The name of the tool." },
-          description: { type: "string", description: "A 2-3 sentence professional description." },
-          category: { type: "string", description: "The primary category for this tool." },
-          tags: {
-            type: "array",
-            items: { type: "string" },
-            description: "A list of relevant tags (e.g., 'ai', 'free', 'beta')."
-          },
-          keywords: { type: "string", description: "A space-separated list of search keywords." },
-          link: { type: "string", description: "The URL to access the tool." }
-        },
-        required: ["name", "description", "category", "tags", "keywords", "link"]
-      }
+      type: "object",
+      properties: {
+        tools: {
+          type: "array",
+          description: "A list of digital tools extracted from the raw text.",
+          items: {
+            type: "object",
+            properties: {
+              name: { type: "string", description: "The name of the tool." },
+              description: { type: "string", description: "A 2-3 sentence professional description." },
+              category: { type: "string", description: "The primary category for this tool." },
+              tags: {
+                type: "array",
+                items: { type: "string" },
+                description: "A list of relevant tags (e.g., 'ai', 'free', 'beta')."
+              },
+              keywords: { type: "string", description: "A space-separated list of search keywords." },
+              link: { type: "string", description: "The URL to access the tool." }
+            },
+            required: ["name", "description", "category", "tags", "keywords", "link"]
+          }
+        }
+      },
+      required: ["tools"]
     };
 
     const result = await this.call(prompt, schema);
     if (!result) return null;
 
     try {
-      // Strip markdown code blocks just in case Gemini includes them
-      const cleaned = result.replace(/```json\n?/gi, '').replace(/```\n?/g, '').trim();
-      return JSON.parse(cleaned);
+      // Bulletproof extraction: find the first { and last } to ignore conversational text
+      const startIndex = result.indexOf('{');
+      const endIndex = result.lastIndexOf('}');
+      if (startIndex !== -1 && endIndex !== -1) {
+        const cleanJson = result.substring(startIndex, endIndex + 1);
+        const parsed = JSON.parse(cleanJson);
+        return parsed.tools; // Return just the array to the UI
+      }
+      return JSON.parse(result).tools;
     } catch (e) {
-      // This new error message proves the browser loaded the fresh file!
       throw new Error(`Parse failed. AI Output snippet: ${result.substring(0, 80)}...`);
     }
   }
@@ -119,8 +131,12 @@ Check if:
     if (!result) return { valid: false, confidence: 0, reason: 'No response from AI' };
 
     try {
-      const cleaned = result.replace(/```json\n?/gi, '').replace(/```\n?/g, '').trim();
-      return JSON.parse(cleaned);
+      const startIndex = result.indexOf('{');
+      const endIndex = result.lastIndexOf('}');
+      if (startIndex !== -1 && endIndex !== -1) {
+        return JSON.parse(result.substring(startIndex, endIndex + 1));
+      }
+      return JSON.parse(result);
     } catch (e) {
       return { valid: false, confidence: 0, reason: 'Parse error from AI response' };
     }
